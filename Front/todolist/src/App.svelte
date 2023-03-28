@@ -1,9 +1,7 @@
 <script>
 
 	let todos = [
-		{ done: false, text: 'finish Svelte tutorial' },
-		{ done: false, text: 'build an app' },
-		{ done: false, text: 'world domination' }
+		{ done: false, text: 'work'}
 	];
 
 	function add() {
@@ -17,15 +15,21 @@
 	$: remaining = todos.filter(t => !t.done).length;
 </script>
 
-<h1>Todos</h1>
+<button >
+  Log in
+</button>
 
+<button >
+  Sign in
+</button>
+
+<h1>Todos</h1>
 {#each todos as todo}
 	<div class:done={todo.done}>
 		<input
 			type=checkbox
 			bind:checked={todo.done}
 		>
-
 		<input
 			placeholder="What needs to be done?"
 			bind:value={todo.text}
@@ -48,6 +52,7 @@
 		opacity: 0.4;
 	}
 </style>
+
 <main>
   
 </main>
