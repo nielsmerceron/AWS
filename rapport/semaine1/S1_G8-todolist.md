@@ -14,10 +14,12 @@
   - Development du projet: Back-end
 - **Chef de projet:**  
   - Gestion du projet
+  - Présentation du projet et de son avancement ( + diapo )
 - **Programmeur 1:**  
   - Développement du projet: Front-end
   - Rédaction du rapport
 - **Programmeur 2:**
+  - Développement du projet: Front-end  
   
 ## Developpement du projet
 ### Présentation
