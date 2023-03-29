@@ -18,6 +18,7 @@
   - Développement du projet: Front-end
   - Rédaction du rapport
 - **Programmeur 2:**
+- 
   -Développement du projet: Front-end  
   
 ## Developpement du projet
