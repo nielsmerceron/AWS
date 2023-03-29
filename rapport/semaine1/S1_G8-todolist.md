@@ -115,5 +115,5 @@ Le choix sera donc PostgresSQL pour autant on reste en discussion au sein du gro
 https://en.wikipedia.org/wiki/SQLite  
 https://en.wikipedia.org/wiki/Angular_(web_framework)  
 https://en.wikipedia.org/wiki/Tailwind_CSS  
-https://www.statista.com/statistics/1124699/worldwide-developer-survey-most-used-frameworks-web/
+https://www.statista.com/statistics/1124699/worldwide-developer-survey-most-used-frameworks-web/  
 https://survey.stackoverflow.co/2022/#section-most-popular-technologies-web-frameworks-and-technologies
