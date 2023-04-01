@@ -61,12 +61,13 @@ Mais pour un site avec beaucoup de fonctionnalité est qui est evolutif, le NoSQ
 Si on reste sur du SQL, il faut être sûr qu'on ne sera pas freiner par celle ci.  
 Ce choix s'accompagne d'autre question comme le choix du SGBD.Il faut trouver un SGBD en NoSQL qui est bien documenté pour nous permettre de faire ce que l'on a besoin.
 ## SQL
-Tous les SGBD traités ici sont gratuits et open-source.  
+Malgré qu'on va surement continué en NoSQL, si on change d'avis entre temps on va utilisé ce SGBD :
 - **PostgreSQL**:
   C'est un SGBD qui est considéré comme l'un des plus fiable et des plus avancés. Il est également connu pour offrir une excellente compatibilité avec les normes SQL, ce qui le rend très populaire parmi les développeurs. Il supporte également le langage PL:pgSQL, un langage très proche 
 
   
 ## NoSQL
+Voici les 2 candidats pour être notre SGBD NoSQL. Ce sont les plus utilisé du marché et les plus tendances, donc avec une très bonne documentation:
 - **MongoDB**:
   MongoDB est un système de gestion de bases de données NoSQL qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement. Cela permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité pour les applications modernes basées sur le cloud.  
   Il est également très utilisé et la documentation est de qualité.
@@ -74,22 +75,21 @@ Tous les SGBD traités ici sont gratuits et open-source.
   C'est un service de base de données NoSQL qui est très populaire. Il est extrêmement simple à prendre en main et il est très complet. Il est également très utilisé et la documentation est de qualité. Le souci est qu'il est propriétaire et il peut coûter cher à l'usage. 
   
 
-# Comparaison et analyse des technologies
+# Conclusion et recommandations
 ## SQL ou NoSQL
 Nous allons donc opter pour un SGBD NoSQL
-# Conclusion et recommandations
 ## Choix du SGBD
-Nous avons fait le choix de rester sur un SGBD relationnel pour le moment car tout le monde dans le groupe maîtrise bien le langage SQL. Cependant, le NoSQL pourrait bien convenir à notre projet, car il est plus simple de réprésenter plusieurs utilisateurs travaillant sur la même tâche. Il permettrait également de mieux gérer un grand nombre d'utilisateurs.  
-Dans tous les cas, on est capable de faire tout ce dont on a besoin avec un SGBD relationnel.  
-Le choix sera donc PostgresSQL pour autant on reste en discussion au sein du groupe pour voir si on peut utiliser un SGBD NoSQL.
+Maintenant qu'on a choisi le NoSQL, on va donc choisir entre MongoDB et Firebase.
 
 # Sources
+## Bibliothèque crypto
 https://www.npmjs.com/package/crypto-js  
 https://openbase.com/js/crypto-js  
 https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/  
 https://developer.mozilla.org/fr/docs/Web/API/SubtleCrypto  
 https://qwtel.com/posts/software/replacing-cryptojs-with-web-cryptography/  
 
+## SQL ou NoSQL
 https://datascientest.com/sql-vs-nosql-differences-utilisations-avantages-et-inconvenients  
 https://datascientest.com/nosql-tout-savoir  
 https://www.ibm.com/cloud/blog/sql-vs-nosql  
