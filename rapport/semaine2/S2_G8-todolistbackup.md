@@ -34,49 +34,53 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 <img title="Design du site" src="imageSite.png">
 
 # Partie Recherche et analyse
-# Nécessités de la semaine
+## Nécessités de la semaine
 - <u>Respectez les necessités global du projet:</u> Simplicité, Documentation, *State of the art*.
-- <u>Sécurisé:</u> Trouvez les meilleurs moyen de sécurisé les donneés sensible de notre SGBD.
-- <u>Bonne SGBD:</u> Trouvez le SGBD qui est le mieux adaptée à notre projet et qui s'adapte à l'évolution de notre site.
+- <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
+- <u>Bonne SGBD:</u> Trouvez le SGBD qui est le mieux adapté à notre projet et qui s'adapte à l'évolution de notre site.
 
-# Sécurité
-Pour la sécurité de nos données sensibles ( mot de passe, donnée privée ) nous allons utilisé une de ces bibliothèques:
+## Sécurité
+Pour la sécurité de nos données sensibles ( mot de passe, données privées ) nous allons utilisé une de ces bibliothèques:
 - crypto-js : bibliothèque javascript.
-- bcrypt + crypto: bibliothèque dans le nodejs d'hachage de mot de passe / et crypter des messages.
+- bcrypt + crypto: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
 - SubtleCrypto native dans javascipt de cryptographie.
 
-## Hash
-Pour authentifier une personne, il y aura un identifiant et un mot de passe. Ce mot de passe va être stocké hashé dans la base de donnée ( hash fait coté client).
-Puis quand on va se connecter à son compte on renvoie le bon identifiant et mot de passe et si l'identifiant donnée est le même que dans la base de donnée et le haché du mot de passe qu'on vient de donnée est le même que celui stocké dans le SGBD alors il se connecte ( il est calculatoirement difficile de trouvé un autre mot de passe tel que son haché soit le même que celui stocké en SGBD)
+### Hash
+Pour authentifier une personne, il y aura un identifiant et un mot de passe. Ce mot de passe va être stocké haché dans la base de donnée ( hash fait coté client).
+Puis quand on va se connecter à son compte on renvoie le bon identifiant et mot de passe et si l'identifiant donnée est le même que dans la base de donnée et le haché du mot de passe qu'on vient de donner est le même que celui stocké dans le SGBD alors il se connecte ( il est calculatoirement difficile de trouvé un autre mot de passe tel que son haché soit le même que celui stocké en SGBD)
 
 Dans les bibliothèques crypto, il existe plein de fonction pour haché ( sha1 , sha3 , sha256 , md5 ...) qui vont nous permettre de haché notre mot de passe.
 Dont le plus souvent utilisé le **sha256** qui sera la fonction utilisé pour haché nos mot de passe
-## Encryption / Decryption
-Pour stocké des données sensible, on va les stocké cryptée pour éviter de les mettre en clair dans la base de donnée.
+### Encryption / Decryption
+Pour stocké des données sensibles, on va les stocké cryptée pour éviter de les mettre en clair dans la base de donnée.
 
 Dans les bibliothèques crypto, il existe plein de fonction pour crypté ( AES, DES, 3-DES) qui vont nous permettre de crypté nos donnée.
 
-# Base de données
+## Base de données
 SQL ou NoSQL ? :  
 Notre groupe a déjà manipulé les bases de données relationnelles utilisant le langage SQL.  
 Et pour un site avec peu de fonctionnalité,et/ou avec de nombreuse jointure, une base de donnée SQL peut suffir.
 Mais pour un site avec beaucoup de fonctionnalité est qui est evolutif, le NoSQL est un meilleur candidat. De plus elle permet de gerer une plus grande quantité de données tout en gérant plus facilement les sites avec un fort trafics.  
 Si on reste sur du SQL, il faut être sûr qu'on ne sera pas freiner par celle ci si on fait évoluer le site.  
 Ce choix s'accompagne d'autre question comme le choix du SGBD.Il faut trouver un SGBD en NoSQL qui est bien documenté pour nous permettre de faire ce que l'on a besoin.
-## SQL
+### SQL
 Malgré qu'on va continué en NoSQL, si on change d'avis entre temps on va utilisé ce SGBD :
 - **PostgreSQL**:
   C'est un SGBD qui est considéré comme l'un des plus fiable et des plus avancés. Il est également connu pour offrir une excellente compatibilité avec les normes SQL, ce qui le rend très populaire parmi les développeurs. Il supporte également le langage PL:pgSQL, un langage très proche 
 
-## NoSQL
+### NoSQL
 La semaine dernière, nous hésitions entre MongoDB et Firebase. Nous avons pris la décision de ce concentré sur le SGBD MongoDB: ce SGBD est opensource et l'une des SGBD les plus utilisé ( voir le plus utilisé en NoSQL ) ce qui signifie qu'il y a beaucoup de documentation.
 Alors que Firebase est propriétaire (Google) et est moins utilisé.
-Voici un petit rappel de ce qu'est MongoDB
+Voici un petit rappel de ce qu'est MongoDB:
 - **MongoDB**:
   MongoDB est un système de gestion de bases de données NoSQL qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement. Cela permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité pour les applications modernes basées sur le cloud.  
   Il est également très utilisé et la documentation est de qualité.
 
 # Conclusion et recommandations
+## Option de sécurité
+Nous allons utiliser la bibliothèque crypto-js:
+Cette bibliothèque est très complete: elle permet le hash et le chiffrement/déchiffrement et d'autre outils comme la personnalisation des différents chiffrement, ou de mode et de pad.
+Elle est aussi très simple d'utilisation et si on a besoin, il y a beaucoup de documentation et est très utilisé.
 ## SQL ou NoSQL
 Nous allons donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqué le SGBD relationnel. Cependant le NoSQL est plus adapté et plus le projet évoluera, plus le NoSQL deviendra une évidence.
 ## Choix du SGBD
@@ -104,3 +108,6 @@ https://db-engines.com/en/ranking
 https://firebase.google.com/docs?gclid=Cj0KCQjwz6ShBhCMARIsAH9A0qU-LK33rpJLKXeFM4Uvqqk9LKAwSEpBFgKyclnm1G4hfhB2OQpL3fAaAs4OEALw_wcB&gclsrc=aw.ds&hl=fr  
 https://www.mongodb.com/fr-fr  
 https://fr.wikipedia.org/wiki/MongoDB  
+  
+https://harry-wanki.developpez.com/tutoriels/mongodb/debuter-mongodb-introduction-base-donnees-nosql/#LIII  
+https://www.fil.univ-lille.fr/~routier/enseignement/licence/jsfs/html/node-mongodb.html
