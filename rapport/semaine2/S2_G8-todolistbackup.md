@@ -8,7 +8,9 @@
 **Programmeur 2:** Manel Azgag  
 
 ## Répartition des tâches
-- **Chercheur:**  
+- **Chercheur:** 
+  - Recherche et analyse des technologies
+  - Rédaction du rapport 
 
 - **Chef de projet:**  
 
@@ -17,75 +19,76 @@
 - **Programmeur 2:**
   
   
-## Developpement du projet
-### Présentation
+# Developpement du projet
+## Présentation
 Notre projet est un site web qui permet de gérer des todo-lists. Il permet de créer des listes de tâches, de les modifier, de les supprimer, de les partager avec d'autres utilisateurs, de les trier, de les filtrer, de les exporter, etc.  
 
-### Objectif de la semaine
+## Objectif de la semaine
 - **Organisation:** Design du site. 
 - **Recherche:** Recherche spécifique sur la BDD ( SQL ou NoSQL ) + option de sécurité des BDD.
 - **Code:** Front : Page d'accueil ( login/sign up ), Back : enregistrement des logs.
 
-### Avancement cette semaine
+## Avancement cette semaine
 
-# Schéma potentiel de notre site
-<img title="Design du site" src="/home/alexis/Bureau/AWS/AWS/rapport/semaine2/imageSite.png">
+### Schéma potentiel de notre site
+<img title="Design du site" src="imageSite.png">
 
 # Partie Recherche et analyse
-# Nécessités dans le cadre de notre projet
-- <u>Simplicité</u>: Il nous faut une learning curve assez douce, la majorité des gens dans le groupe n'ayant jamais manipulés de technologies ou langages utilisés dans le web.
-- <u>Documentation</u>: C'est un point qui découle du précédent mais une bonne documentation est nécéssaire pour arriver à apprendre à utiliser les technologies en partant de rien.
-- <u>State of the art</u> (à la pointe de la technologie)
+# Nécessités de la semaine
+- <u>Respectez les necessités global du projet:</u> Simplicité, Documentation, *State of the art*.
+- <u>Sécurisé:</u> Trouvez les meilleurs moyen de sécurisé les donneés sensible de notre SGBD.
+- <u>Bonne SGBD:</u> Trouvez le SGBD qui est le mieux adaptée à notre projet et qui s'adapte à l'évolution de notre site.
 
 # Sécurité
-Pour la sécurité de nos données sensible ( mot de passe, donnée privée ) nous allons utilisé la bibliothèque " crypto-js " dans laquel il existe plein de technique cryptographique. Elle est très simple d'utilisation, est très utilisé actuellement et sa documentation est très clair.
-Il existe d'autre bibliothèque comme :
-- bcrypt dans le nodejs
-- SubtleCrypto native dans javascipt
+Pour la sécurité de nos données sensibles ( mot de passe, donnée privée ) nous allons utilisé une de ces bibliothèques:
+- crypto-js : bibliothèque javascript.
+- bcrypt + crypto: bibliothèque dans le nodejs d'hachage de mot de passe / et crypter des messages.
+- SubtleCrypto native dans javascipt de cryptographie.
 
 ## Hash
 Pour authentifier une personne, il y aura un identifiant et un mot de passe. Ce mot de passe va être stocké hashé dans la base de donnée ( hash fait coté client).
 Puis quand on va se connecter à son compte on renvoie le bon identifiant et mot de passe et si l'identifiant donnée est le même que dans la base de donnée et le haché du mot de passe qu'on vient de donnée est le même que celui stocké dans le SGBD alors il se connecte ( il est calculatoirement difficile de trouvé un autre mot de passe tel que son haché soit le même que celui stocké en SGBD)
 
 Dans les bibliothèques crypto, il existe plein de fonction pour haché ( sha1 , sha3 , sha256 , md5 ...) qui vont nous permettre de haché notre mot de passe.
+Dont le plus souvent utilisé le **sha256** qui sera la fonction utilisé pour haché nos mot de passe
 ## Encryption / Decryption
 Pour stocké des données sensible, on va les stocké cryptée pour éviter de les mettre en clair dans la base de donnée.
 
 Dans les bibliothèques crypto, il existe plein de fonction pour crypté ( AES, DES, 3-DES) qui vont nous permettre de crypté nos donnée.
 
 # Base de données
-- SQL or NoSQL ? :  
+SQL ou NoSQL ? :  
 Notre groupe a déjà manipulé les bases de données relationnelles utilisant le langage SQL.  
-Et pour un site avec peu de fonctionnalité,ou avec de nombreuse jointure, une base de donnée SQL peut suffir.
+Et pour un site avec peu de fonctionnalité,et/ou avec de nombreuse jointure, une base de donnée SQL peut suffir.
 Mais pour un site avec beaucoup de fonctionnalité est qui est evolutif, le NoSQL est un meilleur candidat. De plus elle permet de gerer une plus grande quantité de données tout en gérant plus facilement les sites avec un fort trafics.  
-Si on reste sur du SQL, il faut être sûr qu'on ne sera pas freiner par celle ci.  
+Si on reste sur du SQL, il faut être sûr qu'on ne sera pas freiner par celle ci si on fait évoluer le site.  
 Ce choix s'accompagne d'autre question comme le choix du SGBD.Il faut trouver un SGBD en NoSQL qui est bien documenté pour nous permettre de faire ce que l'on a besoin.
 ## SQL
-Malgré qu'on va surement continué en NoSQL, si on change d'avis entre temps on va utilisé ce SGBD :
+Malgré qu'on va continué en NoSQL, si on change d'avis entre temps on va utilisé ce SGBD :
 - **PostgreSQL**:
   C'est un SGBD qui est considéré comme l'un des plus fiable et des plus avancés. Il est également connu pour offrir une excellente compatibilité avec les normes SQL, ce qui le rend très populaire parmi les développeurs. Il supporte également le langage PL:pgSQL, un langage très proche 
 
-  
 ## NoSQL
-Voici les 2 candidats pour être notre SGBD NoSQL. Ce sont les plus utilisé du marché et les plus tendances, donc avec une très bonne documentation:
+La semaine dernière, nous hésitions entre MongoDB et Firebase. Nous avons pris la décision de ce concentré sur le SGBD MongoDB: ce SGBD est opensource et l'une des SGBD les plus utilisé ( voir le plus utilisé en NoSQL ) ce qui signifie qu'il y a beaucoup de documentation.
+Alors que Firebase est propriétaire (Google) et est moins utilisé.
+Voici un petit rappel de ce qu'est MongoDB
 - **MongoDB**:
   MongoDB est un système de gestion de bases de données NoSQL qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement. Cela permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité pour les applications modernes basées sur le cloud.  
   Il est également très utilisé et la documentation est de qualité.
-- **Firebase**: 
-  C'est un service de base de données NoSQL qui est très populaire. Il est extrêmement simple à prendre en main et il est très complet. Il est également très utilisé et la documentation est de qualité. Le souci est qu'il est propriétaire et il peut coûter cher à l'usage. 
-  
 
 # Conclusion et recommandations
 ## SQL ou NoSQL
-Nous allons donc opter pour un SGBD NoSQL
+Nous allons donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqué le SGBD relationnel. Cependant le NoSQL est plus adapté et plus le projet évoluera, plus le NoSQL deviendra une évidence.
 ## Choix du SGBD
-Maintenant qu'on a choisi le NoSQL, on va donc choisir entre MongoDB et Firebase.
+Nous allons donc choisir MongoDB pour avoir une SGBD qui sera le plus rapide à prendre en main grâce à sa documentation. De plus, si c'est l'un des plus utilisé, c'est qu'il marche bien en plus d'être open-source.
 
 # Sources
 ## Bibliothèque crypto
 https://www.npmjs.com/package/crypto-js  
 https://openbase.com/js/crypto-js  
-https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/  
+https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/ 
+https://nodejs.org/api/crypto.html  
+https://www.npmjs.com/package/bcrypt   
 https://developer.mozilla.org/fr/docs/Web/API/SubtleCrypto  
 https://qwtel.com/posts/software/replacing-cryptojs-with-web-cryptography/  
 
@@ -94,3 +97,10 @@ https://datascientest.com/sql-vs-nosql-differences-utilisations-avantages-et-inc
 https://datascientest.com/nosql-tout-savoir  
 https://www.ibm.com/cloud/blog/sql-vs-nosql  
 https://www.mongodb.com/nosql-explained/nosql-vs-sql  
+
+## MongoDB
+
+https://db-engines.com/en/ranking  
+https://firebase.google.com/docs?gclid=Cj0KCQjwz6ShBhCMARIsAH9A0qU-LK33rpJLKXeFM4Uvqqk9LKAwSEpBFgKyclnm1G4hfhB2OQpL3fAaAs4OEALw_wcB&gclsrc=aw.ds&hl=fr  
+https://www.mongodb.com/fr-fr  
+https://fr.wikipedia.org/wiki/MongoDB  
