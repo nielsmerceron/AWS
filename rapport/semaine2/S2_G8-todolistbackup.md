@@ -110,6 +110,7 @@ https://helmetjs.github.io/
 https://www.npmjs.com/package/helmet  
 https://www.securecoding.com/blog/javascript-as-backend-prone-to-security-risks/  
 https://fr.wikipedia.org/wiki/Transport_Layer_Security  
+https://advancedweb.hu/how-to-hash-passwords-and-when-not-to/  
 
 
 ## SQL ou NoSQL
