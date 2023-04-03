@@ -43,6 +43,7 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 Pour la sécurité de nos données sensibles côté client ( mot de passe, données privées ) nous allons utilisé une de ces bibliothèques:
 - crypto-js : bibliothèque javascript.
 - SubtleCrypto native dans javascipt de cryptographie.
+Ces deux bibliothèques permettent de faire le hash et le chiffrement/déchiffrement de données. Le choix sera donc fait sur la popularité d'une des bibliothèque, la documentation, de sa maintenance et de sa facilité d'application.
 
 ### Hash
 Pour authentifier une personne, il y aura un identifiant et un mot de passe. Ce mot de passe va être stocké haché dans la base de donnée ( hash fait coté client).
@@ -58,8 +59,15 @@ Dans les bibliothèques crypto, il existe plein de fonction pour crypté ( AES, 
 ## Sécurité Back
 Pour la sécurité de nos données sensibles côté serveur ( mot de passe, données privées ) nous allons utilisé:
 - **bcrypt + crypto**: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
-- **Helmet**: Bibliothèque Express qui permet de sécurisé son site en définissant divers en-têtes HTTP
-- **TLS**: Permet de sécurisé les donnée allant du client au serveur.
+- **Helmet**: Bibliothèque Express qui permet de sécurisé son site en définissant divers en-têtes HTTP pour eviter les vulnérabilités courantes (détournement de clics, HTTP strict ...)
+En effet HTTP est de base ouverte et non sécurisé. Il peut notamment divulger des informations sensible à toutes les personnes ayant les compétences techniques.
+- **TLS**: C'est le protocol de la sécurité de la couche de transport. 
+Elle satisfait différents objectifs client-serveur:
+  - Authentification du serveur
+  - Authentification du client (optionnel)
+  - Confidentialité des données échangées (chiffrement des données)
+  - Intégrité des données échangées
+
 
 ## Base de données
 SQL ou NoSQL ? :  
