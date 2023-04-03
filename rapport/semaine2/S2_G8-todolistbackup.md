@@ -106,9 +106,7 @@ Nous allons donc choisir MongoDB pour avoir une SGBD qui sera le plus rapide à 
 ## Bibliothèque crypto front
 https://www.npmjs.com/package/crypto-js  
 https://openbase.com/js/crypto-js  
-https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/ 
 https://nodejs.org/api/crypto.html  
-https://www.npmjs.com/package/bcrypt   
 https://developer.mozilla.org/fr/docs/Web/API/SubtleCrypto  
 https://qwtel.com/posts/software/replacing-cryptojs-with-web-cryptography/  
 
@@ -119,6 +117,9 @@ https://www.npmjs.com/package/helmet
 https://www.securecoding.com/blog/javascript-as-backend-prone-to-security-risks/  
 https://fr.wikipedia.org/wiki/Transport_Layer_Security  
 https://advancedweb.hu/how-to-hash-passwords-and-when-not-to/  
+https://www.securecoding.com/blog/using-helmetjs/  
+https://www.npmjs.com/package/bcrypt 
+https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/ 
 
 
 ## SQL ou NoSQL
