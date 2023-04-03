@@ -39,10 +39,9 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 - <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
 - <u>Bonne SGBD:</u> Trouvez le SGBD qui est le mieux adapté à notre projet et qui s'adapte à l'évolution de notre site.
 
-## Sécurité
-Pour la sécurité de nos données sensibles ( mot de passe, données privées ) nous allons utilisé une de ces bibliothèques:
+## Sécurité Front
+Pour la sécurité de nos données sensibles côté client ( mot de passe, données privées ) nous allons utilisé une de ces bibliothèques:
 - crypto-js : bibliothèque javascript.
-- bcrypt + crypto: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
 - SubtleCrypto native dans javascipt de cryptographie.
 
 ### Hash
@@ -55,6 +54,12 @@ Dont le plus souvent utilisé le **sha256** qui sera la fonction utilisé pour h
 Pour stocké des données sensibles, on va les stocké cryptée pour éviter de les mettre en clair dans la base de donnée.
 
 Dans les bibliothèques crypto, il existe plein de fonction pour crypté ( AES, DES, 3-DES) qui vont nous permettre de crypté nos donnée.
+
+## Sécurité Back
+Pour la sécurité de nos données sensibles côté serveur ( mot de passe, données privées ) nous allons utilisé:
+- **bcrypt + crypto**: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
+- **Helmet**: Bibliothèque Express qui permet de sécurisé son site en définissant divers en-têtes HTTP
+- **TLS**: Permet de sécurisé les donnée allant du client au serveur.
 
 ## Base de données
 SQL ou NoSQL ? :  
@@ -78,16 +83,19 @@ Voici un petit rappel de ce qu'est MongoDB:
 
 # Conclusion et recommandations
 ## Option de sécurité
-Nous allons utiliser la bibliothèque crypto-js:
+Nous allons utiliser la bibliothèque crypto-js pour sécurisé les données côté client:
 Cette bibliothèque est très complete: elle permet le hash et le chiffrement/déchiffrement et d'autre outils comme la personnalisation des différents chiffrement, ou de mode et de pad.
-Elle est aussi très simple d'utilisation et si on a besoin, il y a beaucoup de documentation et est très utilisé.
+Elle est aussi très simple d'utilisation et si on a besoin, il y a beaucoup de documentation et est très utilisé. En plus de ces bibliothèques, il faut garder des reflexe de sécurité comme faire en sorte d'incité les mot de pass sécurisé, ainsi que d'éviter les attaques par force brute par exemple en limitant le nombre de fois qu'on met un mot de passe où avec un algorithme de hachage assez lents.
+
+Pour les données côté serveur, comme dit avant, nous allons utilisé des protocols/bibliothèque : bcrypt + crypto, TLS, Helmet. De plus que ça, il faut prendre quelque reflexe comme sécurisé les cookies où éviter les attaques par force brute.
+Pour le hachage, il faut absolument hacher côté client et côté serveur pour eviter les attaques dans le canal entre client et serveur( utilisation du hachage pour ce connecté, connaissance du clair).
 ## SQL ou NoSQL
 Nous allons donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqué le SGBD relationnel. Cependant le NoSQL est plus adapté et plus le projet évoluera, plus le NoSQL deviendra une évidence.
 ## Choix du SGBD
 Nous allons donc choisir MongoDB pour avoir une SGBD qui sera le plus rapide à prendre en main grâce à sa documentation. De plus, si c'est l'un des plus utilisé, c'est qu'il marche bien en plus d'être open-source.
 
 # Sources
-## Bibliothèque crypto
+## Bibliothèque crypto front
 https://www.npmjs.com/package/crypto-js  
 https://openbase.com/js/crypto-js  
 https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/ 
@@ -95,6 +103,14 @@ https://nodejs.org/api/crypto.html
 https://www.npmjs.com/package/bcrypt   
 https://developer.mozilla.org/fr/docs/Web/API/SubtleCrypto  
 https://qwtel.com/posts/software/replacing-cryptojs-with-web-cryptography/  
+
+## Bibliothèque/protocol back + prevention
+https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely  
+https://helmetjs.github.io/  
+https://www.npmjs.com/package/helmet  
+https://www.securecoding.com/blog/javascript-as-backend-prone-to-security-risks/  
+https://fr.wikipedia.org/wiki/Transport_Layer_Security  
+
 
 ## SQL ou NoSQL
 https://datascientest.com/sql-vs-nosql-differences-utilisations-avantages-et-inconvenients  
@@ -109,5 +125,7 @@ https://firebase.google.com/docs?gclid=Cj0KCQjwz6ShBhCMARIsAH9A0qU-LK33rpJLKXeFM
 https://www.mongodb.com/fr-fr  
 https://fr.wikipedia.org/wiki/MongoDB  
   
+### Tuto MongoDB
 https://harry-wanki.developpez.com/tutoriels/mongodb/debuter-mongodb-introduction-base-donnees-nosql/#LIII  
 https://www.fil.univ-lille.fr/~routier/enseignement/licence/jsfs/html/node-mongodb.html
+
