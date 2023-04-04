@@ -1,12 +1,15 @@
 const express = require("express");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const InitiateMongoServer = require("./db");
+
 
 InitiateMongoServer();
 
 const app = express();
 const port = 3000;
 
+app.use(helmet());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -15,5 +18,5 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Back listening on port ${port}!`);
-  console.log(`127.0.0.1:${port}`);
+  console.log(`http://127.0.0.1:${port}`);
 });
