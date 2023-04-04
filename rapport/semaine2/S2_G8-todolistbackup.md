@@ -13,10 +13,14 @@
   - Rédaction du rapport 
 
 - **Chef de projet:**  
+  - Rédaction du rapport 
+  - Front
 
 - **Programmeur 1:**  
+  - Back 
 
 - **Programmeur 2:**
+  - Front
   
   
 # Developpement du projet
@@ -29,6 +33,14 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 - **Code:** Front : Page d'accueil ( login/sign up ), Back : enregistrement des logs.
 
 ## Avancement cette semaine
+  Trois pages fonctionnelles au niveau front avec quelques éléments a rajouté de l'ordre du détail.
+  La base de données , le schéma et la connexion ont été effectuer.
+  On a utilisé mangoose et docker pour la base de données.
+  On utilisera aussi body-parser pour récupérer toutes les requetes en json ainsi que helmet pour rajouter de la sécurité a l'aide d'headers.
+  Après discussion,la forme du site est plus défini qu'avant.
+  Choix de sécurité du back et front definit (peut être a creusé le front).
+  Recherche supplémentaire a faire : "gestion du secret/password".
+  
 
 ### Schéma potentiel de notre site
 <img title="Design du site" src="imageSite.png">
