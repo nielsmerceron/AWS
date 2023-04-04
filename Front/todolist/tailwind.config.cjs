@@ -4,7 +4,7 @@ const config = {
   theme: {
     extend: {},
     daisyui: {
-      themes: ["cupcake","luxury"],
+      themes: ["luxury"],
     },
   },
 

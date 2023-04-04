@@ -1,3 +1,4 @@
+<html data-theme="luxury"></html>
 <script>
   function testsignin() {
     var pseudo = document.getElementById("pseudo").value;

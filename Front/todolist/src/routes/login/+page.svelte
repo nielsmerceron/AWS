@@ -1,4 +1,4 @@
-
+<html data-theme="luxury"></html>
     <div class="navbar ">
       <div class="navbar-start">
         <div class="dropdown">
