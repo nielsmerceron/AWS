@@ -94,6 +94,7 @@ declare module '$env/static/private' {
 	export const MAIL: string;
 	export const npm_node_execpath: string;
 	export const npm_config_engine_strict: string;
+	export const OLDPWD: string;
 	export const NODE_ENV: string;
 }
 
@@ -192,6 +193,7 @@ declare module '$env/dynamic/private' {
 		MAIL: string;
 		npm_node_execpath: string;
 		npm_config_engine_strict: string;
+		OLDPWD: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
