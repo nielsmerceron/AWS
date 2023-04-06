@@ -1,16 +1,32 @@
-<html data-theme="luxury"></html>
 <script>
   function testsignin() {
     var pseudo = document.getElementById("pseudo").value;
     var email = document.getElementById("email").value;
     var mdp1 = document.getElementById("mdpas1").value;
     var mdp2 = document.getElementById("mdpas2").value;
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
-    var affall = pseudo + email + mdp1 + mdp2;
+    if(!(strongRegex.test(mdp1))){
+      alert("mot de passe faible");
+    } 
 
-    alert(affall);
+    if (mdp1 != mdp2) {
+      alert("mot de passe 1 et 2 différent");
+    }
+    if (!pseudo) {
+      alert("pseudo non rentrer");
+    }
+    if (
+      !email.match(
+        /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/
+      )
+    ) {
+      alert("ce n'est pas une adresse");
+    }
   }
 </script>
+
+<html data-theme="luxury" lang="fr" />
 
 <div class="navbar">
   <div class="navbar-start">
