@@ -100,7 +100,6 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const npm_execpath: string;
 	export const XDG_RUNTIME_DIR: string;
-	export const export: string;
 	export const DEBUGINFOD_URLS: string;
 	export const npm_package_json: string;
 	export const LC_TIME: string;
@@ -123,6 +122,7 @@ declare module '$env/static/private' {
 	export const LC_NUMERIC: string;
 	export const OLDPWD: string;
 	export const npm_package_engines_node: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -249,6 +249,7 @@ declare module '$env/dynamic/private' {
 		LC_NUMERIC: string;
 		OLDPWD: string;
 		npm_package_engines_node: string;
+		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
