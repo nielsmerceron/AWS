@@ -6,8 +6,21 @@
     var mdp2 = document.getElementById("mdpas2").value;
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
+    let missingChars = [];
     if(!(strongRegex.test(mdp1))){
-      alert("mot de passe faible");
+      if (!/(?=.*[a-z])/.test(mdp1)) {
+        missingChars.push('une lettre minuscule');
+      }
+      if (!/(?=.*[A-Z])/.test(mdp1)) {
+        missingChars.push('une lettre majuscule');
+      }
+      if (!/(?=.*\d)/.test(mdp1)) {
+        missingChars.push('un chiffre');
+      }
+      if (!/(?=.*[@$!%*?&])/.test(mdp1)) {
+        missingChars.push('un caractère spécial (@$!%*?&)');
+      }
+      alert("mot de passe faible il manque " + missingChars);
     } 
 
     if (mdp1 != mdp2) {
