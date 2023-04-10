@@ -3,6 +3,7 @@
 # Avancement du projet
 ## Roles et responsabilités
 **Chercheur:** Manel AZGAG
+
 **Chef de projet:** Pierre Vermeulen  
 **Programmeur 1:** Niels Merceron 
 **Programmeur 2:** Alexis Guigal   
