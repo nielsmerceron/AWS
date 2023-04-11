@@ -43,6 +43,14 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 # Front-end
 ## communication entre le front et le back
 
+
+
+
+
+
+
+
+
 # Back-end 
 - Il existe plusieurs options pour maintenir la connexion d'un utilisateur. Les deux options principales sont l'utilisation de JSON Web Tokens (JWT) et de cookies.
 
@@ -120,6 +128,7 @@ les options les plus courantes sont les JWT et les cookies car elles offrent un 
 
 # Sources
 https://jwt.io/introduction
+
 https://express-validator.github.io/docs/
 
 
