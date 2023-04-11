@@ -10,7 +10,7 @@
 
 
 
-  let emails = "";
+  let email = "";
   let mdp1 = "";
   let mdp2 = "";
   let pseudo = "";
@@ -58,13 +58,13 @@
       <input
         class="input input-bordered"
         type="text"
-        bind:value={emails}
+        bind:value={email}
         placeholder="Email"
-        class:field-danger={!verificationemail(emails)}
-        class:field-success={verificationemail(emails)}
+        class:field-danger={!verificationemail(email)}
+        class:field-success={verificationemail(email)}
       />
     </label>
-    {#if !verificationemail(emails)}
+    {#if !verificationemail(email)}
       <span class="validation-hint"> ADRESSE MAIL INVALID </span>
     {/if}
   </div>
@@ -109,8 +109,8 @@
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button
       class="btn"
-      on:click={()=>alert(doSign(pseudo,emails,mdp1))}
-      disabled={!(verificationemail(emails) &&
+      on:click={()=>console.log(doSign(pseudo,email,mdp1))}
+      disabled={!(verificationemail(email) &&
         verificationmdp(mdp1) &&
         verificationpseudo(pseudo) &&
         mdp1equalmdp2(mdp1, mdp2))} id="bconfirmation">Validez votre inscription</button
