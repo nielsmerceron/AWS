@@ -5,11 +5,16 @@
     verificationpseudo,
     mdp1equalmdp2,
   } from "../signin/validate";
+  import {doSign} from "../signin/interac"
+    import { element } from "svelte/internal";
+
+
 
   let emails = "";
   let mdp1 = "";
   let mdp2 = "";
   let pseudo = "";
+
 </script>
 
 <html data-theme="light" lang="fr" />
@@ -104,10 +109,11 @@
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button
       class="btn"
+      on:click={()=>alert(doSign(pseudo,emails,mdp1))}
       disabled={!(verificationemail(emails) &&
         verificationmdp(mdp1) &&
         verificationpseudo(pseudo) &&
-        mdp1equalmdp2(mdp1, mdp2))}>Validez votre inscription</button
+        mdp1equalmdp2(mdp1, mdp2))} id="bconfirmation">Validez votre inscription</button
     >
   </div>
 </div>
