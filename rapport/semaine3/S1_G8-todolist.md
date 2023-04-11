@@ -55,6 +55,7 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 - Il existe plusieurs options pour maintenir la connexion d'un utilisateur. Les deux options principales sont l'utilisation de JSON Web Tokens (JWT) et de cookies.
 
 - **Qu'est-ce qu'un jeton Web JSON**?
+
 Un jeton Web JSON (JWT) est une norme ouverte qui permet de transmettre de manière sécurisée des informations sous forme d'objet JSON. Les JWT sont signés numériquement et peuvent être signés à l'aide d'un secret ou d'une paire de clés publique/privée.
 Les jetons signés peuvent vérifier l'intégrité des revendications qu'ils contiennent et certifient que seuls les détenteurs de la clé privée peuvent les avoir signés. Les JWT sont donc un moyen sûr de transmettre des informations entre les parties.
 
