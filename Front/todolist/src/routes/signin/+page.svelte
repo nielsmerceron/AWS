@@ -1,42 +1,7 @@
 <script>
-  function testsignin() {
-    var pseudo = document.getElementById("pseudo").value;
-    var email = document.getElementById("email").value;
-    var mdp1 = document.getElementById("mdpas1").value;
-    var mdp2 = document.getElementById("mdpas2").value;
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+  import { emailValidator, requiredValidator } from './validators.js'
+  import { createFieldValidator } from './validation.js'
 
-    let missingChars = [];
-    if(!(strongRegex.test(mdp1))){
-      if (!/(?=.*[a-z])/.test(mdp1)) {
-        missingChars.push('une lettre minuscule');
-      }
-      if (!/(?=.*[A-Z])/.test(mdp1)) {
-        missingChars.push('une lettre majuscule');
-      }
-      if (!/(?=.*\d)/.test(mdp1)) {
-        missingChars.push('un chiffre');
-      }
-      if (!/(?=.*[@$!%*?&])/.test(mdp1)) {
-        missingChars.push('un caractère spécial (@$!%*?&)');
-      }
-      alert("mot de passe faible il manque " + missingChars);
-    } 
-
-    if (mdp1 != mdp2) {
-      alert("mot de passe 1 et 2 différent");
-    }
-    if (!pseudo) {
-      alert("pseudo non rentrer");
-    }
-    if (
-      !email.match(
-        /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      alert("ce n'est pas une adresse");
-    }
-  }
 </script>
 
 <html data-theme="luxury" lang="fr" />
@@ -109,6 +74,6 @@
     </label>
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button on:click={testsignin} class="btn">Validez votre inscription</button>
+    <button class="btn">Validez votre inscription</button>
   </div>
 </div>
