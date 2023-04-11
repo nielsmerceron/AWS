@@ -67,6 +67,18 @@ les options les plus courantes sont les JWT et les cookies car elles offrent un 
 - **express-validator**
  est un ensemble de middlewares express.js qui encapsule les fonctions de validation et de désinfection validator.js, on l'installe en utilisant npm
 
+ ## Sécurité Back
+
+Pour la sécurité de nos données sensibles côté serveur ( mot de passe, données privées ) nous allons utilisé:
+- **bcrypt + crypto**: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
+- **Helmet**: Bibliothèque Express qui permet de sécurisé son site en définissant divers en-têtes HTTP pour eviter les vulnérabilités courantes (détournement de clics, HTTP strict ...)
+En effet HTTP est de base ouverte et non sécurisé. Il peut notamment divulger des informations sensible à toutes les personnes ayant les compétences techniques.
+- **TLS**: C'est le protocol de la sécurité de la couche de transport. 
+Elle satisfait différents objectifs client-serveur:
+  - Authentification du serveur
+  - Authentification du client (optionnel)
+  - Confidentialité des données échangées (chiffrement des données)
+  - Intégrité des données échangées
 
 
 
