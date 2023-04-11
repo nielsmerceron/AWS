@@ -1,7 +1,15 @@
 <script>
-  import {verificationemail} from '../signin/validate'
-  
-  let emails = ""
+  import {
+    verificationemail,
+    verificationmdp,
+    verificationpseudo,
+    mdp1equalmdp2,
+  } from "../signin/validate";
+
+  let emails = "";
+  let mdp1 = "";
+  let mdp2 = "";
+  let pseudo = "";
 </script>
 
 <html data-theme="light" lang="fr" />
@@ -24,12 +32,17 @@
     <label class="input-group">
       <span>Pseudo</span>
       <input
-        type="text"
-        placeholder="cortex91lespiramides"
         class="input input-bordered"
-        id="pseudo"
+        type="text"
+        bind:value={pseudo}
+        placeholder="Pseudo"
+        class:field-danger={!verificationpseudo(pseudo)}
+        class:field-success={verificationpseudo(pseudo)}
       />
     </label>
+    {#if !verificationpseudo(pseudo)}
+      <span class="validation-hint"> PSEUDO INVALID</span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
@@ -41,49 +54,60 @@
         class="input input-bordered"
         type="text"
         bind:value={emails}
-        placeholder="votre email"
+        placeholder="Email"
         class:field-danger={!verificationemail(emails)}
         class:field-success={verificationemail(emails)}
-        id="email"
       />
     </label>
     {#if !verificationemail(emails)}
-      <span class="validation-hint">
-        ADRESSE MAIL INVALID
-      </span>
+      <span class="validation-hint"> ADRESSE MAIL INVALID </span>
     {/if}
   </div>
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Mot_de_passe</span>
+      <span class="label-text">Mot de passe</span>
     </label>
     <label class="input-group">
       <span>Mot de passe</span>
       <input
-        type="text"
-        placeholder=""
         class="input input-bordered"
-        id="mdpas1"
+        type="text"
+        bind:value={mdp1}
+        placeholder="Mot de passe"
+        class:field-danger={!verificationmdp(mdp1)}
+        class:field-success={verificationmdp(mdp1)}
       />
     </label>
+    {#if !verificationmdp(mdp1)}
+      <span class="validation-hint"> MOT DE PASSE INVALID</span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Mot_de_passe_2</span>
+      <span class="label-text">Mot de passe </span>
     </label>
     <label class="input-group">
       <span> Réécrivez votre mot de passe </span>
       <input
-        type="text"
-        placeholder=""
         class="input input-bordered"
-        id="mdpas2"
+        type="text"
+        bind:value={mdp2}
+        placeholder="Mot de passe "
+        class:field-danger={!mdp1equalmdp2(mdp1, mdp2)}
+        class:field-success={mdp1equalmdp2(mdp1, mdp2)}
       />
     </label>
+    {#if !mdp1equalmdp2(mdp1, mdp2)}
+      <span class="validation-hint"> MOT DE PASSE NON 2GAUX</span>
+    {/if}
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button class="btn" disabled={!verificationemail(emails)}
-      >Validez votre inscription</button
+    <button
+      class="btn"
+      disabled={!verificationemail(emails) &&
+        !verificationmdp(mdp1) &&
+        !verificationpseudo(pseudo) &&
+        !mdp1equalmdp2(mdp1, mdp2)}>Validez votre inscription</button
     >
   </div>
 </div>
