@@ -104,10 +104,10 @@
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button
       class="btn"
-      disabled={!verificationemail(emails) &&
-        !verificationmdp(mdp1) &&
-        !verificationpseudo(pseudo) &&
-        !mdp1equalmdp2(mdp1, mdp2)}>Validez votre inscription</button
+      disabled={!(verificationemail(emails) &&
+        verificationmdp(mdp1) &&
+        verificationpseudo(pseudo) &&
+        mdp1equalmdp2(mdp1, mdp2))}>Validez votre inscription</button
     >
   </div>
 </div>
