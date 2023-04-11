@@ -1,10 +1,10 @@
 <script>
-  import { emailValidator, requiredValidator } from './validators.js'
-  import { createFieldValidator } from './validation.js'
-
+  import {verificationemail} from '../signin/validate'
+  
+  let emails = ""
 </script>
 
-<html data-theme="luxury" lang="fr" />
+<html data-theme="light" lang="fr" />
 
 <div class="navbar">
   <div class="navbar-start">
@@ -38,12 +38,20 @@
     <label class="input-group">
       <span>Email</span>
       <input
-        type="text"
-        placeholder="blabla@lala.com"
         class="input input-bordered"
+        type="text"
+        bind:value={emails}
+        placeholder="votre email"
+        class:field-danger={!verificationemail(emails)}
+        class:field-success={verificationemail(emails)}
         id="email"
       />
     </label>
+    {#if !verificationemail(emails)}
+      <span class="validation-hint">
+        ADRESSE MAIL INVALID
+      </span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
@@ -74,6 +82,8 @@
     </label>
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button class="btn">Validez votre inscription</button>
+    <button class="btn" disabled={!verificationemail(emails)}
+      >Validez votre inscription</button
+    >
   </div>
 </div>

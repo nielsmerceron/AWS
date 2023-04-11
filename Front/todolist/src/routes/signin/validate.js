@@ -1,19 +1,10 @@
 
+/**
+ * @param {string} value
+ */
+function verificationemail(value) {
+  let regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+  return (regex.test(value));
+}
 
-function buildValidator (validators) {
-    return function validate (value,dirty) {
-      if (!validators || validators.length === 0) {
-        return { dirty, valid: true }
-      }
-  
-      const failing = validators.find(v => v(value) !== true)
-  
-      return {
-        dirty,
-        valid: !failing,
-        message: failing && failing(value)
-      }
-    }
-  }
-  
-  export { buildValidator }
+export  { verificationemail}

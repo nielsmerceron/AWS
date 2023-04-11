@@ -62,7 +62,7 @@
 </script>
 
 
-      <html data-theme="luxury" lang="fr"></html>
+      <html data-theme="light" lang="fr"></html>
     <div class="navbar ">
       <div class="navbar-start">
         <a class=" normal-case text-xl">To do list</a>
