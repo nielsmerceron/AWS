@@ -52,7 +52,8 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 
 
 # Back-end 
-- Il existe plusieurs options pour maintenir la connexion d'un utilisateur. Les deux options principales sont l'utilisation de JSON Web Tokens (JWT) et de cookies.
+
+ Il existe plusieurs options pour maintenir la connexion d'un utilisateur. Les deux options principales sont l'utilisation de JSON Web Tokens (JWT) et de cookies.
 
 - **Qu'est-ce qu'un jeton Web JSON**?
 
