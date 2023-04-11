@@ -145,6 +145,13 @@ https://jwt.io/introduction
 
 https://express-validator.github.io/docs/
 
+https://www.securecoding.com/blog/
 
+https://helmetjs.github.io/ 
+
+
+https://www.securecoding.com/blog/using-helmetjs/ 
+
+https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely  
 
 
