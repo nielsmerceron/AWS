@@ -38,6 +38,7 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 ## Nécessités de la semaine
 - <u>Respectez les necessités global du projet:</u> Simplicité, Documentation.
 - <u>comment communiquer entre le front et le back</u>
+- <u> connexion d'un utilisateur <u>
 - <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
 
 # Front-end
@@ -141,6 +142,8 @@ Elle satisfait différents objectifs client-serveur:
 
 
 # Sources
+## Bibliothèque back 
+
 https://jwt.io/introduction
 
 https://express-validator.github.io/docs/
@@ -148,7 +151,6 @@ https://express-validator.github.io/docs/
 https://www.securecoding.com/blog/
 
 https://helmetjs.github.io/ 
-
 
 https://www.securecoding.com/blog/using-helmetjs/ 
 
