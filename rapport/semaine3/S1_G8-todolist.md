@@ -36,3 +36,92 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 
 # Partie Recherche et analyse
 ## Nécessités de la semaine
+- <u>Respectez les necessités global du projet:</u> Simplicité, Documentation.
+- <u>comment communiquer entre le front et le back</u>
+- <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
+
+# Front-end
+## communication entre le front et le back
+
+# Back-end 
+- Il existe plusieurs options pour maintenir la connexion d'un utilisateur. Les deux options principales sont l'utilisation de JSON Web Tokens (JWT) et de cookies.
+
+- **Qu'est-ce qu'un jeton Web JSON**?
+Un jeton Web JSON (JWT) est une norme ouverte qui permet de transmettre de manière sécurisée des informations sous forme d'objet JSON. Les JWT sont signés numériquement et peuvent être signés à l'aide d'un secret ou d'une paire de clés publique/privée.
+Les jetons signés peuvent vérifier l'intégrité des revendications qu'ils contiennent et certifient que seuls les détenteurs de la clé privée peuvent les avoir signés. Les JWT sont donc un moyen sûr de transmettre des informations entre les parties.
+
+- **Cookies** : Les cookies sont un autre moyen courant de maintenir une connexion utilisateur. Les cookies sont des fichiers stockés sur le navigateur de l'utilisateur et sont envoyés avec chaque requête envoyée au serveur. Les cookies peuvent stocker des informations d'authentification telles qu'un jeton d'accès ou une session ID.
+
+les options les plus courantes sont les JWT et les cookies car elles offrent un bon compromis entre la sécurité et la praticité.
+
+- **express-validator**
+ est un ensemble de middlewares express.js qui encapsule les fonctions de validation et de désinfection validator.js, on l'installe en utilisant npm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Sources
+https://jwt.io/introduction
+https://express-validator.github.io/docs/
+
+
+
+
