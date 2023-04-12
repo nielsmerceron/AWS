@@ -17,22 +17,26 @@
 
 - **Chef de projet:**  
   - Présentation du projet et de son avancement
+  - Gestion des tâches
+  - Back
 
 - **Programmeur 1:**  
-  -  Back
+  - Back et Front
 
 - **Programmeur 2:**
   - Front 
 
-
-  # Developpement du projet
-## Présentation
-Notre projet est un site web qui permet de gérer des todo-lists. Il permet de créer des listes de tâches, de les modifier, de les supprimer, de les partager avec d'autres utilisateurs, de les trier, de les filtrer, de les exporter, etc. 
+# Developpement du projet
 
 ## Objectif de la semaine
 - Création de la page Tudo sur la partie front-end.
 - Connexion entre la partie front-end et le back-end .
 
+## Avancement cette semaine
+- La page Todo est créée, elle permet de créer des tâches avec une date et d'autres informations. Il y a également un calendrier.
+- La création d'utilisateur et la connexion ont été finis du côté du back-end.
+- La comunication avec le back côté front pour la création d'utilisateur et la connexion a été faite.
+- Legère refonte graphique ainsi que qu'un nettoyage du code.
 
 # Partie Recherche et analyse
 ## Nécessités de la semaine
@@ -57,7 +61,7 @@ Nous avons défini une route à l'aide de la méthode app.post() de Express pour
  
  Cette approche nous a permis de gérer efficacement les requêtes POST et de fournir des réponses rapides et précises aux utilisateurs de notre application web.
 
-## communication entre le front et le back
+## Communication entre le front et le back
 
 Afin de permettre la communication entre le front-end et le back-end de notre site, nous avons utilisé des requêtes HTTP. Pour envoyer des requêtes au back-end depuis le front-end, on va  utilisé l'API Fetch et l'URL correspondante. Dans le back-end, nous avons utilisé Express pour écouter les requêtes entrantes et répondre en envoyant les données au format JSON. Ces données JSON ont ensuite été traitées dans le front-end pour afficher les informations nécessaires à l'utilisateur.
 
