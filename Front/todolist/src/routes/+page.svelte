@@ -43,7 +43,7 @@
     aider a être organiser
   </p>
   (insérer un exemple d'interface du site)
-  <div class="artboard artboard-horizontal phone-1">568×320</div>
+  <div class="artboard artboard-horizontal phone-1"></div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     Ce site vous offrira une interface épuré au design minimaliste pour vous
     ordonner.
