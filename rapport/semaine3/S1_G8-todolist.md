@@ -38,7 +38,7 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 ## Nécessités de la semaine
 - <u>Respectez les necessités global du projet:</u> Simplicité, Documentation.
 - <u>comment communiquer entre le front et le back</u>
-- <u> connexion d'un utilisateur <u>
+- <u> connexion d'un utilisateur </u>
 - <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
 
 # Front-end
@@ -49,10 +49,19 @@ une requête POST est une méthode utilisée pour envoyer des données à un ser
 
 Pour envoyer une requête POST à un serveur Web, l'application cliente doit d'abord créer une demande HTTP POST qui inclut les données à envoyer. Les données peuvent être envoyées sous forme de paramètres de requête ou dans le corps de la requête. Dans le cas des formulaires HTML, les données sont généralement envoyées dans le corps de la requête sous forme d'encodage URL ou de données multipart.
 
-Lorsqu'une requête POST est envoyée à un serveur Web, le serveur doit être capable de comprendre et de traiter la demande. Cela implique généralement la définition d'une route côté serveur qui écoute les requêtes POST à une URL spécifiée. La route doit être capable de récupérer les données envoyées dans la requête et de les traiter en fonction des besoins de l'application.
+Lorsqu'une requête POST est envoyée à un serveur Web, le serveur doit être capable de comprendre et de traiter la demande en utilisant Node.js et Express, notamment la méthode app.post() de Express. Cela implique généralement la définition d'une route côté serveur qui écoute les requêtes POST à une URL spécifiée. La route doit être capable de récupérer les données envoyées dans la requête et de les traiter en fonction des besoins de l'application.
 
+Pour traiter les requêtes POST côté serveur, nous avons utilisé Node.js et Express.
+Nous avons défini une route à l'aide de la méthode app.post() de Express pour écouter les requêtes POST sur une URL spécifiée. Nous avons ensuite utilisé la bibliothèque Mongoose pour interagir avec la base de données MongoDB et récupérer les données nécessaires.
+ Enfin, nous avons renvoyé une réponse appropriée au client, en fonction de la demande POST. 
+ 
+ Cette approche nous a permis de gérer efficacement les requêtes POST et de fournir des réponses rapides et précises aux utilisateurs de notre application web.
 
 ## communication entre le front et le back
+
+Afin de permettre la communication entre le front-end et le back-end de notre site, nous avons utilisé des requêtes HTTP. Pour envoyer des requêtes au back-end depuis le front-end, on va  utilisé l'API Fetch et l'URL correspondante. Dans le back-end, nous avons utilisé Express pour écouter les requêtes entrantes et répondre en envoyant les données au format JSON. Ces données JSON ont ensuite été traitées dans le front-end pour afficher les informations nécessaires à l'utilisateur.
+
+Et pour sécuriser l'authentification des utilisateurs et garantir l'accès aux ressources appropriées, nous avons utilisé les JSON Web Tokens (JWT).
 
 
 
@@ -103,73 +112,6 @@ Elle satisfait différents objectifs client-serveur:
 
  
  
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Sources
 ## Bibliothèque back 
@@ -189,6 +131,11 @@ https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-secure
 ## BDD  
 
 https://docs.mongodb.com/ 
+
+## Front 
+https://expressjs.com/fr/guide/routing.html
+
+https://developer.mozilla.org/fr/docs/Web/API/Fetch_API
 
  
  
