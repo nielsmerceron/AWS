@@ -1,42 +1,20 @@
 <script>
-  function testsignin() {
-    var pseudo = document.getElementById("pseudo").value;
-    var email = document.getElementById("email").value;
-    var mdp1 = document.getElementById("mdpas1").value;
-    var mdp2 = document.getElementById("mdpas2").value;
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+  import {
+    verificationemail,
+    verificationmdp,
+    verificationpseudo,
+    mdp1equalmdp2,
+  } from "../signin/validate";
+  import {doSign} from "../signin/interac"
+    import { element } from "svelte/internal";
 
-    let missingChars = [];
-    if(!(strongRegex.test(mdp1))){
-      if (!/(?=.*[a-z])/.test(mdp1)) {
-        missingChars.push('une lettre minuscule');
-      }
-      if (!/(?=.*[A-Z])/.test(mdp1)) {
-        missingChars.push('une lettre majuscule');
-      }
-      if (!/(?=.*\d)/.test(mdp1)) {
-        missingChars.push('un chiffre');
-      }
-      if (!/(?=.*[@$!%*?&])/.test(mdp1)) {
-        missingChars.push('un caractère spécial (@$!%*?&)');
-      }
-      alert("mot de passe faible il manque " + missingChars);
-    } 
 
-    if (mdp1 != mdp2) {
-      alert("mot de passe 1 et 2 différent");
-    }
-    if (!pseudo) {
-      alert("pseudo non rentrer");
-    }
-    if (
-      !email.match(
-        /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      alert("ce n'est pas une adresse");
-    }
-  }
+
+  let email = "";
+  let mdp1 = "";
+  let mdp2 = "";
+  let pseudo = "";
+
 </script>
 
 <html data-theme="cmyk" lang="fr" />
@@ -59,12 +37,17 @@
     <label class="input-group">
       <span>Pseudo</span>
       <input
-        type="text"
-        placeholder="cortex91lespiramides"
         class="input input-bordered"
-        id="pseudo"
+        type="text"
+        bind:value={pseudo}
+        placeholder="Pseudo"
+        class:field-danger={!verificationpseudo(pseudo)}
+        class:field-success={verificationpseudo(pseudo)}
       />
     </label>
+    {#if !verificationpseudo(pseudo)}
+      <span class="validation-hint"> PSEUDO INVALID</span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
@@ -73,42 +56,64 @@
     <label class="input-group">
       <span>Email</span>
       <input
-        type="text"
-        placeholder="blabla@lala.com"
         class="input input-bordered"
-        id="email"
+        type="text"
+        bind:value={email}
+        placeholder="Email"
+        class:field-danger={!verificationemail(email)}
+        class:field-success={verificationemail(email)}
       />
     </label>
+    {#if !verificationemail(email)}
+      <span class="validation-hint"> ADRESSE MAIL INVALID </span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Mot_de_passe</span>
+      <span class="label-text">Mot de passe</span>
     </label>
     <label class="input-group">
       <span>Mot de passe</span>
       <input
-        type="text"
-        placeholder=""
         class="input input-bordered"
-        id="mdpas1"
+        type="text"
+        bind:value={mdp1}
+        placeholder="Mot de passe"
+        class:field-danger={!verificationmdp(mdp1)}
+        class:field-success={verificationmdp(mdp1)}
       />
     </label>
+    {#if !verificationmdp(mdp1)}
+      <span class="validation-hint"> MOT DE PASSE INVALID</span>
+    {/if}
   </div>
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Mot_de_passe_2</span>
+      <span class="label-text">Mot de passe </span>
     </label>
     <label class="input-group">
       <span> Réécrivez votre mot de passe </span>
       <input
-        type="text"
-        placeholder=""
         class="input input-bordered"
-        id="mdpas2"
+        type="text"
+        bind:value={mdp2}
+        placeholder="Mot de passe "
+        class:field-danger={!mdp1equalmdp2(mdp1, mdp2)}
+        class:field-success={mdp1equalmdp2(mdp1, mdp2)}
       />
     </label>
+    {#if !mdp1equalmdp2(mdp1, mdp2)}
+      <span class="validation-hint"> MOT DE PASSE NON 2GAUX</span>
+    {/if}
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button on:click={testsignin} class="btn">Validez votre inscription</button>
+    <button
+      class="btn"
+      on:click={()=>console.log(doSign(pseudo,email,mdp1))}
+      disabled={!(verificationemail(email) &&
+        verificationmdp(mdp1) &&
+        verificationpseudo(pseudo) &&
+        mdp1equalmdp2(mdp1, mdp2))} id="bconfirmation">Validez votre inscription</button
+    >
   </div>
 </div>
