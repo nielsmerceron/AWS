@@ -81,6 +81,43 @@ Elle satisfait différents objectifs client-serveur:
   - Confidentialité des données échangées (chiffrement des données)
   - Intégrité des données échangées
 
+## Base de données 
+
+  Dans le cadre de notre projet de création d'un site de todolist, nous avons opté pour MongoDB comme système de gestion de base de données. 
+
+   
+
+   MongoDB est une base de données NoSQL, orientée documents, qui offre une grande flexibilité et une scalabilité horizontale. Pour interagir avec la base de données MongoDB, on va  utilisé : 
+
+ 
+ 
+
+  **Mongoose**, une bibliothèque JavaScript qui facilite la définition de schémas et la manipulation de données. En outre, on va utilisé : 
+
+ 
+ 
+
+  **Docker**, pour la gestion des conteneurs. Docker nous a permis de créer des environnements de développement et de production isolés, portables et reproductibles, ce qui a simplifié le déploiement et la maintenance de notre application. ainsi on pu développer notre application de manière plus agile et efficace, en maximisant la productivité de l'équipe et en minimisant les risques d'erreur. 
+
+ 
+ 
+
+  Pour simplifier la communication entre notre application front-end et notre base de données MongoDB, on va utilisé : 
+
+   
+
+  **body-parser**, une bibliothèque JavaScript qui permet de récupérer les données envoyées via les requêtes HTTP et de les convertir en un objet JSON. Body-parser nous a ainsi permis de gérer efficacement les échanges de données entre les différentes couches de notre application, tout en garantissant la sécurité de nos données. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 
@@ -155,5 +192,28 @@ https://helmetjs.github.io/
 https://www.securecoding.com/blog/using-helmetjs/ 
 
 https://expressjs.com/en/advanced/best-practice-security.html#use-cookies-securely  
+
+## BDD  
+
+https://docs.mongodb.com/ 
+
+ 
+ 
+
+https://mongoosejs.com/docs/ 
+
+ 
+ 
+
+https://docs.docker.com/ 
+
+ 
+ 
+
+https://www.npmjs.com/package/body-parser 
+
+ 
+ 
+ 
 
 
