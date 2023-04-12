@@ -1,6 +1,7 @@
 <script>
+  import{addTodo,removeTodo,clickOption,unclickOption,objectifClick,groupeClick,isPeriodique,periodiqueClick} from "../createtodo/todo"
   /**
-   * @type {todo[]}
+   * @type {todo}
    */
   let todos = [];
   let option = 0;
@@ -16,61 +17,7 @@
   let groupe = "";
   let periode = "";
 
-  function addTodo() {
-    const title = document.getElementById("todoTitle").value;
-    const description = document.getElementById("todoDescription").value;
-    const date = document.getElementById("todoDate").value;
 
-    if (title && description) {
-      const todo = { title, description, date };
-      if (isObjectif) {
-        todo.objectif = document.getElementById("todoObjectif").value;
-      }
-      if (isGroupe) {
-        todo.groupe = document.getElementById("todoGroupe").value;
-      }
-      if (isPeriodique) {
-        todo.periodique = document.getElementById("todoPeriodique").value;
-      }
-      todos.push(todo);
-      document.getElementById("todoTitle").value = "";
-      document.getElementById("todoDescription").value = "";
-      document.getElementById("todoDate").value = "";
-      document.getElementById("todoObjectif").value = "";
-      document.getElementById("todoGroupe").value = "";
-      document.getElementById("todoPeriodique").value = "";
-    }
-  }
-
-  function removeTodo(index) {
-    todos = todos.filter((_, i) => i !== index);
-  }
-
-  function clickOption() {
-    option = 1;
-  }
-
-  function unclickOption() {
-    option = 0;
-  }
-
-  let isObjectif = false;
-
-  function objectifClick() {
-    isObjectif ? (isObjectif = false) : (isObjectif = true);
-  }
-
-  let isGroupe = false;
-
-  function groupeClick() {
-    isGroupe ? (isGroupe = false) : (isGroupe = true);
-  }
-
-  let isPeriodique = false;
-
-  function periodiqueClick() {
-    isPeriodique ? (isPeriodique = false) : (isPeriodique = true);
-  }
 </script>
 
 <html data-theme="light" lang="fr" />
