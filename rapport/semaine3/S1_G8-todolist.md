@@ -42,11 +42,17 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 - <u>Sécuriter:</u> Trouvez les meilleurs moyens de sécurisés les donneés sensible de notre SGBD.
 
 # Front-end
+
+##  Comment une requête POST 
+
+une requête POST est une méthode utilisée pour envoyer des données à un serveur Web pour traitement. Contrairement à une requête GET, qui est utilisée pour récupérer des données à partir d'un serveur, une requête POST est utilisée pour envoyer des données au serveur pour traitement, comme l'ajout, la modification ou la suppression d'informations dans une base de données.
+
+Pour envoyer une requête POST à un serveur Web, l'application cliente doit d'abord créer une demande HTTP POST qui inclut les données à envoyer. Les données peuvent être envoyées sous forme de paramètres de requête ou dans le corps de la requête. Dans le cas des formulaires HTML, les données sont généralement envoyées dans le corps de la requête sous forme d'encodage URL ou de données multipart.
+
+Lorsqu'une requête POST est envoyée à un serveur Web, le serveur doit être capable de comprendre et de traiter la demande. Cela implique généralement la définition d'une route côté serveur qui écoute les requêtes POST à une URL spécifiée. La route doit être capable de récupérer les données envoyées dans la requête et de les traiter en fonction des besoins de l'application.
+
+
 ## communication entre le front et le back
-
-
-
-
 
 
 
@@ -85,26 +91,13 @@ Elle satisfait différents objectifs client-serveur:
 
   Dans le cadre de notre projet de création d'un site de todolist, nous avons opté pour MongoDB comme système de gestion de base de données. 
 
-   
-
    MongoDB est une base de données NoSQL, orientée documents, qui offre une grande flexibilité et une scalabilité horizontale. Pour interagir avec la base de données MongoDB, on va  utilisé : 
-
- 
- 
 
   **Mongoose**, une bibliothèque JavaScript qui facilite la définition de schémas et la manipulation de données. En outre, on va utilisé : 
 
- 
- 
-
   **Docker**, pour la gestion des conteneurs. Docker nous a permis de créer des environnements de développement et de production isolés, portables et reproductibles, ce qui a simplifié le déploiement et la maintenance de notre application. ainsi on pu développer notre application de manière plus agile et efficace, en maximisant la productivité de l'équipe et en minimisant les risques d'erreur. 
 
- 
- 
-
   Pour simplifier la communication entre notre application front-end et notre base de données MongoDB, on va utilisé : 
-
-   
 
   **body-parser**, une bibliothèque JavaScript qui permet de récupérer les données envoyées via les requêtes HTTP et de les convertir en un objet JSON. Body-parser nous a ainsi permis de gérer efficacement les échanges de données entre les différentes couches de notre application, tout en garantissant la sécurité de nos données. 
 
