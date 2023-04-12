@@ -39,7 +39,7 @@
   }
 </script>
 
-<html data-theme="luxury" lang="fr" />
+<html data-theme="cmyk" lang="fr" />
 
 <div class="navbar">
   <div class="navbar-start">
