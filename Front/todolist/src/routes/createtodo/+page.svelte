@@ -1,5 +1,5 @@
 <script>
-  import{addTodo,removeTodo,clickOption,unclickOption,objectifClick,groupeClick,isPeriodique,periodiqueClick} from "../createtodo/todo"
+  import{addTodo,removeTodo,clickOption,unclickOption,objectifClick,groupeClick,isPeriodique,periodiqueClick,isGroupe,isObjectif} from "../createtodo/todo"
   /**
    * @type {todo}
    */
@@ -101,7 +101,7 @@
         </div>
       </div>
     {/if}
-    <button class="btn btn-primary" on:click={addTodo}
+    <button class="btn btn-primary" on:click={()=>addTodo(title,description,date,objectif,groupe,periode)}
       >Ajouter dans Brouillon</button
     >
     {#if todos.length === 0}

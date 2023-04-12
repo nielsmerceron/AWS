@@ -54,4 +54,4 @@
     isPeriodique ? (isPeriodique = false) : (isPeriodique = true);
   }
 
-export{addTodo,removeTodo,clickOption,unclickOption,objectifClick,groupeClick,isPeriodique,periodiqueClick}
+export{addTodo,removeTodo,clickOption,unclickOption,objectifClick,groupeClick,isPeriodique,periodiqueClick,isGroupe,isObjectif}
