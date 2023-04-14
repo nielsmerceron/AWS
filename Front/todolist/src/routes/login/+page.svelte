@@ -3,6 +3,14 @@
   <link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
+<script>
+  import { doLogin } from "../login/interactLogin.js";
+  import { element } from "svelte/internal";
+
+  let email = "";
+  let mdp = "";
+</script>
+
 <html data-theme="dracula" lang="fr" />
 <div class="navbar">
   <div class="navbar-start">
@@ -34,7 +42,12 @@
     </label>
     <label class="input-group">
       <span>Email</span>
-      <input type="email" class="input input-bordered" id="email-input" />
+      <input 
+        type="email" 
+        bind:value={email}
+        class="input input-bordered"
+        id="email-input" 
+      />
     </label>
   </div>
   <div class="form-control">
@@ -43,10 +56,17 @@
     </label>
     <label class="input-group">
       <span>Mot de passe</span>
-      <input type="password" class="input input-bordered" id="password-input" />
+    <input
+      type="password" 
+      bind:value={mdp}
+      class="input input-bordered"
+      id="password-input"
+    />
     </label>
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button class="btn">Connexion</button>
+    <button class="btn" 
+    on:click={() => console.log(doLogin(email, mdp))}
+    >Connexion</button>
   </div>
 </div>
