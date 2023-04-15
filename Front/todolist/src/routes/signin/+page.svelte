@@ -12,6 +12,18 @@
   } from "../signin/validate";
   import { doSign } from "../signin/interac";
   import { element } from "svelte/internal";
+  import { navigate } from 'svelte-routing';
+
+
+  async function clickConnection(){
+    try {
+    const result = await doSign(pseudo, email, mdp1);
+    () => console.log(doSign(pseudo, email, mdp1));
+    navigate('/');
+  } catch (error) {
+    () => console.log(doSign(pseudo, email, mdp1));
+  }
+  }
 
   let email = "";
   let mdp1 = "";
@@ -124,7 +136,7 @@
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button
       class="btn"
-      on:click={() => console.log(doSign(pseudo, email, mdp1))}
+      on:click={clickConnection}
       disabled={!(
         verificationemail(email) &&
         verificationmdp(mdp1) &&

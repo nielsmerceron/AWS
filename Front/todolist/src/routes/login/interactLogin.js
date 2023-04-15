@@ -1,16 +1,17 @@
 /**
  * @param {string} email
- * @param {string} mdp
+ * @param {string} password
  */
-async function doLogin(email, mdp) {
-  const url = 'http://127.0.0.1:3000/user/login'; // to be updated by db url 
+async function doLogin(email, password) {
+  const url = 'http://127.0.0.1:3000/user/logup';
+
   const body = {
     email: email,
-    password: mdp,
+    password: password,
   };
 
   const response = await fetch(url, {
-    method: 'GET', // get list of connexion items (email, mdp) from db 
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -22,8 +23,8 @@ async function doLogin(email, mdp) {
   }
 
   const result = await response.json();
-  // check if email and mpd exist in the result list 
-  return Boolean;
+  return result;
 }
 
-export {doLogin}
+export {doLogin};
+

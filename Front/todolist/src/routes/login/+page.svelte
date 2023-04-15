@@ -6,6 +6,18 @@
 <script>
   import { doLogin } from "../login/interactLogin.js";
   import { element } from "svelte/internal";
+  import { navigate } from 'svelte-routing';
+
+
+  async function clickConnection(){
+    try {
+    const result = await doLogin(email, mdp);
+    () => console.log(doLogin(email, mdp));
+    navigate('/');
+  } catch (error) {
+    () => console.log(doLogin(email, mdp));
+  }
+  }
 
   let email = "";
   let mdp = "";
@@ -66,7 +78,7 @@
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button class="btn" 
-    on:click={() => console.log(doLogin(email, mdp))}
+    on:click={clickConnection}
     >Connexion</button>
   </div>
 </div>
