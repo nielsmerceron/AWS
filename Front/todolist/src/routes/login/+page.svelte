@@ -14,6 +14,8 @@
     const result = await doLogin(email, mdp);
     () => console.log(doLogin(email, mdp));
     navigate('/');
+    location.reload();
+
   } catch (error) {
     () => console.log(doLogin(email, mdp));
   }

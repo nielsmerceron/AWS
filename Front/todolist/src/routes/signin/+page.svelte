@@ -20,6 +20,8 @@
     const result = await doSign(pseudo, email, mdp1);
     () => console.log(doSign(pseudo, email, mdp1));
     navigate('/');
+    location.reload();
+
   } catch (error) {
     () => console.log(doSign(pseudo, email, mdp1));
   }
