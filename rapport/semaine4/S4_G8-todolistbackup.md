@@ -87,8 +87,19 @@ Nous utiliserons un JWT avec une signature asymétrique , avec une clé public e
 Je rajoute aussi qu'il faudra donc faire très attention a comment et où l'on stokera la clef secrète pour signer sinon des attaques contre le site seront possible.
 
 
+## hébergement du site
 
+On aurait pu faire ça de plusieurs manières différente , acheter un nom de domaine, payé un serveur pour l'héberger etc..
+Cependant nous avons la chance dans notre groupe d'avoir Pierre qui a un serveur ou l'on peut mettre la base de donnée du site mais aussi le site. 
+Pour effectuer cette tache et ce faciliter le lancement de tout le site nous utiliserons docker.
 
+## qu'es ce que docker ?
+
+Doker c'est une platerfome créée en 2013 qui a pour but d'aider a la conception, test et déploiment de logiciel via des "conteneurs logiciels".
+Toutes les actions dans Docker sont standardisées, par cette standardisation il y a un gain considérable de prise en main et d'éxecution de test ou de déploiement.
+De plus nous pouvons tester certains élément de manière indépendante grace au "conteneur de logiciel" puis les regrouper pour lancer le logiciel ou site.
+C'est exactement ce que nous avons fait en testant d'abord la Base de donnée dans un docker puis le site dans un autre conteneur et après une fois ces deux éléments fonctionnel, les deux ensembles dans un même docker.
+De plus chaque docker peut être partégé par le biais d'un hub. Ce hub fonctionne un peu dans la même ligné que github.
 
 
 # bibliographie/site consulté
@@ -100,3 +111,7 @@ Je rajoute aussi qu'il faudra donc faire très attention a comment et où l'on s
 ### sécurité technologie pour stocker le JWT
   - https://website.simplx.fr/blog/2016/09/27/authentification-api-via-jwt-et-cookies/
   - https://www.pingidentity.com/fr/resources/blog/post/jwt-security-nobody-talks-about.html
+
+### Docker
+ - https://www.docker.com/
+ - https://docs.docker.com/
