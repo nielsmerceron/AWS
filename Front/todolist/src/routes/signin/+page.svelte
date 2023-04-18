@@ -34,7 +34,6 @@
 </script>
 
 <html data-theme="dracula" lang="fr" />
-
 <div class="navbar">
   <div class="navbar-start">
     <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
@@ -53,6 +52,7 @@
         <li><a href="/signin">Sign in </a></li>
         <li><a href="/login">Log in </a></li>
         <li><a href="/createtodo">Create todo </a></li>
+        <li><a href="/calendrier">Calendrier </a></li>
       </ul>
     </div>
   </div>

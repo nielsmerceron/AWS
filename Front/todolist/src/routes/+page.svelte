@@ -7,23 +7,11 @@
   <div class="navbar-start">
     <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
   </div>
-  <div class="navbar-center secondary lg:flex">Log in process</div>
+  <div class="navbar-center secondary lg:flex"><strong>ACCUEIL</strong></div>
   <div class="navbar-end">
     <div class="dropdown dropdown-bottom dropdown-end">
       <label for="dropdown-menu" tabindex="-1" class="btn btn-ghost btn-circle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h7"
-          /></svg
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
       </label>
       <ul
         tabindex="-1"
@@ -33,6 +21,7 @@
         <li><a href="/signin">Sign in </a></li>
         <li><a href="/login">Log in </a></li>
         <li><a href="/createtodo">Create todo </a></li>
+        <li><a href="/calendrier">Calendrier </a></li>
       </ul>
     </div>
   </div>

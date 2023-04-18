@@ -1,17 +1,18 @@
 <script>
 	import calendarize from 'calendarize';
 	
-	export let year = 2019;
-	export let month = 0; // Jan
-	export let offset = 0; // Sun
-	export let today = null; // Date
+	let dateCalendar = new Date();
+	export let year = dateCalendar.getFullYear();
+	export let month = dateCalendar.getMonth(); 
+	export let offset = 1; // Monday le 1er jour
+	export let today = dateCalendar.getDate(); // Date
 	
-	export let labels = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	export let labels = [ 'Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	export let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	
-	$: today_month = today && today.getMonth();
-	$: today_year = today && today.getFullYear();
-	$: today_day = today && today.getDate();
+	$: today_month = today && dateCalendar.getMonth();
+	$: today_year = today && dateCalendar.getFullYear();
+	$: today_day = today && dateCalendar.getDate();
 	
 	let prev = calendarize(new Date(year, month-1), offset);
 	let current = calendarize(new Date(year, month), offset);
@@ -81,15 +82,15 @@
 		<span class="text-xs font-semibold text-gray-500 uppercase">{ labels[(idx + offset) % 7] }</span>
 	{/each}
 
-	{#each { length:6 } as w,posY (posY)}
-		{#if current[posY]}
-			{#each { length:7 } as d,posX (posX)}
-				{#if current[posY][posX] != 0}
-                    <button class="btn btn-accent" class:bg-primary-500={isToday(current[posY][posX])}>	{ current[posY][posX] }</button>
-				{:else if (posY < 1)}
-					<span class="text-lg opacity-50">{ prev[prev.length - 1][posX] }</span>
+	{#each { length:6 } as w,posLigne (posLigne)}
+		{#if current[posLigne]}
+			{#each { length:7 } as d,posColonne (posColonne)}
+				{#if current[posLigne][posColonne] != 0}
+                    <button class={isToday(current[posLigne][posColonne])?"btn btn-primary":"btn btn-accent "}>	{ current[posLigne][posColonne] }</button>
+				{:else if (posLigne < 1)}
+					<span class="text-lg opacity-50">{ prev[prev.length - 1][posColonne] }</span>
 				{:else}
-					<span class="text-lg opacity-50">{ next[0][posX] }</span>
+					<span class="text-lg opacity-50">{ next[0][posColonne] }</span>
 				{/if}
 			{/each}
 		{/if}
