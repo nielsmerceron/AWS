@@ -73,16 +73,30 @@ Le cookie est une protection efficace contre les attaques de cross scripting.
 Pour le problème du JWT avec stokage dans le session storage est que ce token est accessible par toutes les personnes ayant accès au code javascript. Cette technologie est donc vulnérable au attaque par cross scripting. 
 Cependant , si le site est bien codé, il devrait être bien moins vulnérable a ces attaques.  
 
-## mixe des deux
+## meilleur choix 
+
+un liage du JWT et du cookie. Pourquoi faire un mixe des deux, car ces deux technologies ce complète. C'est a dire, le cookie assure la protection du JWT grace au HTTPonly et donc rend donc l'accès du JWT si il était stocké dans le storage. 
+Mais aussi le JWT augmente la taille de donnée du cookie (de 4ko à 4Mo).
+
+## notre choix 
+
+On utilisera le JWT stocker dans le local ou session storage.
+Nous avons fait ce choix car nous pensons que cela suffira au niveau de la sécurité.
+Nous n'utiliserons pas de signature symétrique car on ne peut partager le JWT a plusieurs services différents sans engendré des problèmes d'intrusion potentiel.
+Nous utiliserons un JWT avec une signature asymétrique , avec une clé public et privé pour facilité la communication entre service. De plus nous rajouterons a cela de l'aléatoire pour encore augmenter la sécurité du site.
+Je rajoute aussi qu'il faudra donc faire très attention a comment et où l'on stokera la clef secrète pour signer sinon des attaques contre le site seront possible.
 
 
-## technologie choisi
 
-JSonwebtoken comment le stocker et différence entre les technologies.
-les classer du plus au moins sécur
+
+
 
 # bibliographie/site consulté
+
+### description général du Json Web Token
   - https://fr.wikipedia.org/wiki/JSON_Web_Token#cite_note-RFC-7519-t-1
   - https://datatracker.ietf.org/doc/html/rfc7519
-  - 
+
+### sécurité technologie pour stocker le JWT
   - https://website.simplx.fr/blog/2016/09/27/authentification-api-via-jwt-et-cookies/
+  - https://www.pingidentity.com/fr/resources/blog/post/jwt-security-nobody-talks-about.html
