@@ -13,7 +13,7 @@
   - Rédaction du rapport 
 
 - **Chef de projet:**  
-  - connexion pour le login (communicatiopn back front)
+  - connexion pour le login (communication back front)
 
 - **Programmeur 1:**  
   - portage du site sur le serveur
