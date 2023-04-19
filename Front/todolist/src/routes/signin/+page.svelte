@@ -12,6 +12,20 @@
   } from "../signin/validate";
   import { doSign } from "../signin/interac";
   import { element } from "svelte/internal";
+  import { navigate } from 'svelte-routing';
+
+
+  async function clickConnection(){
+    try {
+    const result = await doSign(pseudo, email, mdp1);
+    () => console.log(doSign(pseudo, email, mdp1));
+    navigate('/');
+    location.reload();
+
+  } catch (error) {
+    () => console.log(doSign(pseudo, email, mdp1));
+  }
+  }
 
   let email = "";
   let mdp1 = "";
@@ -20,7 +34,6 @@
 </script>
 
 <html data-theme="dracula" lang="fr" />
-
 <div class="navbar">
   <div class="navbar-start">
     <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
@@ -39,6 +52,7 @@
         <li><a href="/signin">Sign in </a></li>
         <li><a href="/login">Log in </a></li>
         <li><a href="/createtodo">Create todo </a></li>
+        <li><a href="/calendrier">Calendrier </a></li>
       </ul>
     </div>
   </div>
@@ -124,7 +138,7 @@
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
     <button
       class="btn"
-      on:click={() => console.log(doSign(pseudo, email, mdp1))}
+      on:click={clickConnection}
       disabled={!(
         verificationemail(email) &&
         verificationmdp(mdp1) &&

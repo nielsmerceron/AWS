@@ -3,6 +3,28 @@
   <link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
+<script>
+  import { doLogin } from "../login/interactLogin.js";
+  import { element } from "svelte/internal";
+  import { navigate } from 'svelte-routing';
+
+
+  async function clickConnection(){
+    try {
+    const result = await doLogin(email, mdp);
+    () => console.log(doLogin(email, mdp));
+    navigate('/');
+    location.reload();
+
+  } catch (error) {
+    () => console.log(doLogin(email, mdp));
+  }
+  }
+
+  let email = "";
+  let mdp = "";
+</script>
+
 <html data-theme="dracula" lang="fr" />
 <div class="navbar">
   <div class="navbar-start">
@@ -22,6 +44,7 @@
         <li><a href="/signin">Sign in </a></li>
         <li><a href="/login">Log in </a></li>
         <li><a href="/createtodo">Create todo </a></li>
+        <li><a href="/calendrier">Calendrier </a></li>
       </ul>
     </div>
   </div>
@@ -34,7 +57,12 @@
     </label>
     <label class="input-group">
       <span>Email</span>
-      <input type="email" class="input input-bordered" id="email-input" />
+      <input 
+        type="email" 
+        bind:value={email}
+        class="input input-bordered"
+        id="email-input" 
+      />
     </label>
   </div>
   <div class="form-control">
@@ -43,10 +71,17 @@
     </label>
     <label class="input-group">
       <span>Mot de passe</span>
-      <input type="password" class="input input-bordered" id="password-input" />
+    <input
+      type="password" 
+      bind:value={mdp}
+      class="input input-bordered"
+      id="password-input"
+    />
     </label>
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button class="btn">Connexion</button>
+    <button class="btn" 
+    on:click={clickConnection}
+    >Connexion</button>
   </div>
 </div>

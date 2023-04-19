@@ -28,4 +28,5 @@ async function doSign(pseudo, email, mdp) {
     return result;
 }
 
+
 export {doSign}
