@@ -18,8 +18,9 @@ services:
       - backend
     networks:
       - todo-app
+      - caddy_front
   mongodb:
-    image: mongo:latest
+    image: mongo:4
     container_name: mongodb
     hostname: mongodb
     restart: no
@@ -34,3 +35,5 @@ services:
 
 networks:
   todo-app:
+  caddy_front:
+    external: true
