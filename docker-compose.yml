@@ -2,14 +2,18 @@ version: '3.8'
 services:
   backend:
     build: ./back
+    container_name: todo-app-back
+    hostname: todo-app-back
     depends_on:
       - mongodb
     networks:
       - todo-app
   frontend:
-    build: ./front
+    build: ./Front/todolist
     container_name: todo-app-front
     hostname: todo-app-front
+    ports:
+      - "6534:3000"
     depends_on:
       - backend
     networks:
@@ -21,9 +25,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: testdb
       MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: aws123
-    ports:
-      - "127.0.0.1:27017:27017"
+      MONGO_INITDB_ROOT_PASSWORD: aws
     volumes:
       - ./back/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
