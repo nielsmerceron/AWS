@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGOURI = "mongodb://aws:test@127.0.0.1:27017/testdb";
+const MONGOURI = "mongodb://aws:test@mongodb:27017/testdb";
 
 const InitiateMongoServer = async () => {
   try {
