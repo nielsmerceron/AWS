@@ -37,7 +37,6 @@
 
     } catch (error) {
       () => console.log(doCreateTodo(title,description,false,dateCalendar));
-      erreur = 2;
     }
       document.getElementById("todoTitle").value = "";
       document.getElementById("todoDescription").value = "";

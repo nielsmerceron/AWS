@@ -9,6 +9,7 @@ const User = require("../models/user");
 const Todo = require("../models/todo");
 
 
+
 router.post(
   "/signup",
   [
@@ -142,9 +143,9 @@ router.post(
   "/createtododo",
   
   async (req, res) => {
+    
 
-
-    const { title, description, completed, createAt } = req.body;
+    const { title, description, completed,createAt } = req.body;
     try {
       
 
@@ -157,8 +158,25 @@ router.post(
 
       await todo.save();
 
-      
-    
+      const payload = {
+        todo: {
+          id: todo.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        "randomString",
+        {
+          expiresIn: 3600,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).json({
+            token,
+          });
+        }
+      );
     } catch (err) {
       console.log(err.message);
       res.status(500).send("Error in Saving");
