@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 
 const User = require("../models/user");
+const Todo = require("../models/todo");
+
 
 router.post(
   "/signup",
@@ -132,6 +134,34 @@ router.post(
       res.status(500).json({
         message: "Server Error",
       });
+    }
+  }
+);
+
+router.post(
+  "/createtododo",
+  
+  async (req, res) => {
+
+
+    const { title, description, completed, createAt } = req.body;
+    try {
+      
+
+      let todo = new Todo({
+        title,
+        description,
+        completed,
+        createAt,
+      });
+
+      await todo.save();
+
+      
+    
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send("Error in Saving");
     }
   }
 );

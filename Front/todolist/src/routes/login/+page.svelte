@@ -5,7 +5,6 @@
 
 <script>
   import { doLogin } from "../login/interactLogin.js";
-  import { element } from "svelte/internal";
   import { navigate } from 'svelte-routing';
 
 

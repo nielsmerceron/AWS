@@ -2,13 +2,15 @@
   let todos = [];
   let option = 0;
   let todo = {};
+  let erreur = 0;
 
   import { DateInput } from "date-picker-svelte";
+  import { doCreateTodo } from "./interactCreateTodo";
   let dateCalendar = new Date();
 
-  function addTodo() {
-    const title = document.getElementById("todoTitle").value;
-    const description = document.getElementById("todoDescription").value;
+  async function addTodo() {
+    let title = document.getElementById("todoTitle").value;
+    let description = document.getElementById("todoDescription").value;
     const date =
       dateCalendar.getDate() +
       "/" +
@@ -28,6 +30,15 @@
         todo.periodique = document.getElementById("todoPeriodique").value;
       }
       todos.push(todo);
+      try {
+      const result = await doCreateTodo(title,description,false,dateCalendar);
+      () => console.log(doCreateTodo(title,description,false,dateCalendar));
+      erreur = 1;
+
+    } catch (error) {
+      () => console.log(doCreateTodo(title,description,false,dateCalendar));
+      erreur = 2;
+    }
       document.getElementById("todoTitle").value = "";
       document.getElementById("todoDescription").value = "";
       document.getElementById("todoDate").value = "";
@@ -159,8 +170,10 @@
         </div>
       </div>
     {/if}
-    <button class="btn btn-accent" on:click={addTodo}
-      >Ajouter dans Brouillon</button
+    <button
+        class={erreur ? "btn btn-secondary" : "btn btn-primary"}
+        on:click={addTodo}
+      >Ajouter dans truc</button
     >
     {#if todos.length === 0}
       <p>No to-dos added yet.</p>
