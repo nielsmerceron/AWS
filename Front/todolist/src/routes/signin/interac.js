@@ -4,7 +4,7 @@
  * @param {string} mdp
  */
 async function doSign(pseudo, email, mdp) {
-  const url = "http://todo-app-back:3000/user/signup";
+  const url = 'http://127.0.0.1:3000/user/signup';
   const body = {
     username: pseudo,
     email: email,
