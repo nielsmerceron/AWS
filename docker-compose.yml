@@ -8,12 +8,11 @@ services:
       - mongodb
     networks:
       - todo-app
+      - caddy_front
   frontend:
     build: ./Front/todolist
     container_name: todo-app-front
     hostname: todo-app-front
-    ports:
-      - "4173:4173"
     depends_on:
       - backend
     networks:

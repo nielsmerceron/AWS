@@ -1,22 +1,18 @@
 FROM node:18 as build
 
-ENV NODE_ENV=production 
-
+ENV NPM_CONFIG_PRODUCTION=false
 
 WORKDIR /app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json .
 RUN npm install
-COPY . ./
+COPY . .
 RUN npm run build
-
 
 FROM node:18
 
 WORKDIR /app
 COPY --from=build /app .
-
 
 ENV HOST=0.0.0.0
 EXPOSE 4173

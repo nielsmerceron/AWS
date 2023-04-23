@@ -3,7 +3,7 @@
  * @param {string} password
  */
 async function doLogin(email, password) {
-  const url = "http://todo-app-back:3000/user/logup";
+  const url = "https://aws.tpzcloud.uk/api/user/logup";
 
   const body = {
     email: email,
