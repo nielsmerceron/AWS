@@ -1,19 +1,20 @@
 /**
+ * @param {string} pseudo
  * @param {string} email
- * @param {string} password
+ * @param {string} mdp
  */
-async function doLogin(email, password) {
-  const url = 'http://127.0.0.1:3000/user/logup';
-
+async function doSign(pseudo, email, mdp) {
+  const url = "http://127.0.0.1:3000/user/signin";
   const body = {
+    username: pseudo,
     email: email,
-    password: password,
+    password: mdp,
   };
 
   const response = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
   });
@@ -26,5 +27,4 @@ async function doLogin(email, password) {
   return result;
 }
 
-export {doLogin};
-
+export { doSign };

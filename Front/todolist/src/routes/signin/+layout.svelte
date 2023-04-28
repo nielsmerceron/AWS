@@ -1,5 +1,5 @@
 <script>
-    import "../signin/app.postcss";
+    import "../login/app.postcss";
   </script>
   
   <slot />
