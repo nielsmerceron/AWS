@@ -17,6 +17,7 @@
 
 - **Programmeur 1:**  
   - portage du site sur le serveur
+  - schéma de la base de données
 
 - **Programmeur 2:**
   - page calendrier
@@ -33,7 +34,7 @@ Notre projet est un site web qui permet de gérer des todo-lists. Il permet de c
 - **Code:** Front : Page d'accueil ( login/sign up ), Back : enregistrement des logs.
 
 ## Avancement cette semaine
-  L'affichage des toto a été légèrement modifier.
+  L'affichage des todo a été légèrement modifier.
   ajout d'un renvoie vers la page d'accueil quand on est Signin ou Login.
   ajout d'une page de calendrier.
   Connexion entre le back et front pour le login faite.

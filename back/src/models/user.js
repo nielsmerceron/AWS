@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
   todos: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "/todo",
+      ref: "todo",
     },
   ],
   createdAt: {
