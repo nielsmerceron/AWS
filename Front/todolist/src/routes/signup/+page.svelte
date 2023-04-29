@@ -58,8 +58,8 @@
         class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         id="dropdown-menu"
       >
-        <li><a href="/signin">Sign in </a></li>
-        <li><a href="/login">Log in </a></li>
+        <li><a href="/signup">Sign up </a></li>
+        <li><a href="/signin">Log in </a></li>
         <li><a href="/createtodo">Create todo </a></li>
         <li><a href="/calendrier">Calendrier </a></li>
       </ul>

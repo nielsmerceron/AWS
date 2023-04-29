@@ -139,49 +139,5 @@ router.post(
   }
 );
 
-router.post(
-  "/createtododo",
-  
-  async (req, res) => {
-    
-
-    const { title, description, completed,createAt } = req.body;
-    try {
-      
-
-      let todo = new Todo({
-        title,
-        description,
-        completed,
-        createAt,
-      });
-
-      await todo.save();
-
-      const payload = {
-        todo: {
-          id: todo.id,
-        },
-      };
-
-      jwt.sign(
-        payload,
-        "randomString",
-        {
-          expiresIn: 3600,
-        },
-        (err, token) => {
-          if (err) throw err;
-          res.status(200).json({
-            token,
-          });
-        }
-      );
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Error in Saving");
-    }
-  }
-);
 
 module.exports = router;
