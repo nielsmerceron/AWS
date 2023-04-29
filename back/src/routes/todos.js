@@ -58,4 +58,34 @@ router.get("/get", auth, async (req, res) => {
   }
 });
 
+// Delete
+//DELETE /del/abc - abc beeing the _id of the todo item
+router.delete("/del/:id", auth, async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.id);
+    res.json({ message: "Todo Deleted" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Error in Deleting Todo");
+  }
+});
+
+// Update
+//PUT /modify/adb
+//{
+//  "title": "New Title",
+//  "description": "New Description"
+//}
+router.put("/modify/:id", auth, async (req, res) => {
+  try {
+    const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updatedTodo);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Error in Updating Todo");
+  }
+});
+
 module.exports = router;
