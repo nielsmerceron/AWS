@@ -1,101 +1,39 @@
-<svelte:head>
-	<title>TODO</title>
-  <link rel="icon" href="/favicon.svg" />
-</svelte:head>
-
 <script>
-  import {
-    verificationemail,
-    verificationmdp,
-    verificationpseudo,
-    mdp1equalmdp2,
-  } from "../signin/validate";
-  import { doSign } from "../signin/interac";
+  import { doLogin } from "./interactLogin.js";
   import { element } from "svelte/internal";
   import { navigate } from 'svelte-routing';
 
 
   async function clickConnection(){
     try {
-    const result = await doSign(pseudo, email, mdp1);
-    () => console.log(doSign(pseudo, email, mdp1));
+    const result = await doLogin(email, mdp);
+    () => console.log(doLogin(email, mdp));
     navigate('/');
     location.reload();
 
   } catch (error) {
-    () => console.log(doSign(pseudo, email, mdp1));
+    () => console.log(doLogin(email, mdp));
   }
   }
 
   let email = "";
-  let mdp1 = "";
-  let mdp2 = "";
-  let pseudo = "";
+  let mdp = "";
 </script>
-
-<html data-theme="dracula" lang="fr" />
-<div class="navbar">
-  <div class="navbar-start">
-    <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
-  </div>
-  <div class="navbar-center secondary lg:flex"><strong>SIGN UP</strong></div>
-  <div class="navbar-end">
-    <div class="dropdown dropdown-bottom dropdown-end">
-      <label for="dropdown-menu" tabindex="-1" class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-      </label>
-      <ul
-        tabindex="-1"
-        class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-        id="dropdown-menu"
-      >
-        <li><a href="/signin">Sign in </a></li>
-        <li><a href="/login">Log in </a></li>
-        <li><a href="/createtodo">Create todo </a></li>
-        <li><a href="/calendrier">Calendrier </a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
   <div class="form-control">
-    <label class="label" for="pseudo-input">
-      <span class="label-text">Pseudo</span>
-    </label>
-    <label class="input-group">
-      <span>Pseudo</span>
-      <input
-        class="input input-bordered"
-        type="text"
-        bind:value={pseudo}
-        class:field-danger={!verificationpseudo(pseudo)}
-        class:field-success={verificationpseudo(pseudo)}
-        id="pseudo-input"
-      />
-    </label>
-    {#if !verificationpseudo(pseudo)}
-      <span class="validation-hint"> PSEUDO INVALID</span>
-    {/if}
-  </div>
-  <div class="form-control">
     <label class="label" for="email-input">
-      <span class="label-text">Email</span>
+      <span class="label-text">Identifiant</span>
     </label>
     <label class="input-group">
       <span>Email</span>
-      <input
-        class="input input-bordered"
-        type="email"
+      <input 
+        type="email" 
         bind:value={email}
-        class:field-danger={!verificationemail(email)}
-        class:field-success={verificationemail(email)}
-        id="email-input"
+        class="input input-bordered"
+        id="email-input" 
       />
     </label>
-    {#if !verificationemail(email)}
-      <span class="validation-hint"> ADRESSE MAIL INVALID </span>
-    {/if}
   </div>
   <div class="form-control">
     <label class="label" for="password-input">
@@ -103,49 +41,17 @@
     </label>
     <label class="input-group">
       <span>Mot de passe</span>
-      <input
-        class="input input-bordered"
-        type="password"
-        bind:value={mdp1}
-        class:field-danger={!verificationmdp(mdp1)}
-        class:field-success={verificationmdp(mdp1)}
-        id="password-input"
-      />
+    <input
+      type="password" 
+      bind:value={mdp}
+      class="input input-bordered"
+      id="password-input"
+    />
     </label>
-    {#if !verificationmdp(mdp1)}
-      <span class="validation-hint"> MOT DE PASSE INVALID</span>
-    {/if}
-  </div>
-  <div class="form-control">
-    <label class="label" for="password-input">
-      <span class="label-text">Mot de passe </span>
-    </label>
-    <label class="input-group">
-      <span> Réécrivez votre mot de passe </span>
-      <input
-        class="input input-bordered"
-        type="password"
-        bind:value={mdp2}
-        class:field-danger={!mdp1equalmdp2(mdp1, mdp2)}
-        class:field-success={mdp1equalmdp2(mdp1, mdp2)}
-        id="password-input"
-      />
-    </label>
-    {#if !mdp1equalmdp2(mdp1, mdp2)}
-      <span class="validation-hint"> MOT DE PASSE NON 2GAUX</span>
-    {/if}
   </div>
   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-    <button
-      class="btn"
-      on:click={clickConnection}
-      disabled={!(
-        verificationemail(email) &&
-        verificationmdp(mdp1) &&
-        verificationpseudo(pseudo) &&
-        mdp1equalmdp2(mdp1, mdp2)
-      )}
-      id="bconfirmation">Validez votre inscription</button
-    >
+    <button class="btn" 
+    on:click={clickConnection}
+    >Connexion</button>
   </div>
 </div>

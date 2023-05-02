@@ -4,7 +4,7 @@
  * @param {string} mdp
  */
 async function doSign(pseudo, email, mdp) {
-  const url = "https://aws.tpzcloud.uk/api/user/signup";
+  const url = "http://127.0.0.1:3000/user/signin";
   const body = {
     username: pseudo,
     email: email,
