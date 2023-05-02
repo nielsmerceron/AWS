@@ -3,7 +3,7 @@
  * @param {string} password
  */
 async function doLogin(email, password) {
-  const url = "https://aws.tpzcloud.uk/api/user/logup";
+  const url = "https://aws.tpzcloud.uk/api/user/signin";
 
   const body = {
     email: email,
