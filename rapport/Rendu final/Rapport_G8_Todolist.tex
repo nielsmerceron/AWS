@@ -13,50 +13,53 @@
 \usepackage[hidelinks]{hyperref}
 
 \date{}
-\title{Rapport AWS }
+\title{Rapport AWS}
 \author{Niels Merceron \\ Pierre Vermeulen \\ Alexis Guigal \\ Manel Azgag \\ \\  \includegraphics[scale=0.20]{logo-UVSQ-2020-RVB.png}}
 
 
 \begin{document}
-	\maketitle
-	
-	\newpage
-	 \tableofcontents
-		\chapter{Introduction}
-		
-			Nous sommes un groupes avec peu de notion de web, donc pour nous familiariser avec les langages et autre technologie nous avons fait le choix de faire un site  simple et plus particulièrement un site de to do list. Il y a beaucoup de ressource en ligne nous décrivant comment faire une to do list et donc nous aiderons tout au cours du dévelopement de notre site pour savoir quel service implémenter de notre site ou non, si c'est a notre portée.
-			\\Pour autant, faire ce site relèvera de quelques challenges de conception vu que nous ne sommes pas familier avec beaucoup de technologie pour développer des sites web.
-			On peut noter par exemple la gestion du back peut être vite contraignante, ou l'aspect sécurité qui doit être fait de manière la plus propre possible pour ne laisser aucune faille.
-			
-  
-		\chapter{Technologie utilisée}
-			\section{Front}
-			
-			Svelte
-				  C'est un framwork simple et proche syntaxiquement du javascript standard. Il est conçu pour compiler le code au moment de la compilation plutôt qu'au moment de l'éxécution, il offre donc de très bonnes performances. Le framework est également bien documenté avec une documentation claire et précise.
-				
-				daisyui  
-				  C'est un framwork qui est bien plus simple que les deux autres. Il est également très facile à intégrer avec n'importe quel type de stack.
-			\section{back}
-			
-			Nodejs/expressjs
-			C'est un environnement d'éxécution pour JavaScript construit sur le moteur Javascript de Chrome. Il est extrêmement populaire et il est utilisé par de très nombreuses entreprises. Il est également très simple à prendre en main. 
-			
-			Mongodb
-			MongoDB est un système de gestion de bases de données NoSQL qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement. Cela permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité pour les applications modernes basées sur le cloud.  
-  Il est également très utilisé et la documentation est de qualité.
-			
-			\section{Sécurité}
-			
-			utilisation bibliothèque crypto-js coté client
-			
-			côté serveur bcrypt +crypto + TLS + helmet
-			
-			\chapter{Déroullé du projet}
-			
-			\chapter{conclusion/ce qu'on a appris}
-			
-			\chapter{Conclusion}
+\maketitle
 
-			
+\newpage
+\tableofcontents
+\chapter{Introduction}
+
+Nous sommes un groupe avec peu de notions de web, donc pour nous familiariser avec les langages et autre technologie nous avons fait le choix de faire un site simple et plus particulièrement un site de to do list. Il y a beaucoup de ressource en ligne nous décrivant comment faire une to do list et donc nous aiderons tout au cours du développement de notre site pour savoir quel service implémenter de notre site ou non, si c'est à notre portée.
+\\Pour autant, faire ce site relèvera de quelques challenges de conception vu que nous ne sommes pas familiers avec beaucoup de technologie pour développer des sites web.
+On peut noter par exemple la gestion du back peut être vite contraignante, ou l'aspect sécurité qui doit être fait de manière la plus propre possible pour ne laisser aucune faille.
+
+
+\chapter{Technologie utilisée}
+\section{Front end}
+
+\subsection{Svelte}
+C'est un framwork simple et proche syntaxiquement du javascript standard. Il est conçu pour compiler le code au moment de la compilation plutôt qu'au moment de l'éxécution, il offre donc de très bonnes performances. Le framework est également bien documenté avec une documentation claire et précise.
+
+\subsection{Tailwind avec DaisyUI}
+C'est un framwork qui est bien plus simple que les deux autres. Il est également très facile à intégrer avec n'importe quel type de stack.
+\section{Back end}
+
+\subsection{Nodejs/expressjs}
+C'est un environnement d'éxécution pour JavaScript construit sur le moteur Javascript de Chrome. Il est extrêmement populaire et il est utilisé par de très nombreuses entreprises. Il est également très simple à prendre en main.
+
+\subsection{Mongodb}
+MongoDB est un système de gestion de bases de données NoSQL, qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement.
+Cette approche permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs, ce qui est particulièrement utile pour les applications modernes basées sur le cloud. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité, ce qui en fait une solution de choix pour les entreprises qui cherchent à développer des applications à grande échelle. 
+En raison de ses avantages, MongoDB est très utilisé et dispose d'une documentation de qualité, ce qui facilite son adoption et son utilisation.
+
+\subsection{JWT}
+
+\section{Sécurité}
+
+utilisation bibliothèque crypto-js coté client
+
+côté serveur bcrypt +crypto + TLS + helmet
+
+\chapter{Déroulement du projet}
+
+\chapter{conclusion/ce qu'on a appris}
+
+\chapter{Conclusion}
+
+
 \end{document}
