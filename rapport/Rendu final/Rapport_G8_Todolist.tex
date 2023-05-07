@@ -46,7 +46,8 @@
 }
 
 \date{}
-\title{Rapport AWS}
+\title{Rapport AWS \\ Groupe 8 : Projet TODO LIST}
+
 \author{Niels Merceron \\ Pierre Vermeulen \\ Alexis Guigal \\ Manel Azgag \\ \\  \includegraphics[scale=0.20]{logo-UVSQ-2020-RVB.png}}
 
 
@@ -69,24 +70,60 @@ On peut noter par exemple la gestion du back peut être vite contraignante, ou l
 C'est un framwork simple et proche syntaxiquement du javascript standard. Il est conçu pour compiler le code au moment de la compilation plutôt qu'au moment de l'éxécution, il offre donc de très bonnes performances. Le framework est également bien documenté avec une documentation claire et précise.
 
 \subsection{Tailwind avec DaisyUI}
-C'est un framwork qui est bien plus simple que les deux autres. Il est également très facile à intégrer avec n'importe quel type de stack.
+C'est un framwork qui est bien plus simple que les autres framework CSS.Sa documentation , sa simplicité d'utilisation et de la modernité des design présent fait de ce framework le meilleur choix pour notre application.Il est également très facile à intégrer avec n'importe quel type de stack.
+
 \section{Back end}
 
 \subsection{Nodejs/expressjs}
 C'est un environnement d'éxécution pour JavaScript construit sur le moteur Javascript de Chrome. Il est extrêmement populaire et il est utilisé par de très nombreuses entreprises. Il est également très simple à prendre en main.
 
+\subsection{JWT}
+
+Le jsonwebtoken est un standard définit dans la RFC 7519. 
+La technologie de jsonwebtoken est publique (c'est une norme ouverte) qui a pour but d'avoir un format compact et autonome pour assurer des communications sécurisées entre deux ou plusieurs éléments.
+Cette technologie existe depuis 2015.
+Un JWT est composé de la manière suivante:
+- un header contenant l'algorithme de chiffrement, le type de token (JWT)
+- un payload (la charge utile) qui contient toutes les informations transmises à l'application
+- Une signature qui est générée en fonction du header ,du payload et d'une clef secrète connu que part l'application.
+
+On peut l'utiliser dans à peut près tous les cas possibles car il est assez "fléxible" de conception. Cependant il y a trois cas où le JWT est souvent utilisé.
+Dans les applications de REST pour sécuriser un protocole en envoyant direct les données d'authentification, du Cros origin ressource sharing et quand il y a plusieurs frameworks utilisés. 
+Dans notre cas, on l'utilisera pour sécuriser une connexion d'un utilisateur.
+
+\section{Sécurité}
+
+ Pour la sécurité côter client , on utilise la bibliothèque crypto-js qui nous permet d'avoir le principaux outils de sécurité côter client ( hash , encryption)
+
+Pour la sécurité de nos données sensibles côté serveur ( mot de passe, données privées ) nous allons utilisé:
+
+- \textbf{bcrypt + crypto}: bibliothèque dans le nodejs d'hachage de mot de passe + crypter des messages.
+
+- \textbf{Helmet}: Bibliothèque Express qui permet de sécurisé son site en définissant divers en-têtes HTTP pour eviter les vulnérabilités courantes (détournement de clics, HTTP strict ...)
+En effet HTTP est de base ouverte et non sécurisé. Il peut notamment divulger des informations sensible à toutes les personnes ayant les compétences techniques.
+
+- \textbf{TLS}: C'est le protocol de la sécurité de la couche de transport. 
+Elle satisfait différents objectifs client-serveur:
+
+- Authentification du serveur
+
+- Authentification du client (optionnel)
+
+- Confidentialité des données échangées (chiffrement des données)
+
+- Intégrité des données échangées
+
+De plus que ça, il faut prendre quelque reflexe comme sécurisé les cookies où éviter les attaques par force brute.
+Pour le hachage, il faut absolument hacher côté client et côté serveur pour eviter les attaques dans le canal entre client et serveur( utilisation du hachage pour ce connecté, connaissance du clair).
+
+\section{SGBD}
+\subsection{SQL ou NoSQL}
+Nous avions donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqué le SGBD relationnel. Cependant le NoSQL est plus adapté et plus le projet évolue, plus le NoSQL deviennait une évidence.
 \subsection{Mongodb}
 MongoDB est un système de gestion de bases de données NoSQL, qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement.
 Cette approche permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs, ce qui est particulièrement utile pour les applications modernes basées sur le cloud. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité, ce qui en fait une solution de choix pour les entreprises qui cherchent à développer des applications à grande échelle.
 En raison de ses avantages, MongoDB est très utilisé et dispose d'une documentation de qualité, ce qui facilite son adoption et son utilisation.
 
-\subsection{JWT}
-
-\section{Sécurité}
-
-utilisation bibliothèque crypto-js coté client
-
-côté serveur bcrypt +crypto + TLS + helmet
 
 \chapter{Déroulement du projet}
 
@@ -193,7 +230,11 @@ Exemple de réponse:
 }
 \end{lstlisting}
 
-\chapter{conclusion/ce qu'on a appris}
+\chapter{Objectif accompli durant le projet}
+
+Dans cette section, on vous présente l'état final de notre projet.
+
+
 
 \chapter{Conclusion}
 
