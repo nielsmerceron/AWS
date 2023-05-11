@@ -31,7 +31,6 @@
     backgroundcolor=\color{background},
 }
 
-
 \lstset{frame=tb,
   language=json,
   aboveskip=3mm,
@@ -50,7 +49,6 @@
 
 \author{Niels Merceron \\ Pierre Vermeulen \\ Alexis Guigal \\ Manel Azgag \\ \\  \includegraphics[scale=0.20]{logo-UVSQ-2020-RVB.png}}
 
-
 \begin{document}
 \maketitle
 
@@ -58,24 +56,29 @@
 \tableofcontents
 \chapter{Introduction}
 
-Nous sommes un groupe avec peu de notions de web, donc pour nous familiariser avec les langages et autre technologie nous avons fait le choix de faire un site simple et plus particulièrement un site de to do list. Il y a beaucoup de ressource en ligne nous décrivant comment faire une to do list et donc nous aiderons tout au cours du développement de notre site pour savoir quel service implémenter de notre site ou non, si c'est à notre portée.
+Nous sommes un groupe avec peu de notions de web, donc pour nous familiariser avec les langages et autres technologies, nous avons fait le choix de faire un site simple et plus particulièrement un site de to do list.
+Il y a beaucoup de ressource en ligne nous décrivant comment faire une to do list et donc nous aiderons tout au cours du développement de notre site pour savoir quelles fonctionnalités implémenter sur notre site et si c'est à notre portée.
 \\Pour autant, faire ce site relèvera de quelques challenges de conception vu que nous ne sommes pas familiers avec beaucoup de technologie pour développer des sites web.
-On peut noter par exemple la gestion du back peut être vite contraignante, ou l'aspect sécurité qui doit être fait de manière la plus propre possible pour ne laisser aucune faille.
+On peut noter par exemple la gestion du back peut être vite contraignante, ou l'aspect sécurité qui doit être respécté en utilisant des technologies de pointe(state of the art) afin de diminuer les chances d'avoir une faille.
 
 
 \chapter{Technologie utilisée}
 \section{Front end}
 
 \subsection{Svelte}
-C'est un framwork simple et proche syntaxiquement du javascript standard. Il est conçu pour compiler le code au moment de la compilation plutôt qu'au moment de l'éxécution, il offre donc de très bonnes performances. Le framework est également bien documenté avec une documentation claire et précise.
+C'est un framwork simple et proche syntaxiquement du javascript standard. Il est conçu pour créer un code rapide et léger à l'éxécution, il offre donc de très bonnes performances. 
+Le framework est également bien documenté avec une documentation claire et précise.
 
 \subsection{Tailwind avec DaisyUI}
-C'est un framwork qui est bien plus simple que les autres framework CSS.Sa documentation , sa simplicité d'utilisation et de la modernité des design présent fait de ce framework le meilleur choix pour notre application.Il est également très facile à intégrer avec n'importe quel type de stack.
+C'est un framwork qui est assez simple mais tout de même très complet. Tailwind fait parti des framworks les plus utilisés. 
+Sa documentation , sa simplicité d'utilisation et de la modernité des designs présent avec DaisyUI fait de ce framework le meilleur choix pour notre application.
+Il est également très facile à intégrer avec n'importe quel type de stack.
 
 \section{Back end}
 
 \subsection{Nodejs/expressjs}
-C'est un environnement d'éxécution pour JavaScript construit sur le moteur Javascript de Chrome. Il est extrêmement populaire et il est utilisé par de très nombreuses entreprises. Il est également très simple à prendre en main.
+C'est un environnement d'éxécution pour JavaScript construit sur le moteur Javascript de Chrome. Il est extrêmement populaire et il est utilisé par de très nombreuses entreprises. 
+Il est également très simple à prendre en main.
 
 \subsection{JWT}
 
@@ -87,7 +90,7 @@ Un JWT est composé de la manière suivante:
 \begin{itemize}
 \item un header contenant l'algorithme de chiffrement, le type de token (JWT)
 \item un payload (la charge utile) qui contient toutes les informations transmises à l'application
-\item Une signature qui est générée en fonction du header ,du payload et d'une clef secrète connu que part l'application.\\
+\item Une signature qui est générée en fonction du header ,du payload et d'une clef secrète connu que par l'application.\\
 \end{itemize}
 
 On peut l'utiliser dans à peut près tous les cas possibles car il est assez "fléxible" de conception. 
@@ -97,16 +100,18 @@ Pour notre projet nous utiliserons le JWT lié a des cookies pour éviter que le
 Pour la sécurité, nous avons utilisé plusieurs bibliothèques natives de nodejs mais aussi certaines que nous avons vu pendant le cours ou décourvertes durant les recherches pour ce projet.
 
 \subsection{Bcrypt et crypto}
-	On utilise Bcrypt pour générer des hash de mots de passe qui sont basés sur l'algorithme du "blowfish cipher". Pour éviter les attaques par force brute, nous ajoutons une entrée aléatoire à Bcrypt. On utilise Bcrypt principalement dans le back-end.
+On utilise Bcrypt pour générer des hash de mots de passe qui sont basés sur l'algorithme du "blowfish cipher". Pour éviter les attaques par force brute, nous ajoutons une entrée aléatoire à Bcrypt. On utilise Bcrypt principalement dans le back-end.
 
 Crypto est une bibliothèque que nous avons voulu utiliser car elle est assez versatile. Elle peut nous être utile pour générer des hash, de signer ou de faire des vérifications sur des données cryptées. Nous l'avons utilisée dans le back-end et le front-end du site pour les connexions et le stockage des mots de passe.
 
 \newpage
 \subsection{Helmet}
-	Helmet est une bibliothèque native de Node.js qui nous permet de sécuriser avec des headers les communications entre le back-end et le front-end. Ces headers nous protègent, par exemple, des attaques de "cross-site scripting". Ces attaques consistent à passer un script en argument qui sera exécuté par le back-end pour renvoyer de l'information à l'attaquant.
+Helmet est une bibliothèque native de Node.js qui nous permet de sécuriser avec des headers les communications entre le back-end et le front-end. Ces headers nous protègent, par exemple, des attaques de "cross-site scripting". 
+Ces attaques consistent à passer un script en argument qui sera exécuté par le back-end pour renvoyer de l'information à l'attaquant.
 
 \subsection{Protocole TLS}
-	Le Transport Layer Security sert à assurer la sécurité du transport de données sur Internet. C'est-à-dire que lorsque j'envoie une requête du front-end vers le back-end qui est stocké dans un serveur, cette requête ne pourra être altérée grâce à la sécurité que met en place le TLS. Pour chiffrer ces données, TLS utilise aussi bien du chiffrement asymétrique (connexion client-serveur) que du chiffrement symétrique (échange de données).
+Le Transport Layer Security sert à assurer la sécurité du transport de données sur Internet. C'est-à-dire que lorsque j'envoie une requête du front-end vers le back-end qui est stocké dans un serveur, cette requête ne pourra être altérée grâce à la sécurité que met en place le TLS. 
+Pour chiffrer ces données, TLS utilise aussi bien du chiffrement asymétrique (connexion client-serveur) que du chiffrement symétrique (échange de données).
 	
 \section{SGBD}
 
@@ -115,14 +120,15 @@ Nous avions donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqu�
 
 \subsection{Mongodb}
 MongoDB est un système de gestion de bases de données NoSQL, qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement.\\
-Cette approche permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs, ce qui est particulièrement utile pour les applications modernes basées sur le cloud. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité, ce qui en fait une solution de choix pour les entreprises qui cherchent à développer des applications à grande échelle.
+Cette approche permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs, ce qui est particulièrement utile pour les applications modernes basées sur le cloud. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité, ce qui en fait une solution de choix pour les entreprises qui cherchent à développer des applications à grande échelle.*
+Il est également opensource, on peut l'héberger nous même et rester maître des données de notre application.
 En raison de ses avantages, MongoDB est très utilisé et dispose d'une documentation de qualité, ce qui facilite son adoption et son utilisation.
-
 
 \chapter{Déroulement du projet}
 
 \section{Back}
 \subsection{Création des routes}
+Toutes les requêtes à part le signup et le login doivent contenir un header avec un le token JWT en tant que token bearer.
 \subsubsection{- Signup - POST}
 Exemple de requête:
 \begin{lstlisting}
@@ -174,9 +180,6 @@ Exemple de réponse:
 \end{lstlisting}
 
 \subsubsection{- Gettodo - GET}
-Exemple de requête:
-
-
 Exemple de réponse:
 \begin{lstlisting}
 [
@@ -200,8 +203,6 @@ Exemple de réponse:
 \end{lstlisting}
 
 \subsection{- Del - DEL}
-Exemple de requête:
-
 Exemple de réponse:
 \begin{lstlisting}
 {
@@ -210,8 +211,6 @@ Exemple de réponse:
 \end{lstlisting}
 
 \subsection{- Modify - PUT}
-Exemple de requête:
-
 Exemple de réponse:
 \begin{lstlisting}
 {
