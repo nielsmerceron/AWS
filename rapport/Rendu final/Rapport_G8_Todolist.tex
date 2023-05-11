@@ -97,18 +97,22 @@ Pour notre projet nous utiliserons le JWT lié a des cookies pour éviter que le
 Pour la sécurité, nous avons utilisé plusieurs bibliothèques natives de nodejs mais aussi certaines que nous avons vu pendant le cours ou décourvertes durant les recherches pour ce projet.
 
 \subsection{Bcrypt et crypto}
- On utilse Bcrypt pour générer des hashé de mot de passe qui est basé sur l'algorithme du "blowfish cipher". Pour éviter des attaques par force brute nous ajoutons une entré aléatoire a Bcrypt. On utilise Bcrypt principalement dans le back.\\
- 
- Crypto est une bibliothèque que nous avons voulu utiliser car elle est assez versatille. Elle peut aussi bien nous être utilse pour générer des Hash,que de signer opu faire des vérifications sur des données cryptées. Nous l'avons utilisé dans le Back et le Front du site pour les connexions et stockage des mots de passe.
- 
+	On utilise Bcrypt pour générer des hash de mots de passe qui sont basés sur l'algorithme du "blowfish cipher". Pour éviter les attaques par force brute, nous ajoutons une entrée aléatoire à Bcrypt. On utilise Bcrypt principalement dans le back-end.
+
+Crypto est une bibliothèque que nous avons voulu utiliser car elle est assez versatile. Elle peut nous être utile pour générer des hash, de signer ou de faire des vérifications sur des données cryptées. Nous l'avons utilisée dans le back-end et le front-end du site pour les connexions et le stockage des mots de passe.
+
+\newpage
 \subsection{Helmet}
-	Helmet est une bibliothèque native de nodejs qui nous permet de sécurisé avec des headers les communications entre le back est le front. Ces headers nou sprotège par exemple des attaque de "cross-site-Scripting"
+	Helmet est une bibliothèque native de Node.js qui nous permet de sécuriser avec des headers les communications entre le back-end et le front-end. Ces headers nous protègent, par exemple, des attaques de "cross-site scripting". Ces attaques consistent à passer un script en argument qui sera exécuté par le back-end pour renvoyer de l'information à l'attaquant.
 
 \subsection{Protocole TLS}
-
+	Le Transport Layer Security sert à assurer la sécurité du transport de données sur Internet. C'est-à-dire que lorsque j'envoie une requête du front-end vers le back-end qui est stocké dans un serveur, cette requête ne pourra être altérée grâce à la sécurité que met en place le TLS. Pour chiffrer ces données, TLS utilise aussi bien du chiffrement asymétrique (connexion client-serveur) que du chiffrement symétrique (échange de données).
+	
 \section{SGBD}
+
 \subsection{SQL ou NoSQL}
 Nous avions donc opter pour un SGBD NoSQL malgré le fait qu'on ai plus pratiqué le SGBD relationnel. Cependant le NoSQL est plus adapté et plus le projet évolue, plus le NoSQL deviennait une évidence.
+
 \subsection{Mongodb}
 MongoDB est un système de gestion de bases de données NoSQL, qui utilise un format de stockage de données basé sur JSON. Contrairement aux bases de données relationnelles, MongoDB n'utilise pas de tables et de schémas fixes, mais stocke les données dans des collections flexibles qui peuvent être modifiées sans avoir à définir un schéma préalablement.\\
 Cette approche permet une grande flexibilité pour gérer des données complexes et des schémas évolutifs, ce qui est particulièrement utile pour les applications modernes basées sur le cloud. De plus, MongoDB offre des performances élevées, une évolutivité horizontale facile et une grande disponibilité, ce qui en fait une solution de choix pour les entreprises qui cherchent à développer des applications à grande échelle.
@@ -222,7 +226,10 @@ Exemple de réponse:
 
 \chapter{Objectif accompli durant le projet}
 
-Dans cette section, on vous présente l'état final de notre projet.
+Notre site web comporte 5 pages implémentées. Nous avons une page de présentation du site, une page de connexion (login), une page d'inscription (sign-in), une page avec plusieurs outils pour manipuler et créer des tâches à faire (todo) et pour finir une page de calendrier pour faciliter l'accès aux tâches journalières.\\
+
+Dans cette page d'outils, nous avons 2 outils très importants. Un outil de création de tâches à faire avec plusieurs options. Nous avons, par exemple, comme option de faire des tâches à faire en groupe ou seules, de les répéter sur une période (toutes les semaines, tous les mois, ...).\\
+Le deuxième outil est une barre de recherche pour pouvoir consulter des tâches à faire précises. Avec cet outil, nous avons aussi l'option de supprimer une tâche à faire si elle a été mal créée.
 
 
 
