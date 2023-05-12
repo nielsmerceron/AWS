@@ -64,8 +64,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(201).cookie("access_token", "Bearer " + token, {
-            expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+          res.status(200).cookie("access_token", "Bearer " + token, {
+            expires: new Date(Date.now() + 8 * 3600000),
           });
         }
       );
@@ -123,8 +123,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(201).cookie("access_token", "Bearer " + token, {
-            expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
+          res.status(200).cookie("access_token", "Bearer " + token, {
+            expires: new Date(Date.now() + 8 * 3600000),
           });
         }
       );
