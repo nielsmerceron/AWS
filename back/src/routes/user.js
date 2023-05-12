@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -63,8 +64,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({
-            token,
+          res.status(201).cookie("access_token", "Bearer " + token, {
+            expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
           });
         }
       );
@@ -122,8 +123,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({
-            token,
+          res.status(201).cookie("access_token", "Bearer " + token, {
+            expires: new Date(Date.now() + 8 * 3600000), // cookie will be removed after 8 hours
           });
         }
       );
