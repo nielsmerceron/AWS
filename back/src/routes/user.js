@@ -126,8 +126,9 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+          res.cookie("jwt", token, { httpOnly: true });
           res.status(200).json({
-            token,
+            message: "User signed in successfully",
           });
         }
       );

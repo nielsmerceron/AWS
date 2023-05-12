@@ -1,12 +1,15 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 
 const auth = require("../middleware/auth");
 const User = require("../models/user");
 const Todo = require("../models/todo");
+
+router.use(cookieParser());
 
 // Create a new Todo
 router.post(
