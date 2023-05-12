@@ -1,12 +1,14 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 
 const User = require("../models/user");
+
+router.use(cookieParser());
 
 router.post(
   "/signup",
@@ -64,8 +66,9 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).cookie("access_token", "Bearer " + token, {
-            expires: new Date(Date.now() + 8 * 3600000),
+          res.cookie("jwt", token, { httpOnly: true });
+          res.status(200).json({
+            message: "User signed in successfully",
           });
         }
       );
@@ -123,8 +126,8 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).cookie("access_token", "Bearer " + token, {
-            expires: new Date(Date.now() + 8 * 3600000),
+          res.status(200).json({
+            token,
           });
         }
       );

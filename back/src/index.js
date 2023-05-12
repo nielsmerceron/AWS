@@ -1,7 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 const InitiateMongoServer = require("./db");
 const user = require("./routes/user");
 const todo = require("./routes/todos");
@@ -13,7 +12,6 @@ const port = 3000;
 
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({ message: "AWS Back" });
