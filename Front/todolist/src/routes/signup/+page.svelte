@@ -6,14 +6,15 @@
     mdp1equalmdp2,
   } from "./validate";
   import { doSign } from "./interac";
-  import { navigate } from "svelte-routing";
+  import {goto } from "$app/navigation";
+
 
   async function clickConnection() {
     try {
-      const result = await doSign(pseudo, email, mdp1);
-      () => console.log(doSign(pseudo, email, mdp1));
+      await doSign(pseudo, email, mdp1);
+      goto("/");
     } catch (error) {
-      () => console.log(doSign(pseudo, email, mdp1));
+      alert("une erreur a été rencontrée ");
     }
   }
 
