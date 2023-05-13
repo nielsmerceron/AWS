@@ -15,7 +15,7 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "https://aws.tpzcloud.uk",
   })
 );
 app.use(bodyParser.json());

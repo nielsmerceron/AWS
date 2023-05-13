@@ -6,7 +6,7 @@
  * @param {String} groupe
  */
 async function Addtodo(titre, description, startdate, enddate, groupe) {
-  const url = "http://127.0.0.1:3000/todo/add";
+  const url = "https://aws.tpzcloud.uk/api/todo/add";
   const body = {
     title: titre,
     description: description,
