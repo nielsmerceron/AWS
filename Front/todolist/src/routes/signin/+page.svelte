@@ -21,7 +21,7 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
     </div>
     <div class="navbar-center secondary lg:flex">
-      <strong>CREATE TODO</strong>
+      <strong>Sign in</strong>
     </div>
     <div class="navbar-end">
       <div class="dropdown dropdown-bottom dropdown-end">
