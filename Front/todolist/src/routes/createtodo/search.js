@@ -26,16 +26,19 @@ export { Todoget };
  * @param {any} result
  */
 function trimbytitle(titre, result) {
-  if (result != null && titre != "") {
+  let todoList = [
+    { id:"",title:"test",description:"",dated:new Date(),datee:new Date(),status:false },
+  ];
+  if (result != null) {
     let arrayresult = result.parse();
     for (let i = 1; i < arrayresult.lenght; i = i + 7) {
-      if (arrayresult.at(i) != titre) {
-        //je dégage les valeurs que je ne veux pas
-        arrayresult.fill(" ", i - 1, i + 5);
+      if (arrayresult.at(i) === titre) {
+        todoList = [...todoList, { id:arrayresult.at(i-1),title:arrayresult.at(i),description:arrayresult.at(i+1),dated:arrayresult.at(i+2),datee:arrayresult.at(i+3),status:arrayresult.at(i+4)}];
       }
     }
-    return arrayresult;
   }
+  return(todoList);
 }
+
 
 export { trimbytitle };

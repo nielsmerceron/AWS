@@ -5,14 +5,15 @@
   import { Tododelete } from "./delete";
   import { Todoget, trimbytitle } from "./search";
 
-  let id = "";
   let title = "";
   let description = "";
   let groupe = "";
   let startdate = new Date();
   let enddate = new Date();
   let recherche = "";
+  let iddelete = "";
 
+  //creationtodo
   /**
    * @type {boolean | null}
    */
@@ -27,6 +28,7 @@
     }
   }
 
+  //recherche todo
   /**
    * @type {boolean | null}
    */
@@ -42,29 +44,37 @@
     }
   }
 
-  let newItem = "";
+  let todoList = trimbytitle(recherche, searchresult);
 
-  let todoList = [
-    { id:"",title:"",description:"",dated:new Date(),datee:new Date(),status:false },
-  ];
-
+  //supprime todo
   /**
-   * @param {String} id
-   * @param {String} title
-   * @param {String} description
-   * @param {Date} start
-   * @param {Date} end
-   * @param {Boolean} status
+   * @param {number} index
    */
-  function addToList(id,title,description,start,end,status) {
-    todoList = [...todoList, { id:id,title:title,description:description,dated:start,datee:end,status:status}];
-    newItem = "";
-  }
-
   function removeFromList(index) {
     todoList.splice(index, 1);
     todoList = todoList;
   }
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationdelete = null;
+  /**
+   * @param {Number} index
+   */
+  async function deletetodo(index) {
+    try {
+      iddelete = todoList.at(index)?.id;
+      await Tododelete(iddelete);
+      verificationdelete = true;
+      todoList.splice(index, 1);
+      todoList = todoList;
+    } catch (error) {
+      verificationdelete = false;
+    }
+  }
+
+  //checktodo
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -151,7 +161,7 @@
           <div class="bg-zinc-400">
             <input bind:checked={item.status} type="checkbox" />
             <span class:checked={item.status}>{item.title}</span>
-            <span on:click={() => removeFromList(index)}>❌</span>
+            <span on:click={() => deletetodo(index)}>❌</span>
           </div>
           <br />
         {/each}
@@ -159,9 +169,23 @@
     </div>
 
     <!-- colonne du centre -->
-    <div class="bg-zinc-600 col-span-2" />
-    <!-- colonne de droite -->
+    <div class="bg-zinc-600 col-span-2">
+      <div class="col-span-2 container mx-auto py-10" />
+      <!-- message de réussite ou non du delete d'une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationaddtodo != null}
+          {#if verificationaddtodo === true}
+            <p>La todo a été supprimé avec succès</p>
+          {:else}
+            <p>Une erreur a été rencontré lors de la suppression</p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+    </div>
 
+    <!-- colonne de droite -->
     <div class="bg-zinc-700">
       <div class="col-span-2 container mx-auto py-10" />
       <!-- input titre -->
