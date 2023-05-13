@@ -3,14 +3,15 @@
   import { Addtodo } from "./add";
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
-  import { Todoget } from "./search";
+  import { Todoget, trimbytitle } from "./search";
 
-
+  let id = "";
   let title = "";
   let description = "";
   let groupe = "";
   let startdate = new Date();
   let enddate = new Date();
+  let recherche = "";
 
   /**
    * @type {boolean | null}
@@ -30,14 +31,39 @@
    * @type {boolean | null}
    */
   let verificationsearch = null;
+  let searchresult = null;
 
   async function searchtodo() {
     try {
-      await Todoget();
+      searchresult = await Todoget();
       verificationsearch = true;
     } catch (error) {
       verificationsearch = false;
     }
+  }
+
+  let newItem = "";
+
+  let todoList = [
+    { id:"",title:"",description:"",dated:new Date(),datee:new Date(),status:false },
+  ];
+
+  /**
+   * @param {String} id
+   * @param {String} title
+   * @param {String} description
+   * @param {Date} start
+   * @param {Date} end
+   * @param {Boolean} status
+   */
+  function addToList(id,title,description,start,end,status) {
+    todoList = [...todoList, { id:id,title:title,description:description,dated:start,datee:end,status:status}];
+    newItem = "";
+  }
+
+  function removeFromList(index) {
+    todoList.splice(index, 1);
+    todoList = todoList;
   }
 </script>
 
@@ -98,13 +124,37 @@
                 type="text"
                 placeholder="Todo title"
                 class="input input-bordered"
+                bind:value={recherche}
               />
-              <button class="btn bg-blue-800">Search</button>
+              <button class="btn bg-blue-800" on:click={searchtodo}
+                >Search</button
+              >
             </label>
+          </div>
+          <!-- réussite de la recherche-->
+          <div>
+            <div class="flex space-x-2 mb-4">
+              {#if verificationsearch != null}
+                {#if verificationsearch === true}
+                  <p>Des todo ont été trouvé</p>
+                {:else}
+                  <p>erreur rencontré ou aucune todo trouvé</p>
+                {/if}
+              {:else}<p />
+              {/if}
+            </div>
           </div>
         </div>
         <!-- todo trouvé-->
-        <div class="bg-zinc-400">Todo</div>
+        <br />
+        {#each todoList as item, index}
+          <div class="bg-zinc-400">
+            <input bind:checked={item.status} type="checkbox" />
+            <span class:checked={item.status}>{item.title}</span>
+            <span on:click={() => removeFromList(index)}>❌</span>
+          </div>
+          <br />
+        {/each}
       </div>
     </div>
 
@@ -165,14 +215,14 @@
         </div>
         <!-- résultat de la requete-->
         <div class="flex space-x-2 mb-4">
-          {#if verificationaddtodo !=null}
-          {#if verificationaddtodo === true}
-		      <p>{title} a été ajouté</p>
-	        {:else}
-		      <p>{title} n'a pas pu être rajouté</p>
-	        {/if}
+          {#if verificationaddtodo != null}
+            {#if verificationaddtodo === true}
+              <p>{title} a été ajouté</p>
+            {:else}
+              <p>{title} n'a pas pu être rajouté</p>
+            {/if}
           {:else}
-          <p> ajouté une todo </p>
+            <p>ajouté une todo</p>
           {/if}
         </div>
       </div>
