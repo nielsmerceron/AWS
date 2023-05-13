@@ -1,6 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const InitiateMongoServer = require("./db");
 const user = require("./routes/user");
 const todo = require("./routes/todos");
@@ -11,17 +12,18 @@ const app = express();
 const port = 3000;
 
 app.use(helmet());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.json({ message: "AWS Back" });
 });
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
   next();
 });
 
