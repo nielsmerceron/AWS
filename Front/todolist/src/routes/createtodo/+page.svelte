@@ -11,7 +11,7 @@
   let startdate = new Date();
   let enddate = new Date();
   let recherche = "";
-  let iddelete = "";
+  let id = "";
 
   //creationtodo
   /**
@@ -64,8 +64,8 @@
    */
   async function deletetodo(index) {
     try {
-      iddelete = todoList.at(index)?.id;
-      await Tododelete(iddelete);
+      id = todoList.at(index)?.id;
+      await Tododelete(id);
       verificationdelete = true;
       todoList.splice(index, 1);
       todoList = todoList;
@@ -75,6 +75,41 @@
   }
 
   //checktodo
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationcheck = null;
+  /**
+   * @param {Number} index
+   */
+  async function checktodo(index) {
+    try {
+      id = todoList.at(index)?.id;
+      await Tododelete(id);
+      verificationcheck = true;
+      todoList.splice(index, 1);
+      todoList = todoList;
+    } catch (error) {
+      verificationcheck = false;
+    }
+  }
+
+  //aff description
+  let aff = false;
+  let affdescription = "";
+
+  /**
+   * @param {number} index
+   */
+  function switchaff(index) {
+    if (aff == false) {
+      aff = true;
+      affdescription = todoList.at(index)?.description;
+    } else {
+      aff = false;
+    }
+  }
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -162,6 +197,7 @@
             <input bind:checked={item.status} type="checkbox" />
             <span class:checked={item.status}>{item.title}</span>
             <span on:click={() => deletetodo(index)}>❌</span>
+            <span on:click={() => switchaff(index)}></span>
           </div>
           <br />
         {/each}
@@ -178,6 +214,32 @@
             <p>La todo a été supprimé avec succès</p>
           {:else}
             <p>Une erreur a été rencontré lors de la suppression</p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- message de réussite ou non d'avoir complété une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationcheck != null}
+          {#if verificationcheck === true}
+            <p>La todo a a été complété</p>
+          {:else}
+            <p>
+              Une erreur a été rencontré lors du changement d'état de la todo
+            </p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- affichage de la description -->
+      <div class="flex space-x-2 mb-4">
+        {#if aff != null}
+          {#if aff === true}
+            <p>{affdescription}</p>
+          {:else}
+            <p />
           {/if}
         {:else}
           <p />
