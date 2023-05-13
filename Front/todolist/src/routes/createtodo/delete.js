@@ -1,5 +1,5 @@
 
-
+/*
 async function Deletetodo(titre) {
     const url = "http://127.0.0.1:3000/todos/del";
     const body = {
@@ -25,3 +25,4 @@ async function Deletetodo(titre) {
   }
   
   export { doSign };
+  */

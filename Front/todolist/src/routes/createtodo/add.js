@@ -1,10 +1,20 @@
 
-async function Addtodo(titre,description,date) {
-    const url = "http://127.0.0.1:3000/todos/add";
+
+/**
+ * @param {String} titre
+ * @param {String} description
+ * @param {Date} startdate
+ * @param {Date} enddate
+ * @param {String} groupe
+ */
+async function Addtodo(titre,description,startdate, enddate,groupe) {
+    
+  const url = "http://127.0.0.1:3000/todos/add";
     const body = {
-      username: pseudo,
-      email: email,
-      password: mdp,
+      title : titre ,
+      description: description,
+      start_date: startdate,
+      end_date: enddate,
     };
   
     const response = await fetch(url, {
@@ -12,6 +22,7 @@ async function Addtodo(titre,description,date) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(body),
     });
   
@@ -23,4 +34,4 @@ async function Addtodo(titre,description,date) {
     return result;
   }
   
-  export { doSign };
+  export { Addtodo };
