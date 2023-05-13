@@ -4,7 +4,7 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
     </div>
     <div class="navbar-center secondary lg:flex">
-      <strong>CREATE TODO</strong>
+      <strong>Home</strong>
     </div>
     <div class="navbar-end">
       <div class="dropdown dropdown-bottom dropdown-end">
@@ -34,8 +34,6 @@
         >
           <li><a href="/signin">Log in </a></li>
           <li><a href="/signup">Sign Up </a></li>
-          <li><a href="/createtodo">Create todo </a></li>
-          <li><a href="/calendrier">Calendrier </a></li>
         </ul>
       </div>
     </div>

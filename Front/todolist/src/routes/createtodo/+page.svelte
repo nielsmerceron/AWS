@@ -1,12 +1,17 @@
 <script>
   import { DateInput } from "date-picker-svelte";
   import { Addtodo } from "./add";
+  import { Todofaite } from "./checktodo";
+  import { Tododelete } from "./delete";
+  import { Todoget } from "./search";
+
 
   let title = "";
   let description = "";
   let groupe = "";
   let startdate = new Date();
   let enddate = new Date();
+
   /**
    * @type {boolean | null}
    */
@@ -18,6 +23,20 @@
       verificationaddtodo = true;
     } catch (error) {
       verificationaddtodo = false;
+    }
+  }
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationsearch = null;
+
+  async function searchtodo() {
+    try {
+      await Todoget();
+      verificationsearch = true;
+    } catch (error) {
+      verificationsearch = false;
     }
   }
 </script>
