@@ -6,12 +6,8 @@ async function Tododelete(id) {
   const body = {};
 
   const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "DELETE",
     credentials: "include",
-    body: JSON.stringify(body),
   });
 
   if (!response.ok) {

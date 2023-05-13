@@ -3,12 +3,8 @@ async function Todoget() {
   const body = {};
 
   const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "GET",
     credentials: "include",
-    body: JSON.stringify(body),
   });
 
   if (!response.ok) {

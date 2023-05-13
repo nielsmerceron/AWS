@@ -11,7 +11,7 @@ async function Todofaite(titre, description, id) {
   };
 
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
