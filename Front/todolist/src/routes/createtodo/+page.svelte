@@ -66,6 +66,8 @@
   function periodiqueClick() {
     isPeriodique ? (isPeriodique = false) : (isPeriodique = true);
   }
+
+  let mpd = "";
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -111,12 +113,36 @@
 
   <div class="grid grid-cols-4 gap-0 h-screen">
     <!-- colonne de gauche-->
-    <div class="bg-zinc-500" ></div>
+    <div class="bg-zinc-500">
+      <div class="col-span-2 container mx-auto py-10" />
+      <div class="grid grid-cols-1 gap-3">
+        <div class="mx-auto">
+          <!-- barre de recherche-->
+          <div class="form-control">
+            <label class="label " for="search-input">
+              <span class="label-text">Enter the todo title</span>
+            </label>
+            <label class="input-group ">
+              <input
+                type="text"
+                placeholder="Todo title"
+                class="input input-bordered"
+              />
+              <button class="btn bg-blue-800">Search</button>
+            </label>
+          </div>
+        </div>
+        <!-- todo trouvé-->
+        <div class="bg-zinc-400">Todo</div>
+      </div>
+    </div>
+
     <!-- colonne du centre -->
-    <div class="bg-zinc-600 col-span-2" ></div>
+    <div class="bg-zinc-600 col-span-2" />
     <!-- colonne de droite -->
+
     <div class="bg-zinc-700">
-      <div class="col-span-2 container mx-auto py-10"></div>
+      <div class="col-span-2 container mx-auto py-10" />
       {#if option === 0}
         <div class="col-span-1 container mx-auto py-10">
           <div class="flex space-x-2 mb-4">
