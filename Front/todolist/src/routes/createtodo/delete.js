@@ -1,11 +1,9 @@
-
 /**
  * @param {string} id
  */
 async function Tododelete(id) {
-  const url = "http://127.0.0.1:3000/todo/del/"+id;
-  const body = {
-  };
+  const url = "https://aws.tpzcloud.uk/api/todo/del/" + id;
+  const body = {};
 
   const response = await fetch(url, {
     method: "POST",
