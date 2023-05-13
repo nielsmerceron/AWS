@@ -2,10 +2,13 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 
 const User = require("../models/user");
+
+router.use(cookieParser());
 
 router.post(
   "/signup",
@@ -63,8 +66,9 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+          res.cookie("jwt", token, { httpOnly: true });
           res.status(200).json({
-            token,
+            message: "User signed in successfully",
           });
         }
       );
@@ -122,8 +126,9 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
+          res.cookie("jwt", token, { httpOnly: true });
           res.status(200).json({
-            token,
+            message: "User signed in successfully",
           });
         }
       );

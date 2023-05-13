@@ -1,12 +1,15 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 
 const auth = require("../middleware/auth");
 const User = require("../models/user");
 const Todo = require("../models/todo");
+
+router.use(cookieParser());
 
 // Create a new Todo
 router.post(
@@ -15,6 +18,8 @@ router.post(
     auth,
     check("title", "Please enter a title").not().isEmpty(),
     check("description", "Please enter a description").not().isEmpty(),
+    check("start_date", "Please enter a valid start date").isISO8601().toDate(),
+    check("end_date", "Please enter a valid end date").isISO8601().toDate(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -24,12 +29,14 @@ router.post(
       });
     }
 
-    const { title, description } = req.body;
+    const { title, description, start_date, end_date } = req.body;
 
     try {
       const newTodo = new Todo({
         title,
         description,
+        start_date,
+        end_date,
       });
 
       const todo = await newTodo.save();
