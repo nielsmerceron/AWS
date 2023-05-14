@@ -3,6 +3,7 @@ const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const router = express.Router();
 
@@ -60,7 +61,7 @@ router.post(
 
       jwt.sign(
         payload,
-        "randomString",
+        "${process.env.SECRT}",
         {
           expiresIn: 3600,
         },
@@ -120,7 +121,7 @@ router.post(
 
       jwt.sign(
         payload,
-        "randomString",
+        "${process.env.SECRT}",
         {
           expiresIn: 3600,
         },
