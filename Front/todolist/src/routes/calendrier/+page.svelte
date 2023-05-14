@@ -1,5 +1,9 @@
 <script>
   import calendarize from "calendarize";
+  import { Todofaite } from "./checktodo";
+  import { Tododelete } from "./delete";
+  import { Todoget} from "./search";
+
 
   let dateCalendar = new Date();
   export let year = dateCalendar.getFullYear();
