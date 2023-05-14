@@ -1,21 +1,19 @@
 /**
- * @param {string} pseudo
- * @param {string} email
- * @param {string} mdp
+ * @param {string} id
+ * @param {boolean} completed
  */
-async function doSign(pseudo, email, mdp) {
-  const url = "http://127.0.0.1:3000/user/signup";
+async function Todofaite(id,completed) {
+  const url = "http://127.0.0.1:3000/todo/modify/" + id;
   const body = {
-    username: pseudo,
-    email: email,
-    password: mdp,
+    completed : completed,
   };
 
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(body),
   });
 
@@ -27,4 +25,4 @@ async function doSign(pseudo, email, mdp) {
   return result;
 }
 
-export { doSign };
+export { Todofaite };

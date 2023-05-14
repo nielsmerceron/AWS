@@ -1,16 +1,13 @@
 <script>
   import { doLogin } from "./interactLogin.js";
-  import { element } from "svelte/internal";
-  import { navigate } from "svelte-routing";
+  import {goto } from "$app/navigation";
 
   async function clickConnection() {
     try {
-      const result = await doLogin(email, mdp);
-      () => console.log(doLogin(email, mdp));
-      navigate("/");
-      location.reload();
+      await doLogin(email, mdp);
+      goto("/createtodo");
     } catch (error) {
-      () => console.log(doLogin(email, mdp));
+      alert("une erreur a été rencontrée ");
     }
   }
 
@@ -24,7 +21,7 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
     </div>
     <div class="navbar-center secondary lg:flex">
-      <strong>CREATE TODO</strong>
+      <strong>Sign in</strong>
     </div>
     <div class="navbar-end">
       <div class="dropdown dropdown-bottom dropdown-end">
@@ -61,7 +58,7 @@
 
   <div class="grid grid-cols-4 gap-0 h-screen">
     <!-- colonne de Mélenchon -->
-    <div class="bg-zinc-500"></div>
+    <div class="bg-zinc-500" />
     <!-- colonne de Macron -->
     <div class="bg-zinc-600 col-span-2">
       <div
@@ -103,6 +100,6 @@
       </div>
     </div>
     <!-- colonne de le Pen-->
-    <div class="bg-zinc-700"></div>
+    <div class="bg-zinc-700" />
   </div>
 </div>

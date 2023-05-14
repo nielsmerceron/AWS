@@ -1,73 +1,160 @@
 <script>
-  let todos = [];
-  let option = 0;
-  let todo = {};
+  // @ts-nocheck
 
   import { DateInput } from "date-picker-svelte";
-  let dateCalendar = new Date();
+  import { Addtodo } from "./add";
+  import { Todofaite } from "./checktodo";
+  import { Tododelete } from "./delete";
+  import { Todoget, trimbytitle, gettodobyid } from "./search";
 
-  function addTodo() {
-    const title = document.getElementById("todoTitle").value;
-    const description = document.getElementById("todoDescription").value;
-    const date =
-      dateCalendar.getDate() +
-      "/" +
-      dateCalendar.getMonth() +
-      "/" +
-      dateCalendar.getFullYear();
+  let title = "";
+  let description = "";
+  let groupe = "";
+  let startdate = new Date();
+  let enddate = new Date();
+  let recherche = "";
 
-    if (title && description) {
-      const todo = { title, description, date };
-      if (isObjectif) {
-        todo.objectif = document.getElementById("todoObjectif").value;
-      }
-      if (isGroupe) {
-        todo.groupe = document.getElementById("todoGroupe").value;
-      }
-      if (isPeriodique) {
-        todo.periodique = document.getElementById("todoPeriodique").value;
-      }
-      todos.push(todo);
-      document.getElementById("todoTitle").value = "";
-      document.getElementById("todoDescription").value = "";
-      document.getElementById("todoDate").value = "";
-      document.getElementById("todoObjectif").value = "";
-      document.getElementById("todoGroupe").value = "";
-      document.getElementById("todoPeriodique").value = "";
+  //creationtodo
+  /**
+   * @type {boolean | null}
+   */
+  let verificationaddtodo = null; //
+
+  async function addtodo() {
+    try {
+      await Addtodo(title, description, startdate, enddate, groupe);
+      verificationaddtodo = true;
+      verificationsearch = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
+    } catch (error) {
+      verificationaddtodo = false;
+      verificationsearch = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
     }
   }
 
-  function removeTodo(index) {
-    todos = todos.filter((_, i) => i !== index);
+  //recherche todo
+  /**
+   * @type {boolean | null}
+   */
+  let verificationsearch = null; //
+  /**
+   * @type {JSON |null}
+   */
+  let searchresult = null;
+
+  async function searchtodo() {
+    try {
+      searchresult = await Todoget();
+      verificationsearch = true;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
+      searchresult = trimbytitle(recherche, searchresult);
+      recherche = "";
+    } catch (error) {
+      verificationsearch = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
+    }
   }
 
-  function clickOption() {
-    option = 1;
+  //supprime todo
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationdelete = null;
+
+  /**
+   * @param {string} id
+   */
+  async function deletetodo(id) {
+    try {
+      await Tododelete(id);
+      if (searchresult != null) {
+        for (let i = 0; i < searchresult.length; i++) {
+          if (searchresult[i]._id === id) {
+            searchresult.splice(i, 1);
+            verificationdelete = true;
+            verificationaddtodo = null;
+            aff = false;
+            verificationcheck = null;
+            verificationsearch = null;
+            searchresult.push("");
+            searchresult = searchresult;
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      verificationdelete = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationsearch = null;
+    }
   }
 
-  function unclickOption() {
-    option = 0;
+  //checktodo
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationcheck = null;
+  /**
+   * @param {string} id
+   * @param {boolean} completed
+   */
+  async function checktodo(id, completed) {
+    try {
+      await Todofaite(id, !completed);
+      verificationcheck = true;
+      verificationaddtodo = null;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
+    } catch (error) {
+      verificationcheck = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
+    }
   }
 
-  let isObjectif = false;
+  //aff description
+  let aff = false;
+  let affdescription = "";
+  let affdebut = "";
+  let afffin = "";
+  let affcomplete = "";
 
-  function objectifClick() {
-    isObjectif ? (isObjectif = false) : (isObjectif = true);
+  /**
+   * @param {any} todo
+   */
+  function switchaff(todo) {
+    verificationaddtodo = null;
+    verificationcheck = null;
+    verificationdelete = null;
+    verificationsearch = null;
+    aff = true;
+    if (todo != null) {
+      affdescription = " Description : " + todo[0].description;
+      affdebut = " Début : " + todo[0].start_date;
+      afffin = " Fin : " + todo[0].end_date;
+      affcomplete = todo[0].completed;
+    } else {
+      affdescription = "pas de description";
+    }
   }
-
-  let isGroupe = false;
-
-  function groupeClick() {
-    isGroupe ? (isGroupe = false) : (isGroupe = true);
-  }
-
-  let isPeriodique = false;
-
-  function periodiqueClick() {
-    isPeriodique ? (isPeriodique = false) : (isPeriodique = true);
-  }
-
-  let mpd = "";
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -119,187 +206,197 @@
         <div class="mx-auto">
           <!-- barre de recherche-->
           <div class="form-control">
-            <label class="label " for="search-input">
+            <label class="label" for="search-input">
               <span class="label-text">Enter the todo title</span>
             </label>
-            <label class="input-group ">
+            <label class="input-group">
               <input
                 type="text"
                 placeholder="Todo title"
                 class="input input-bordered"
+                bind:value={recherche}
               />
-              <button class="btn bg-blue-800">Search</button>
+              <button class="btn bg-blue-800" on:click={searchtodo}
+                >Search</button
+              >
             </label>
+          </div>
+          <!-- réussite de la recherche-->
+          <div>
+            <div class="flex space-x-2 mb-4">
+              {#if verificationsearch != null}
+                {#if verificationsearch === true}
+                  <p>Des todo ont été trouvé</p>
+                {:else}
+                  <p>erreur rencontré ou aucune todo trouvé</p>
+                {/if}
+              {:else}<p />
+              {/if}
+            </div>
           </div>
         </div>
         <!-- todo trouvé-->
-        <div class="bg-zinc-400">Todo</div>
+        {#if searchresult != null}
+          {#each searchresult as todoitem}
+            {#if todoitem != ""}
+              <div class="bg-zinc-400">
+                <li>
+                  <div class="p-4">{todoitem.title}</div>
+                  <div class="grid grid-cols-3 gap-4 p-2">
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-blue-800"
+                        on:click={() =>
+                          switchaff(gettodobyid(todoitem._id, searchresult))}
+                        >Description</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-emerald-600"
+                        on:click={() =>
+                          checktodo(todoitem._id, todoitem.completed)}
+                        >Fait</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-red-800"
+                        on:click={() => deletetodo(todoitem._id)}>Supp</button
+                      >
+                    </div>
+                  </div>
+                </li>
+              </div>
+            {/if}
+          {/each}
+        {:else}
+          <div class="bg-zinc-400">
+            <p>aucune todo</p>
+          </div>
+        {/if}
       </div>
     </div>
 
     <!-- colonne du centre -->
-    <div class="bg-zinc-600 col-span-2" />
-    <!-- colonne de droite -->
+    <div class="bg-zinc-600 col-span-2">
+      <div class="col-span-2 container mx-auto py-10" />
+      <!-- message de réussite ou non du delete d'une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationdelete != null}
+          {#if verificationdelete === true}
+            <p>La todo a été supprimé avec succès</p>
+          {:else}
+            <p>Une erreur a été rencontré lors de la suppression</p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- message de réussite ou non d'avoir complété une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationcheck != null}
+          {#if verificationcheck === true}
+            <p>La todo a a été complété</p>
+          {:else}
+            <p>
+              Une erreur a été rencontré lors du changement d'état de la todo
+            </p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- affichage de la description -->
+      <div class="flex space-x-2 mb-4">
+        {#if aff != null}
+          {#if aff === true}
+            <p>
+              {affdescription} <br />
+              {affdebut} <br />
+              {afffin} <br />
+              {#if affcomplete === "false"}
+                la todo n'est pas complété
+              {:else}
+                {#if affcomplete==="true"}
+                la todo est complété
+                {/if}
+              {/if}
+            </p>
+          {:else}
+            <p />
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+    </div>
 
+    <!-- colonne de droite -->
     <div class="bg-zinc-700">
       <div class="col-span-2 container mx-auto py-10" />
-      {#if option === 0}
-        <div class="col-span-1 container mx-auto py-10">
-          <div class="flex space-x-2 mb-4">
-            <div class="flex-1 mr-2">
-              <input
-                type="text"
-                placeholder="Title"
-                id="todoTitle"
-                class="input input-bordered w-full"
-              />
-            </div>
-            <button class="btn btn-accent" on:click={clickOption}>Option</button
-            >
-          </div>
-          <div class="flex space-x-2 mb-4">
-            <div class="flex-1 mr-2">
-              <input
-                type="text"
-                placeholder="Description"
-                id="todoDescription"
-                class="input input-bordered w-full"
-              />
-            </div>
-          </div>
-          <div class="flex space-x-2 mb-4">
-            <h1>Jour et heure de la fin de la todolist :</h1>
-            <DateInput
-              bind:date={dateCalendar}
-              class="input input-bordered w-full datepicker-input"
+      <!-- input titre -->
+      <div class="col-span-1 container mx-auto py-10">
+        <div class="flex space-x-2 mb-4">
+          <div class="flex-1 mr-2">
+            <input
+              type="text"
+              placeholder="Titre"
+              id="todoTitle"
+              bind:value={title}
+              class="input input-bordered w-full"
             />
           </div>
-          {#if isObjectif === true}
-            <div class="flex space-x-2 mb-4">
-              <div class="flex-1 mr-2">
-                <input
-                  type="text"
-                  placeholder="Objectif"
-                  id="todoObjectif"
-                  class="input input-bordered w-full"
-                />
-              </div>
-            </div>
-          {/if}
-          {#if isGroupe === true}
-            <div class="flex space-x-2 mb-4">
-              <div class="flex-1 mr-2">
-                <input
-                  type="text"
-                  placeholder="Avec ..."
-                  id="todoGroupe"
-                  class="input input-bordered w-full"
-                />
-              </div>
-            </div>
-          {/if}
-          {#if isPeriodique === true}
-            <div class="flex space-x-2 mb-4">
-              <div class="flex-1 mr-2">
-                <input
-                  type="text"
-                  placeholder="Tous les ..."
-                  id="todoPeriodique"
-                  class="input input-bordered w-full"
-                />
-              </div>
-            </div>
-          {/if}
-          <button class="btn btn-accent" on:click={addTodo}
-            >Ajouter dans Brouillon</button
-          >
-          {#if todos.length === 0}
-            <p>No to-dos added yet.</p>
-          {:else}
-            <ul class="divide-y divide-gray-400">
-              {#each todos as todo, i}
-                <li class="py-4 flex">
-                  <div class="flex-1">
-                    <h3 class="text-lg font-bold">{todo.title}</h3>
-                    {#if todo.description != null}<p class="text-gray-500">
-                        {todo.description}
-                      </p>{/if}
-                    {#if todo.date != null}<p class="text-gray-500">
-                        {todo.date}
-                      </p>{/if}
-                    {#if todo.objectif != null}<p class="text-gray-500">
-                        {todo.objectif}
-                      </p>{/if}
-                    {#if todo.groupe != null}<p class="text-gray-500">
-                        {todo.groupe}
-                      </p>{/if}
-                    {#if todo.periodique != null}<p class="text-gray-500">
-                        {todo.periodique}
-                      </p>{/if}
-                  </div>
-                  <button class="btn btn-warning" on:click={() => removeTodo(i)}
-                    >Remove</button
-                  >
-                </li>
-              {/each}
-            </ul>
-          {/if}
         </div>
-      {:else}
-        <div class="container mx-auto py-10">
-          <div class="flex space-x-2 mb-4">
-            <h1 class="text-5xl font-bold">Option</h1>
-            <button class="btn btn-circle btn-primary" on:click={unclickOption}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                /></svg
+        <!-- input description -->
+        <div class="flex space-x-2 mb-4">
+          <div class="flex-1 mr-2">
+            <input
+              type="text"
+              placeholder="Description"
+              id="todoTitle"
+              bind:value={description}
+              class="input input-bordered w-full"
+            />
+          </div>
+        </div>
+        <!-- date de début-->
+        <div class="flex space-x-2 mb-4">
+          <label for="datestartinput">
+            <span class="label-text">début de la todo</span>
+          </label>
+          <DateInput bind:value={startdate} />
+        </div>
+        <!-- date fin-->
+        <div class="flex space-x-2 mb-4">
+          <label for="datestartinput">
+            <span class="label-text">fin de la todo</span>
+          </label>
+          <DateInput bind:value={enddate} />
+        </div>
+        <!-- option-->
+        <div class="flex space-x-2 mb-4">
+          <div class=" grid grid-cols-3 gap-1">
+            <div class="col-start-2">
+              <button class="btn bg-blue-800" on:click={addtodo}
+                >ajout de la todo</button
               >
-            </button>
-          </div>
-          <div class="flex space-x-2 mb-4">
-            <button
-              class={isObjectif ? "btn btn-secondary" : "btn btn-primary"}
-              on:click={objectifClick}
-            >
-              Objectif
-            </button>
-            <h1>Ajout d'un objectif</h1>
-          </div>
-          <div class="flex space-x-2 mb-4">
-            <button
-              class={isGroupe ? "btn btn-secondary" : "btn btn-primary"}
-              on:click={groupeClick}
-            >
-              Groupe
-            </button>
-            <button
-              class={isGroupe ? "btn btn-primary" : "btn btn-secondary"}
-              on:click={groupeClick}
-            >
-              Solo
-            </button>
-            <h1>Est ce un todo de groupe où un todo simple?</h1>
-          </div>
-          <div class="flex space-x-2 mb-4">
-            <button
-              class={isPeriodique ? "btn btn-secondary" : "btn btn-primary"}
-              on:click={periodiqueClick}
-            >
-              Periodique
-            </button>
-            <h1>Est ce un todo periodique?</h1>
+            </div>
           </div>
         </div>
-      {/if}
+        <!-- résultat de la requete-->
+        <div class="flex space-x-2 mb-4">
+          {#if verificationaddtodo != null}
+            {#if verificationaddtodo === true}
+              <p>{title} a été ajouté</p>
+            {:else}
+              <p>{title} n'a pas pu être rajouté</p>
+            {/if}
+          {:else}
+            <p>ajouté une todo</p>
+          {/if}
+        </div>
+      </div>
     </div>
   </div>
 </div>

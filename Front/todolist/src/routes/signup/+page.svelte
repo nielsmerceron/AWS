@@ -6,16 +6,15 @@
     mdp1equalmdp2,
   } from "./validate";
   import { doSign } from "./interac";
-  import { navigate } from "svelte-routing";
+  import {goto } from "$app/navigation";
+
 
   async function clickConnection() {
     try {
-      const result = await doSign(pseudo, email, mdp1);
-      () => console.log(doSign(pseudo, email, mdp1));
-      navigate("/");
-      location.reload();
+      await doSign(pseudo, email, mdp1);
+      goto("/");
     } catch (error) {
-      () => console.log(doSign(pseudo, email, mdp1));
+      alert("une erreur a été rencontrée ");
     }
   }
 
@@ -31,7 +30,7 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
     </div>
     <div class="navbar-center secondary lg:flex">
-      <strong>CREATE TODO</strong>
+      <strong>Sign up</strong>
     </div>
     <div class="navbar-end">
       <div class="dropdown dropdown-bottom dropdown-end">
