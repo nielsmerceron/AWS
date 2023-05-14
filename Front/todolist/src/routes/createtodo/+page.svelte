@@ -3,7 +3,8 @@
   import { Addtodo } from "./add";
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
-  import { Todoget, trimbytitle } from "./search";
+  import { Todoget, trimbytitle, gettodobyid } from "./search";
+  import Layout from "../+layout.svelte";
 
   let title = "";
   let description = "";
@@ -33,6 +34,9 @@
    * @type {boolean | null}
    */
   let verificationsearch = null;
+  /**
+   * @type {JSON |null}
+   */
   let searchresult = null;
 
   async function searchtodo() {
@@ -44,16 +48,26 @@
     }
   }
 
-  let todoList = trimbytitle(recherche, searchresult);
-
+  searchresult = trimbytitle(recherche, searchresult);
+  searchresult = [
+    {
+      _id: "645e70de40ee0701f3805ee2",
+      title: "tesvqhtret1",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+    {
+      _id: "645e7gsgs0de40ee0701f3805ee2",
+      title: "oui",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+  ];
   //supprime todo
-  /**
-   * @param {number} index
-   */
-  function removeFromList(index) {
-    todoList.splice(index, 1);
-    todoList = todoList;
-  }
 
   /**
    * @type {boolean | null}
@@ -62,17 +76,7 @@
   /**
    * @param {Number} index
    */
-  async function deletetodo(index) {
-    try {
-      id = todoList.at(index)?.id;
-      await Tododelete(id);
-      verificationdelete = true;
-      todoList.splice(index, 1);
-      todoList = todoList;
-    } catch (error) {
-      verificationdelete = false;
-    }
-  }
+  async function deletetodo(index) {}
 
   //checktodo
 
@@ -83,29 +87,24 @@
   /**
    * @param {Number} index
    */
-  async function checktodo(index) {
-    try {
-      id = todoList.at(index)?.id;
-      await Tododelete(id);
-      verificationcheck = true;
-      todoList.splice(index, 1);
-      todoList = todoList;
-    } catch (error) {
-      verificationcheck = false;
-    }
-  }
+  async function checktodo(index) {}
 
   //aff description
   let aff = false;
-  let affdescription = "";
+  let affdescription ="";
 
   /**
-   * @param {number} index
+   * @param {any} todo
    */
-  function switchaff(index) {
+  function switchaff(todo) {
     if (aff == false) {
       aff = true;
-      affdescription = todoList.at(index)?.description;
+      if(todo!=null){
+      affdescription = " Description : " + todo[0].description + " Début : " + todo[0].start_date + " Fin : " + todo[0].end_date  ;
+      }
+      else{
+        affdescription="aucune description de todo"
+      }
     } else {
       aff = false;
     }
@@ -191,16 +190,25 @@
           </div>
         </div>
         <!-- todo trouvé-->
-        <br />
-        {#each todoList as item, index}
+        {#if searchresult != null}
+          {#each searchresult as todoitem,index}
+            <div class="bg-zinc-400">
+              <li>
+                <div class="p-4">{todoitem.title}</div>
+                <div class="grid grid-cols-3 gap-4 p-2">
+                  <div class="col-auto"><button class="btn btn-block bg-blue-800" on:click={()=>switchaff(gettodobyid(todoitem._id,searchresult))}>Description</button></div>
+                  <div class="col-auto"><button class="btn btn-block bg-emerald-600">Fait</button></div>
+                  <div class="col-auto"><button class="btn btn-block bg-red-800">Supp</button></div>
+                </div>
+                
+              </li>
+            </div>
+          {/each}
+        {:else}
           <div class="bg-zinc-400">
-            <input bind:checked={item.status} type="checkbox" />
-            <span class:checked={item.status}>{item.title}</span>
-            <span on:click={() => deletetodo(index)}>❌</span>
-            <span on:click={() => switchaff(index)}></span>
+            <p>rien</p>
           </div>
-          <br />
-        {/each}
+        {/if}
       </div>
     </div>
 
@@ -209,8 +217,8 @@
       <div class="col-span-2 container mx-auto py-10" />
       <!-- message de réussite ou non du delete d'une todo -->
       <div class="flex space-x-2 mb-4">
-        {#if verificationaddtodo != null}
-          {#if verificationaddtodo === true}
+        {#if verificationdelete != null}
+          {#if verificationdelete === true}
             <p>La todo a été supprimé avec succès</p>
           {:else}
             <p>Une erreur a été rencontré lors de la suppression</p>
@@ -278,7 +286,9 @@
         <!-- date de début-->
         <div class="flex space-x-2 mb-4">
           <label for="datestartinput">
-            <span class="label-text">début de la todo</span>
+            <span class="label-text"
+              >début de la todo</span
+            >
           </label>
           <DateInput bind:value={startdate} />
         </div>

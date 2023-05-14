@@ -1,3 +1,4 @@
+
 async function Todoget() {
   const url = "http://127.0.0.1:3000/todo/get";
 
@@ -21,7 +22,21 @@ export { Todoget };
  * @param {any} result
  */
 function trimbytitle(titre, result) {
+  if(result!=null){
   return result.filter((x) => x.title === titre);
+  }
 }
 
 export { trimbytitle };
+
+/**
+   * @param {any} id
+   * @param {any[] | null} result
+   */
+function gettodobyid(id,result){
+  if(result!=null){
+    return(result.filter((j) => j._id === id));
+  }
+}
+
+export {gettodobyid}
