@@ -159,32 +159,32 @@
     }
   }
 
-  //aff description
-  let aff = false;
+ //aff description
+ let aff = true;
   let affdescription = "";
+  let affdebut = "";
+  let afffin = "";
+  let affcomplete = "";
 
   /**
    * @param {any} todo
    */
   function switchaff(todo) {
+    verificationaddtodo = null;
     verificationcheck = null;
     verificationdelete = null;
     verificationsearch = null;
     aff = true;
     if (todo != null) {
-      affdescription =
-        " Description : " +
-        todo[0].description +
-        " Début : " +
-        todo[0].start_date +
-        " Fin : " +
-        todo[0].end_date +
-        " Accomplissement : " +
-        todo[0].completed;
+      affdescription = " Description : " + todo[0].description;
+      affdebut = " Début : " + todo[0].start_date;
+      afffin = " Fin : " + todo[0].end_date;
+      affcomplete = todo[0].completed;
     } else {
       affdescription = "pas de description";
     }
   }
+  verificationsearch=false;
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -242,7 +242,7 @@
                 {#if verificationsearch === true}
                   <p>Des todo ont été trouvé</p>
                 {:else}
-                  <p>erreur rencontré ou aucune todo trouvé</p>
+                  <p>aucune todo trouvé</p>
                 {/if}
               {:else}<p />
               {/if}
@@ -372,7 +372,18 @@
       <div class="flex space-x-2 mb-4">
         {#if aff != null}
           {#if aff === true}
-            <p>{affdescription}</p>
+            <p>
+              {affdescription} <br />
+              {affdebut} <br />
+              {afffin} <br />
+              {#if affcomplete === "false"}
+                la todo n'est pas complété
+              {:else}
+                {#if affcomplete==="true"}
+                la todo est complété
+                {/if}
+              {/if}
+            </p>
           {:else}
             <p />
           {/if}

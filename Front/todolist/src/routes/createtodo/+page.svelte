@@ -1,5 +1,5 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import { DateInput } from "date-picker-svelte";
   import { Addtodo } from "./add";
@@ -18,7 +18,7 @@
   /**
    * @type {boolean | null}
    */
-  let verificationaddtodo = null;
+  let verificationaddtodo = null; //
 
   async function addtodo() {
     try {
@@ -41,7 +41,7 @@
   /**
    * @type {boolean | null}
    */
-  let verificationsearch = null;
+  let verificationsearch = null; //
   /**
    * @type {JSON |null}
    */
@@ -133,6 +133,9 @@
   //aff description
   let aff = false;
   let affdescription = "";
+  let affdebut = "";
+  let afffin = "";
+  let affcomplete = "";
 
   /**
    * @param {any} todo
@@ -144,15 +147,10 @@
     verificationsearch = null;
     aff = true;
     if (todo != null) {
-      affdescription =
-        " Description : " +
-        todo[0].description +
-        " Début : " +
-        todo[0].start_date +
-        " Fin : " +
-        todo[0].end_date +
-        " Accomplissement : " +
-        todo[0].completed;
+      affdescription = " Description : " + todo[0].description;
+      affdebut = " Début : " + todo[0].start_date;
+      afffin = " Fin : " + todo[0].end_date;
+      affcomplete = todo[0].completed;
     } else {
       affdescription = "pas de description";
     }
@@ -274,7 +272,7 @@
           {/each}
         {:else}
           <div class="bg-zinc-400">
-            <p>rien</p>
+            <p>aucune todo</p>
           </div>
         {/if}
       </div>
@@ -313,7 +311,18 @@
       <div class="flex space-x-2 mb-4">
         {#if aff != null}
           {#if aff === true}
-            <p>{affdescription}</p>
+            <p>
+              {affdescription} <br />
+              {affdebut} <br />
+              {afffin} <br />
+              {#if affcomplete === "false"}
+                la todo n'est pas complété
+              {:else}
+                {#if affcomplete==="true"}
+                la todo est complété
+                {/if}
+              {/if}
+            </p>
           {:else}
             <p />
           {/if}
