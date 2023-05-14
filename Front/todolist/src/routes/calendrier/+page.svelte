@@ -2,9 +2,10 @@
   import calendarize from "calendarize";
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
-  import { Todoget} from "./search";
+  import { Todoget,trimbydate} from "./search";
 
 
+  //pour le calendrier
   let dateCalendar = new Date();
   export let year = dateCalendar.getFullYear();
   export let month = dateCalendar.getMonth();
@@ -62,6 +63,33 @@
       today && today_year === year && today_month === month && today_day === day
     );
   }
+
+  //le code musclé
+
+  //recherche todo
+  /**
+   * @type {boolean | null}
+   */
+   let verificationsearch = null;
+  /**
+   * @type {JSON |null}
+   */
+  let searchresult = null;
+
+  /**
+   * @param {Date} day
+   */
+  async function searchtodo(day) {
+    try {
+      searchresult = await Todoget();
+      verificationsearch = true;
+      searchresult = trimbydate(day, searchresult);
+    } catch (error) {
+      verificationsearch = false;
+    }
+  }
+  
+  
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -128,8 +156,9 @@
 				  {#if current[posLigne][posColonne] != 0}
 					<button
 					  class={isToday(current[posLigne][posColonne])
-						? "btn btn-primary"
-						: "btn btn-accent "}
+						? "btn bg-blue-950"
+						: "btn bg-blue-800 "}
+            on:click={()=>searchtodo(new Date(year+'-'+(month+1)+'-'+current[posLigne][posColonne]))}
 					>
 					  {current[posLigne][posColonne]}</button
 					>
