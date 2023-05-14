@@ -40,6 +40,8 @@
         >
           <li><a href="/signin">Log in </a></li>
           <li><a href="/signup">Sign Up </a></li>
+          <li><a href="/calendrier">calendrier </a></li>
+          
         </ul>
       </div>
     </div>

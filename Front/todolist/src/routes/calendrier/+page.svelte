@@ -1,5 +1,5 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import calendarize from "calendarize";
   import { Todofaite } from "./checktodo";
@@ -68,14 +68,32 @@
   //le code musclé
 
   //recherche todo
-  /**
-   * @type {boolean | null}
-   */
-  let verificationsearch = null;
+
   /**
    * @type {JSON |null}
    */
-  let searchresult = null;
+  let searchresult = [
+    {
+      _id: "645e70de40ee0701f3805ee2",
+      title: "tesvqhtret1",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      start_date: "2023-05-12T17:01:13.860Z",
+      end_date: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+    {
+      _id: "645e7gsgs0de40ee0701f3805ee2",
+      title: "oui",
+      description: "fzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      start_date: "2023-05-12T17:01:13.860Z",
+      end_date: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+  ];
 
   /**
    * @param {Date} day
@@ -83,7 +101,6 @@
   async function searchtodo(day) {
     try {
       searchresult = await Todoget();
-      verificationsearch = true;
       verificationcheck = null;
       aff = false;
       verificationdelete = null;
@@ -91,7 +108,6 @@
       searchresult.push("");
       searchresult = searchresult;
     } catch (error) {
-      verificationsearch = false;
       verificationcheck = null;
       aff = false;
       verificationdelete = null;
@@ -119,7 +135,6 @@
             verificationdelete = true;
             aff = false;
             verificationcheck = null;
-            verificationsearch = null;
             searchresult.push("");
             searchresult = searchresult;
             break;
@@ -130,7 +145,6 @@
       verificationdelete = false;
       aff = false;
       verificationcheck = null;
-      verificationsearch = null;
     }
   }
 
@@ -150,17 +164,15 @@
       verificationcheck = true;
       aff = false;
       verificationdelete = null;
-      verificationsearch = null;
     } catch (error) {
       verificationcheck = false;
       aff = false;
       verificationdelete = null;
-      verificationsearch = null;
     }
   }
 
- //aff description
- let aff = true;
+  //aff description
+  let aff = false;
   let affdescription = "";
   let affdebut = "";
   let afffin = "";
@@ -170,11 +182,10 @@
    * @param {any} todo
    */
   function switchaff(todo) {
-    verificationaddtodo = null;
     verificationcheck = null;
     verificationdelete = null;
-    verificationsearch = null;
     aff = true;
+    console.log(aff);
     if (todo != null) {
       affdescription = " Description : " + todo[0].description;
       affdebut = " Début : " + todo[0].start_date;
@@ -184,13 +195,14 @@
       affdescription = "pas de description";
     }
   }
-  verificationsearch=false;
 </script>
 
 <div class=" bg-zinc-800 h-screen">
   <div class="navbar bg-zinc-800">
     <div class="navbar-start">
-      <a href="/createtodo" class="btn btn-ghost normal-case text-xl">To do list</a>
+      <a href="/createtodo" class="btn btn-ghost normal-case text-xl"
+        >To do list</a
+      >
     </div>
     <div class="navbar-center secondary lg:flex">
       <strong>Calendar</strong>
@@ -236,18 +248,6 @@
           <!--titre-->
           <div>todo du jour</div>
           <!-- réussite de la recherche-->
-          <div>
-            <div class="flex space-x-2 mb-4">
-              {#if verificationsearch != null}
-                {#if verificationsearch === true}
-                  <p>Des todo ont été trouvé</p>
-                {:else}
-                  <p>aucune todo trouvé</p>
-                {/if}
-              {:else}<p />
-              {/if}
-            </div>
-          </div>
         </div>
         <!-- todo trouvé-->
         {#if searchresult != null}
