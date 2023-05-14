@@ -190,7 +190,7 @@
 <div class=" bg-zinc-800 h-screen">
   <div class="navbar bg-zinc-800">
     <div class="navbar-start">
-      <a href="/" class="btn btn-ghost normal-case text-xl">To do list</a>
+      <a href="/createtodo" class="btn btn-ghost normal-case text-xl">To do list</a>
     </div>
     <div class="navbar-center secondary lg:flex">
       <strong>Calendar</strong>
