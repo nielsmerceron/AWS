@@ -1,13 +1,11 @@
 /**
- * @param {String} titre
- * @param {String} description
  * @param {string} id
+ * @param {boolean} completed
  */
-async function Todofaite(titre, description, id) {
+async function Todofaite(id,completed) {
   const url = "http://127.0.0.1:3000/todo/modify/" + id;
   const body = {
-    title: titre,
-    description: description,
+    completed : completed,
   };
 
   const response = await fetch(url, {

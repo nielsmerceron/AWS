@@ -4,7 +4,6 @@
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
   import { Todoget, trimbytitle, gettodobyid } from "./search";
-  import Layout from "../+layout.svelte";
 
   let title = "";
   let description = "";
@@ -12,7 +11,6 @@
   let startdate = new Date();
   let enddate = new Date();
   let recherche = "";
-  let id = "";
 
   //creationtodo
   /**
@@ -48,7 +46,6 @@
     }
   }
 
-  searchresult = trimbytitle(recherche, searchresult);
   searchresult = [
     {
       _id: "645e70de40ee0701f3805ee2",
@@ -67,16 +64,36 @@
       __v: 0,
     },
   ];
+
+  $: searchresult = trimbytitle(recherche, searchresult);
   //supprime todo
 
   /**
    * @type {boolean | null}
    */
   let verificationdelete = null;
+
   /**
-   * @param {Number} index
+   * @param {string} id
    */
-  async function deletetodo(index) {}
+  async function deletetodo(id) {
+    try {
+      await Tododelete(id);
+    verificationdelete = true;
+    if (searchresult != null) {
+      console.log(searchresult.length);
+      for (let i = 0; i < searchresult.length; i++) {
+        if (searchresult[i]._id === id) {
+          searchresult.splice(i, 1);
+          break;
+        }
+      }
+      console.log(searchresult.length);
+    }
+    } catch (error) {
+      verificationdelete = false;
+    }
+  }
 
   //checktodo
 
@@ -85,13 +102,21 @@
    */
   let verificationcheck = null;
   /**
-   * @param {Number} index
+   * @param {string} id
+   * @param {boolean} completed
    */
-  async function checktodo(index) {}
+  async function checktodo(id,completed) {
+    try {
+      searchresult = await Todofaite(id,!completed);
+      verificationcheck = true;
+    } catch (error) {
+      verificationcheck = false;
+    }
+  }
 
   //aff description
   let aff = false;
-  let affdescription ="";
+  let affdescription = "";
 
   /**
    * @param {any} todo
@@ -99,11 +124,18 @@
   function switchaff(todo) {
     if (aff == false) {
       aff = true;
-      if(todo!=null){
-      affdescription = " Description : " + todo[0].description + " Début : " + todo[0].start_date + " Fin : " + todo[0].end_date  ;
-      }
-      else{
-        affdescription="aucune description de todo"
+      if (todo != null) {
+        affdescription =
+          " Description : " +
+          todo[0].description +
+          " Début : " +
+          todo[0].start_date +
+          " Fin : " +
+          todo[0].end_date +
+          " Accomplissement : " +
+          todo[0].completed;
+      } else {
+        affdescription = "aucune description de todo";
       }
     } else {
       aff = false;
@@ -191,16 +223,29 @@
         </div>
         <!-- todo trouvé-->
         {#if searchresult != null}
-          {#each searchresult as todoitem,index}
+          {#each searchresult as todoitem}
             <div class="bg-zinc-400">
               <li>
                 <div class="p-4">{todoitem.title}</div>
                 <div class="grid grid-cols-3 gap-4 p-2">
-                  <div class="col-auto"><button class="btn btn-block bg-blue-800" on:click={()=>switchaff(gettodobyid(todoitem._id,searchresult))}>Description</button></div>
-                  <div class="col-auto"><button class="btn btn-block bg-emerald-600">Fait</button></div>
-                  <div class="col-auto"><button class="btn btn-block bg-red-800">Supp</button></div>
+                  <div class="col-auto">
+                    <button
+                      class="btn btn-block bg-blue-800"
+                      on:click={() =>
+                        switchaff(gettodobyid(todoitem._id, searchresult))}
+                      >Description</button
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-block bg-emerald-600" on:click={()=>checktodo(todoitem._id,todoitem.completed)}>Fait</button>
+                  </div>
+                  <div class="col-auto">
+                    <button
+                      class="btn btn-block bg-red-800"
+                      on:click={() => deletetodo(todoitem._id)}>Supp</button
+                    >
+                  </div>
                 </div>
-                
               </li>
             </div>
           {/each}
@@ -286,9 +331,7 @@
         <!-- date de début-->
         <div class="flex space-x-2 mb-4">
           <label for="datestartinput">
-            <span class="label-text"
-              >début de la todo</span
-            >
+            <span class="label-text">début de la todo</span>
           </label>
           <DateInput bind:value={startdate} />
         </div>

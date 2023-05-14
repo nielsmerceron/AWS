@@ -1,4 +1,3 @@
-
 async function Todoget() {
   const url = "http://127.0.0.1:3000/todo/get";
 
@@ -22,21 +21,29 @@ export { Todoget };
  * @param {any} result
  */
 function trimbytitle(titre, result) {
-  if(result!=null){
-  return result.filter((x) => x.title === titre);
+  if ((titre === "")) {
+    //pas de filtrage
+    return result;
+  } else {
+    //filtre par titre
+    if (result != null) {
+      return result.filter(
+        (/** @type {{ title: string; }} */ x) => x.title === titre
+      );
+    }
   }
 }
 
 export { trimbytitle };
 
 /**
-   * @param {any} id
-   * @param {any[] | null} result
-   */
-function gettodobyid(id,result){
-  if(result!=null){
-    return(result.filter((j) => j._id === id));
+ * @param {any} id
+ * @param {any[] | null} result
+ */
+function gettodobyid(id, result) {
+  if (result != null) {
+    return result.filter((j) => j._id === id);
   }
 }
 
-export {gettodobyid}
+export { gettodobyid };
