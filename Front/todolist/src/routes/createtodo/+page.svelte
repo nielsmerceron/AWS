@@ -22,8 +22,16 @@
     try {
       await Addtodo(title, description, startdate, enddate, groupe);
       verificationaddtodo = true;
+      verificationsearch = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
     } catch (error) {
       verificationaddtodo = false;
+      verificationsearch = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
     }
   }
 
@@ -41,29 +49,20 @@
     try {
       searchresult = await Todoget();
       verificationsearch = true;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
+      searchresult = trimbytitle(recherche, searchresult);
+      recherche = "";
     } catch (error) {
       verificationsearch = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationdelete = null;
     }
   }
-
-  searchresult = [
-    {
-      _id: "645e70de40ee0701f3805ee2",
-      title: "tesvqhtret1",
-      description: "gfzghfgrfeafezrgezg",
-      completed: false,
-      createdAt: "2023-05-12T17:01:13.860Z",
-      __v: 0,
-    },
-    {
-      _id: "645e7gsgs0de40ee0701f3805ee2",
-      title: "oui",
-      description: "gfzghfgrfeafezrgezg",
-      completed: false,
-      createdAt: "2023-05-12T17:01:13.860Z",
-      __v: 0,
-    },
-  ];
 
   //supprime todo
 
@@ -83,6 +82,10 @@
           if (searchresult[i]._id === id) {
             searchresult.splice(i, 1);
             verificationdelete = true;
+            verificationaddtodo = null;
+            aff = false;
+            verificationcheck = null;
+            verificationsearch = null;
             searchresult.push("");
             searchresult = searchresult;
             break;
@@ -91,6 +94,10 @@
       }
     } catch (error) {
       verificationdelete = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationcheck = null;
+      verificationsearch = null;
     }
   }
 
@@ -106,10 +113,18 @@
    */
   async function checktodo(id, completed) {
     try {
-      searchresult = await Todofaite(id, !completed);
+      await Todofaite(id, !completed);
       verificationcheck = true;
+      verificationaddtodo = null;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
     } catch (error) {
       verificationcheck = false;
+      verificationaddtodo = null;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
     }
   }
 
@@ -121,23 +136,23 @@
    * @param {any} todo
    */
   function switchaff(todo) {
-    if (aff == false) {
-      aff = true;
-      if (todo != null) {
-        affdescription =
-          " Description : " +
-          todo[0].description +
-          " Début : " +
-          todo[0].start_date +
-          " Fin : " +
-          todo[0].end_date +
-          " Accomplissement : " +
-          todo[0].completed;
-      } else {
-        affdescription = "aucune description de todo";
-      }
+    verificationaddtodo = null;
+    verificationcheck = null;
+    verificationdelete = null;
+    verificationsearch = null;
+    aff = true;
+    if (todo != null) {
+      affdescription =
+        " Description : " +
+        todo[0].description +
+        " Début : " +
+        todo[0].start_date +
+        " Fin : " +
+        todo[0].end_date +
+        " Accomplissement : " +
+        todo[0].completed;
     } else {
-      aff = false;
+      affdescription = "pas de description";
     }
   }
 </script>

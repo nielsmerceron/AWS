@@ -1,6 +1,10 @@
 <script>
   import calendarize from "calendarize";
+  import { Todofaite } from "./checktodo";
+  import { Tododelete } from "./delete";
+  import { Todoget, trimbydate, gettodobyid } from "./search";
 
+  //pour le calendrier
   let dateCalendar = new Date();
   export let year = dateCalendar.getFullYear();
   export let month = dateCalendar.getMonth();
@@ -58,6 +62,135 @@
       today && today_year === year && today_month === month && today_day === day
     );
   }
+
+  //le code musclé
+
+  //recherche todo
+  /**
+   * @type {boolean | null}
+   */
+  let verificationsearch = null;
+  /**
+   * @type {JSON |null}
+   */
+  let searchresult = [
+    {
+        "_id": "645e70de40ee0701f3805ee2",
+        "title": "tesvqhtret1",
+        "description": "gfzghfgrfeafezrgezg",
+        "completed": false,
+        "createdAt": "2023-05-12T17:01:13.860Z",
+        "__v": 0
+    },
+    {
+        "_id": "645e7gsgs0de40ee0701f3805ee2",
+        "title": "oui",
+        "description": "gfzghfgrfeafezrgezg",
+        "completed": false,
+        "createdAt": "2023-05-12T17:01:13.860Z",
+        "__v": 0
+    }
+]
+
+  /**
+   * @param {Date} day
+   */
+  async function searchtodo(day) {
+    try {
+      searchresult = await Todoget();
+      verificationsearch = true;
+      searchresult = trimbydate(day, searchresult);
+    } catch (error) {
+      verificationsearch = false;
+    }
+  }
+
+  //supprime todo
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationdelete = null;
+
+  /**
+   * @param {string} id
+   */
+  async function deletetodo(id) {
+    try {
+      await Tododelete(id);
+      if (searchresult != null) {
+        for (let i = 0; i < searchresult.length; i++) {
+          if (searchresult[i]._id === id) {
+            searchresult.splice(i, 1);
+            verificationdelete = true;
+            aff = false;
+            verificationcheck = null;
+            verificationsearch = null;
+            searchresult.push("");
+            searchresult = searchresult;
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      verificationdelete = false;
+      aff = false;
+      verificationcheck = null;
+      verificationsearch = null;
+    }
+  }
+
+  //checktodo
+
+  /**
+   * @type {boolean | null}
+   */
+  let verificationcheck = null;
+  /**
+   * @param {string} id
+   * @param {boolean} completed
+   */
+  async function checktodo(id, completed) {
+    try {
+      await Todofaite(id, !completed);
+      verificationcheck = true;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
+    } catch (error) {
+      verificationcheck = false;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
+    }
+  }
+
+  //aff description
+  let aff = false;
+  let affdescription = "";
+
+  /**
+   * @param {any} todo
+   */
+  function switchaff(todo) {
+    verificationcheck = null;
+    verificationdelete = null;
+    verificationsearch = null;
+    aff = true;
+    if (todo != null) {
+      affdescription =
+        " Description : " +
+        todo[0].description +
+        " Début : " +
+        todo[0].start_date +
+        " Fin : " +
+        todo[0].end_date +
+        " Accomplissement : " +
+        todo[0].completed;
+    } else {
+      affdescription = "pas de description";
+    }
+  }
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -102,47 +235,157 @@
   </div>
 
   <div class="grid grid-cols-4 gap-0 h-screen">
-    <div class="bg-zinc-500" ></div>
+    <div class="bg-zinc-500">
+      <div class="col-span-2 container mx-auto py-10" />
+      <div class="grid grid-cols-1 gap-3">
+        <div class="mx-auto">
+          <!--titre-->
+          <div>todo du jour</div>
+          <!-- réussite de la recherche-->
+          <div>
+            <div class="flex space-x-2 mb-4">
+              {#if verificationsearch != null}
+                {#if verificationsearch === true}
+                  <p>Des todo ont été trouvé</p>
+                {:else}
+                  <p>erreur rencontré ou aucune todo trouvé</p>
+                {/if}
+              {:else}<p />
+              {/if}
+            </div>
+          </div>
+        </div>
+        <!-- todo trouvé-->
+        {#if searchresult != null}
+          {#each searchresult as todoitem}
+            {#if todoitem != ""}
+              <div class="bg-zinc-400">
+                <li>
+                  <div class="p-4">{todoitem.title}</div>
+                  <div class="grid grid-cols-3 gap-4 p-2">
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-blue-800"
+                        on:click={() =>
+                          switchaff(gettodobyid(todoitem._id, searchresult))}
+                        >Description</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-emerald-600"
+                        on:click={() =>
+                          checktodo(todoitem._id, todoitem.completed)}
+                        >Fait</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-red-800"
+                        on:click={() => deletetodo(todoitem._id)}>Supp</button
+                      >
+                    </div>
+                  </div>
+                </li>
+              </div>
+            {/if}
+          {/each}
+        {:else}
+          <div class="bg-zinc-400">
+            <p>aucune todo</p>
+          </div>
+        {/if}
+      </div>
+    </div>
     <!-- colonne du centre -->
-    <div class="bg-zinc-600 col-span-2" >
-		<div class="flex items-center justify-center mb-8">
-			<button class="btn btn-link" on:click={toPrev}> &#8592</button>
-			<h4 class="text-lg font-semibold">{months[month]} {year}</h4>
-			<button class="btn btn-link" on:click={toNext}> &#8594 </button>
-		  </div>
-		
-		  <div class="grid grid-cols-7 gap-4 text-center">
-			{#each labels as txt, idx (txt)}
-			  <span class="text-xs font-semibold text-gray-500 uppercase"
-				>{labels[(idx + offset) % 7]}</span
-			  >
-			{/each}
-		
-			{#each { length: 6 } as w, posLigne (posLigne)}
-			  {#if current[posLigne]}
-				{#each { length: 7 } as d, posColonne (posColonne)}
-				  {#if current[posLigne][posColonne] != 0}
-					<button
-					  class={isToday(current[posLigne][posColonne])
-						? "btn btn-primary"
-						: "btn btn-accent "}
-					>
-					  {current[posLigne][posColonne]}</button
-					>
-				  {:else if posLigne < 1}
-					<span class="text-lg opacity-50"
-					  >{prev[prev.length - 1][posColonne]}</span
-					>
-				  {:else}
-					<span class="text-lg opacity-50">{next[0][posColonne]}</span>
-				  {/if}
-				{/each}
-			  {/if}
-			{/each}
-		  </div>
+    <div class="bg-zinc-600 col-span-2">
+      <div class="flex items-center justify-center mb-8">
+        <button class="btn btn-link" on:click={toPrev}> &#8592</button>
+        <h4 class="text-lg font-semibold">{months[month]} {year}</h4>
+        <button class="btn btn-link" on:click={toNext}> &#8594 </button>
+      </div>
 
-	</div>
+      <div class="grid grid-cols-7 gap-4 text-center">
+        {#each labels as txt, idx (txt)}
+          <span class="text-xs font-semibold text-gray-500 uppercase"
+            >{labels[(idx + offset) % 7]}</span
+          >
+        {/each}
+
+        {#each { length: 6 } as w, posLigne (posLigne)}
+          {#if current[posLigne]}
+            {#each { length: 7 } as d, posColonne (posColonne)}
+              {#if current[posLigne][posColonne] != 0}
+                <button
+                  class={isToday(current[posLigne][posColonne])
+                    ? "btn bg-blue-950"
+                    : "btn bg-blue-800 "}
+                  on:click={() =>
+                    searchtodo(
+                      new Date(
+                        year +
+                          "-" +
+                          (month + 1) +
+                          "-" +
+                          current[posLigne][posColonne]
+                      )
+                    )}
+                >
+                  {current[posLigne][posColonne]}</button
+                >
+              {:else if posLigne < 1}
+                <span class="text-lg opacity-50"
+                  >{prev[prev.length - 1][posColonne]}</span
+                >
+              {:else}
+                <span class="text-lg opacity-50">{next[0][posColonne]}</span>
+              {/if}
+            {/each}
+          {/if}
+        {/each}
+      </div>
+    </div>
     <!-- colonne de droite -->
-    <div class="bg-zinc-700"></div>
+    <div class="bg-zinc-700">
+      <div class="col-span-2 container mx-auto py-10" />
+      <!-- message de réussite ou non du delete d'une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationdelete != null}
+          {#if verificationdelete === true}
+            <p>La todo a été supprimé avec succès</p>
+          {:else}
+            <p>Une erreur a été rencontré lors de la suppression</p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- message de réussite ou non d'avoir complété une todo -->
+      <div class="flex space-x-2 mb-4">
+        {#if verificationcheck != null}
+          {#if verificationcheck === true}
+            <p>La todo a a été complété</p>
+          {:else}
+            <p>
+              Une erreur a été rencontré lors du changement d'état de la todo
+            </p>
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+      <!-- affichage de la description -->
+      <div class="flex space-x-2 mb-4">
+        {#if aff != null}
+          {#if aff === true}
+            <p>{affdescription}</p>
+          {:else}
+            <p />
+          {/if}
+        {:else}
+          <p />
+        {/if}
+      </div>
+    </div>
   </div>
 </div>
