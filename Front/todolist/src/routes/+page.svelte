@@ -1,5 +1,5 @@
 <script>
-  import searchbarImage from "./images/searchbar.jpg";
+  import searchbarimage from "./images/searchbar.jpg";
   import addimage from "./images/add.jpg";
   import calenimage from "./images/calendrier.jpg";
 </script>
@@ -40,8 +40,6 @@
         >
           <li><a href="/signin">Log in </a></li>
           <li><a href="/signup">Sign Up </a></li>
-          <li><a href="/createtodo">Create todo </a></li>
-          <li><a href="/calendrier">Calendrier </a></li>
         </ul>
       </div>
     </div>
@@ -49,7 +47,7 @@
 
   <div class="grid grid-cols-4 gap-0 h-screen">
     <!-- colonne de gauche-->
-    <div class="bg-zinc-500" />
+    <div class="bg-zinc-600" />
     <!-- colonne du centre -->
     <div class="bg-zinc-600 col-span-2">
       <div
@@ -59,26 +57,47 @@
           Ce site a pour but de vous accompagner dans vos tâches journalières et
           vous aider a être organiser avec l'ajout de todo
         </p>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <img src={searchbarImage} alt="Search Bar" />
+        <div
+          class="container py-10 px-10 mx-0 min-w-full grid place-items-center"
+        />
+        <div class="carousel w-full">
+          <div id="slide1" class="carousel-item relative w-full">
+            <img src={calenimage} alt="calendrier" />
+            <div
+              class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+            >
+              <a href="#slide1" class="btn btn-circle">❮</a>
+              <a href="#slide3" class="btn btn-circle">❯</a>
+            </div>
           </div>
-
-          <div><img src={addimage} alt="add" /></div>
+          <div id="slide2" class="carousel-item relative w-full">
+            <img src={addimage} alt="calendrier" />
+            <div
+              class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+            >
+              <a href="#slide2" class="btn btn-circle">❮</a>
+              <a href="#slide1" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+          <div id="slide3" class="carousel-item relative w-full">
+            <img src={searchbarimage} alt="calendrier" />
+            <div
+              class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+            >
+              <a href="#slide3" class="btn btn-circle">❮</a>
+              <a href="#slide2" class="btn btn-circle">❯</a>
+            </div>
+          </div>
         </div>
-
         <div
           class="container py-10 px-10 mx-0 min-w-full grid place-items-center"
         >
           Ce site vous offrira une interface épuré au design minimaliste pour
           vous ordonner et consulter vos todo.
         </div>
-        <div class="grid grid-cols-1 gap-2">
-          <div><img src={calenimage} alt="calendrier" /></div>
-        </div>
       </div>
     </div>
     <!-- colonne de droite -->
-    <div class="bg-zinc-700" />
+    <div class="bg-zinc-600" />
   </div>
 </div>
