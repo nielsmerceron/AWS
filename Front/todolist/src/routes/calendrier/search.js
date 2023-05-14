@@ -1,3 +1,4 @@
+// @ts-nocheck
 async function Todoget() {
   const url = "http://127.0.0.1:3000/todo/get";
 
@@ -24,8 +25,7 @@ function trimbydate(date, result) {
   //filtre par titre
   if (result != null) {
     return result.filter(
-      (/** @type {{ start_date: Date; }} */ x) => x.start_date === date
-    );
+      (x) => x.start_date.substring(0,10) === date.toISOString().substring(0,10));
   }
 }
 

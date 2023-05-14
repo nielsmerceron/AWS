@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import calendarize from "calendarize";
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
@@ -73,24 +75,7 @@
   /**
    * @type {JSON |null}
    */
-  let searchresult = [
-    {
-        "_id": "645e70de40ee0701f3805ee2",
-        "title": "tesvqhtret1",
-        "description": "gfzghfgrfeafezrgezg",
-        "completed": false,
-        "createdAt": "2023-05-12T17:01:13.860Z",
-        "__v": 0
-    },
-    {
-        "_id": "645e7gsgs0de40ee0701f3805ee2",
-        "title": "oui",
-        "description": "gfzghfgrfeafezrgezg",
-        "completed": false,
-        "createdAt": "2023-05-12T17:01:13.860Z",
-        "__v": 0
-    }
-]
+  let searchresult = null;
 
   /**
    * @param {Date} day
@@ -99,9 +84,18 @@
     try {
       searchresult = await Todoget();
       verificationsearch = true;
+      verificationcheck = null;
+      aff = false;
+      verificationdelete = null;
       searchresult = trimbydate(day, searchresult);
+      searchresult.push("");
+      searchresult = searchresult;
     } catch (error) {
       verificationsearch = false;
+      verificationcheck = null;
+      aff = false;
+      verificationdelete = null;
+      verificationsearch = null;
     }
   }
 
