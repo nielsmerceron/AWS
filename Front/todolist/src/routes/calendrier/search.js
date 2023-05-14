@@ -1,6 +1,6 @@
 // @ts-nocheck
 async function Todoget() {
-  const url = "http://127.0.0.1:3000/todo/get";
+  const url = "https://aws.tpzcloud.uk/api/todo/get";
 
   const response = await fetch(url, {
     method: "GET",
@@ -18,14 +18,16 @@ async function Todoget() {
 export { Todoget };
 
 /**
-   * @param {Date} date
-   * @param {any | null} result
-   */
+ * @param {Date} date
+ * @param {any | null} result
+ */
 function trimbydate(date, result) {
   //filtre par titre
   if (result != null) {
     return result.filter(
-      (x) => x.start_date.substring(0,10) === date.toISOString().substring(0,10));
+      (x) =>
+        x.start_date.substring(0, 10) === date.toISOString().substring(0, 10)
+    );
   }
 }
 
@@ -42,4 +44,3 @@ function gettodobyid(id, result) {
 }
 
 export { gettodobyid };
-
