@@ -1,3 +1,9 @@
+<script>
+  import searchbarImage from "./images/searchbar.jpg";
+  import addimage from "./images/add.jpg";
+  import calenimage from "./images/calendrier.jpg";
+</script>
+
 <div class=" bg-zinc-800 h-screen">
   <div class="navbar bg-zinc-800">
     <div class="navbar-start">
@@ -34,8 +40,6 @@
         >
           <li><a href="/signin">Log in </a></li>
           <li><a href="/signup">Sign Up </a></li>
-          <li><a href="/createtodo">Create todo </a></li>
-          <li><a href="/calendrier">Calendrier </a></li>
         </ul>
       </div>
     </div>
@@ -43,32 +47,36 @@
 
   <div class="grid grid-cols-4 gap-0 h-screen">
     <!-- colonne de gauche-->
-    <div class="bg-zinc-500"></div>
+    <div class="bg-zinc-500" />
     <!-- colonne du centre -->
-    <div class="bg-zinc-600 col-span-2 ">   <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-      <p>
-        Ce site a pour but de vous accompagner dans vos tâches journalières et
-        vous aider a être organiser
-      </p>
-      (insérer un exemple d'interface du site)
-      <div class="artboard artboard-horizontal phone-1" />
-      <div class="container py-10 px-10 mx-0 min-w-full grid place-items-center">
-        Ce site vous offrira une interface épuré au design minimaliste pour vous
-        ordonner.
+    <div class="bg-zinc-600 col-span-2">
+      <div
+        class="container py-10 px-10 mx-0 min-w-full grid place-items-center"
+      >
         <p>
-          Nous avons plusieurs features qui pourront vous intéreresser tel que des
-          rappels de tache,
+          Ce site a pour but de vous accompagner dans vos tâches journalières et
+          vous aider a être organiser avec l'ajout de todo
         </p>
-        <p>
-          un classement pour se motiver a égaler les personnes effectuant leur
-          tache et bien d'autre
-        </p>
-        <p>feature que vous découvrirez lors de l'utilisation de notre site.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <img src={searchbarImage} alt="Search Bar" />
+          </div>
+
+          <div><img src={addimage} alt="add" /></div>
+        </div>
+
+        <div
+          class="container py-10 px-10 mx-0 min-w-full grid place-items-center"
+        >
+          Ce site vous offrira une interface épuré au design minimaliste pour
+          vous ordonner et consulter vos todo.
+        </div>
+        <div class="grid grid-cols-1 gap-2">
+          <div><img src={calenimage} alt="calendrier" /></div>
+        </div>
       </div>
-    </div></div>
+    </div>
     <!-- colonne de droite -->
-    <div class="bg-zinc-700"></div>
+    <div class="bg-zinc-700" />
   </div>
-
-
 </div>
