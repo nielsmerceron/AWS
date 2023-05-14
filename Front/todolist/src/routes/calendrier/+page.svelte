@@ -68,10 +68,7 @@
   //le code musclé
 
   //recherche todo
-  /**
-   * @type {boolean | null}
-   */
-  let verificationsearch = null;
+
   /**
    * @type {JSON |null}
    */
@@ -83,7 +80,6 @@
   async function searchtodo(day) {
     try {
       searchresult = await Todoget();
-      verificationsearch = true;
       verificationcheck = null;
       aff = false;
       verificationdelete = null;
@@ -91,7 +87,6 @@
       searchresult.push("");
       searchresult = searchresult;
     } catch (error) {
-      verificationsearch = false;
       verificationcheck = null;
       aff = false;
       verificationdelete = null;
@@ -119,7 +114,6 @@
             verificationdelete = true;
             aff = false;
             verificationcheck = null;
-            verificationsearch = null;
             searchresult.push("");
             searchresult = searchresult;
             break;
@@ -130,7 +124,6 @@
       verificationdelete = false;
       aff = false;
       verificationcheck = null;
-      verificationsearch = null;
     }
   }
 
@@ -150,30 +143,27 @@
       verificationcheck = true;
       aff = false;
       verificationdelete = null;
-      verificationsearch = null;
     } catch (error) {
       verificationcheck = false;
       aff = false;
       verificationdelete = null;
-      verificationsearch = null;
     }
   }
 
  //aff description
- let aff = true;
+ let aff = false;
   let affdescription = "";
   let affdebut = "";
   let afffin = "";
   let affcomplete = "";
 
-  /**
+    /**
    * @param {any} todo
    */
-  function switchaff(todo) {
+   function switchaff(todo) {
     verificationaddtodo = null;
     verificationcheck = null;
     verificationdelete = null;
-    verificationsearch = null;
     aff = true;
     if (todo != null) {
       affdescription = " Description : " + todo[0].description;
@@ -184,7 +174,6 @@
       affdescription = "pas de description";
     }
   }
-  verificationsearch=false;
 </script>
 
 <div class=" bg-zinc-800 h-screen">
@@ -236,18 +225,6 @@
           <!--titre-->
           <div>todo du jour</div>
           <!-- réussite de la recherche-->
-          <div>
-            <div class="flex space-x-2 mb-4">
-              {#if verificationsearch != null}
-                {#if verificationsearch === true}
-                  <p>Des todo ont été trouvé</p>
-                {:else}
-                  <p>aucune todo trouvé</p>
-                {/if}
-              {:else}<p />
-              {/if}
-            </div>
-          </div>
         </div>
         <!-- todo trouvé-->
         {#if searchresult != null}
