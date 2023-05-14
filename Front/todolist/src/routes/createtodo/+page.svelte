@@ -65,7 +65,6 @@
     },
   ];
 
-  $: searchresult = trimbytitle(recherche, searchresult);
   //supprime todo
 
   /**
@@ -79,17 +78,17 @@
   async function deletetodo(id) {
     try {
       await Tododelete(id);
-    verificationdelete = true;
-    if (searchresult != null) {
-      console.log(searchresult.length);
-      for (let i = 0; i < searchresult.length; i++) {
-        if (searchresult[i]._id === id) {
-          searchresult.splice(i, 1);
-          break;
+      if (searchresult != null) {
+        for (let i = 0; i < searchresult.length; i++) {
+          if (searchresult[i]._id === id) {
+            searchresult.splice(i, 1);
+            verificationdelete = true;
+            searchresult.push("");
+            searchresult = searchresult;
+            break;
+          }
         }
       }
-      console.log(searchresult.length);
-    }
     } catch (error) {
       verificationdelete = false;
     }
@@ -105,9 +104,9 @@
    * @param {string} id
    * @param {boolean} completed
    */
-  async function checktodo(id,completed) {
+  async function checktodo(id, completed) {
     try {
-      searchresult = await Todofaite(id,!completed);
+      searchresult = await Todofaite(id, !completed);
       verificationcheck = true;
     } catch (error) {
       verificationcheck = false;
@@ -237,7 +236,12 @@
                     >
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-block bg-emerald-600" on:click={()=>checktodo(todoitem._id,todoitem.completed)}>Fait</button>
+                    <button
+                      class="btn btn-block bg-emerald-600"
+                      on:click={() =>
+                        checktodo(todoitem._id, todoitem.completed)}
+                      >Fait</button
+                    >
                   </div>
                   <div class="col-auto">
                     <button
