@@ -72,28 +72,7 @@
   /**
    * @type {JSON |null}
    */
-  let searchresult = [
-    {
-      _id: "645e70de40ee0701f3805ee2",
-      title: "tesvqhtret1",
-      description: "gfzghfgrfeafezrgezg",
-      completed: false,
-      createdAt: "2023-05-12T17:01:13.860Z",
-      start_date: "2023-05-12T17:01:13.860Z",
-      end_date: "2023-05-12T17:01:13.860Z",
-      __v: 0,
-    },
-    {
-      _id: "645e7gsgs0de40ee0701f3805ee2",
-      title: "oui",
-      description: "fzghfgrfeafezrgezg",
-      completed: false,
-      createdAt: "2023-05-12T17:01:13.860Z",
-      start_date: "2023-05-12T17:01:13.860Z",
-      end_date: "2023-05-12T17:01:13.860Z",
-      __v: 0,
-    },
-  ];
+  let searchresult = null;
 
   /**
    * @param {Date} day
