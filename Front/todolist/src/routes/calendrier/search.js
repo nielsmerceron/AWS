@@ -30,3 +30,16 @@ function trimbydate(date, result) {
 }
 
 export { trimbydate };
+
+/**
+ * @param {any} id
+ * @param {any[] | null} result
+ */
+function gettodobyid(id, result) {
+  if (result != null) {
+    return result.filter((j) => j._id === id);
+  }
+}
+
+export { gettodobyid };
+
