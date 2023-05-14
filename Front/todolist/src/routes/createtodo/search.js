@@ -22,35 +22,29 @@ export { Todoget };
  * @param {any} result
  */
 function trimbytitle(titre, result) {
-  let todoList = [
-    {
-      id: "",
-      title: "test",
-      description: "",
-      dated: new Date(),
-      datee: new Date(),
-      status: false,
-    },
-  ];
-  if (result != null) {
-    let arrayresult = result.parse();
-    for (let i = 1; i < arrayresult.lenght; i = i + 7) {
-      if (arrayresult.at(i) === titre) {
-        todoList = [
-          ...todoList,
-          {
-            id: arrayresult.at(i - 1),
-            title: arrayresult.at(i),
-            description: arrayresult.at(i + 1),
-            dated: arrayresult.at(i + 2),
-            datee: arrayresult.at(i + 3),
-            status: arrayresult.at(i + 4),
-          },
-        ];
-      }
+  if ((titre === "")) {
+    //pas de filtrage
+    return result;
+  } else {
+    //filtre par titre
+    if (result != null) {
+      return result.filter(
+        (/** @type {{ title: string; }} */ x) => x.title === titre
+      );
     }
   }
-  return todoList;
 }
 
 export { trimbytitle };
+
+/**
+ * @param {any} id
+ * @param {any[] | null} result
+ */
+function gettodobyid(id, result) {
+  if (result != null) {
+    return result.filter((j) => j._id === id);
+  }
+}
+
+export { gettodobyid };

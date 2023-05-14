@@ -3,7 +3,7 @@
   import { Addtodo } from "./add";
   import { Todofaite } from "./checktodo";
   import { Tododelete } from "./delete";
-  import { Todoget, trimbytitle } from "./search";
+  import { Todoget, trimbytitle, gettodobyid } from "./search";
 
   let title = "";
   let description = "";
@@ -11,7 +11,6 @@
   let startdate = new Date();
   let enddate = new Date();
   let recherche = "";
-  let id = "";
 
   //creationtodo
   /**
@@ -33,6 +32,9 @@
    * @type {boolean | null}
    */
   let verificationsearch = null;
+  /**
+   * @type {JSON |null}
+   */
   let searchresult = null;
 
   async function searchtodo() {
@@ -44,31 +46,50 @@
     }
   }
 
-  let todoList = trimbytitle(recherche, searchresult);
+  searchresult = [
+    {
+      _id: "645e70de40ee0701f3805ee2",
+      title: "tesvqhtret1",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+    {
+      _id: "645e7gsgs0de40ee0701f3805ee2",
+      title: "oui",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+  ];
 
+  $: searchresult = trimbytitle(recherche, searchresult);
   //supprime todo
-  /**
-   * @param {number} index
-   */
-  function removeFromList(index) {
-    todoList.splice(index, 1);
-    todoList = todoList;
-  }
 
   /**
    * @type {boolean | null}
    */
   let verificationdelete = null;
+
   /**
-   * @param {Number} index
+   * @param {string} id
    */
-  async function deletetodo(index) {
+  async function deletetodo(id) {
     try {
-      id = todoList.at(index)?.id;
       await Tododelete(id);
-      verificationdelete = true;
-      todoList.splice(index, 1);
-      todoList = todoList;
+    verificationdelete = true;
+    if (searchresult != null) {
+      console.log(searchresult.length);
+      for (let i = 0; i < searchresult.length; i++) {
+        if (searchresult[i]._id === id) {
+          searchresult.splice(i, 1);
+          break;
+        }
+      }
+      console.log(searchresult.length);
+    }
     } catch (error) {
       verificationdelete = false;
     }
@@ -81,15 +102,13 @@
    */
   let verificationcheck = null;
   /**
-   * @param {Number} index
+   * @param {string} id
+   * @param {boolean} completed
    */
-  async function checktodo(index) {
+  async function checktodo(id,completed) {
     try {
-      id = todoList.at(index)?.id;
-      await Tododelete(id);
+      searchresult = await Todofaite(id,!completed);
       verificationcheck = true;
-      todoList.splice(index, 1);
-      todoList = todoList;
     } catch (error) {
       verificationcheck = false;
     }
@@ -100,12 +119,24 @@
   let affdescription = "";
 
   /**
-   * @param {number} index
+   * @param {any} todo
    */
-  function switchaff(index) {
+  function switchaff(todo) {
     if (aff == false) {
       aff = true;
-      affdescription = todoList.at(index)?.description;
+      if (todo != null) {
+        affdescription =
+          " Description : " +
+          todo[0].description +
+          " Début : " +
+          todo[0].start_date +
+          " Fin : " +
+          todo[0].end_date +
+          " Accomplissement : " +
+          todo[0].completed;
+      } else {
+        affdescription = "aucune description de todo";
+      }
     } else {
       aff = false;
     }
@@ -191,16 +222,38 @@
           </div>
         </div>
         <!-- todo trouvé-->
-        <br />
-        {#each todoList as item, index}
+        {#if searchresult != null}
+          {#each searchresult as todoitem}
+            <div class="bg-zinc-400">
+              <li>
+                <div class="p-4">{todoitem.title}</div>
+                <div class="grid grid-cols-3 gap-4 p-2">
+                  <div class="col-auto">
+                    <button
+                      class="btn btn-block bg-blue-800"
+                      on:click={() =>
+                        switchaff(gettodobyid(todoitem._id, searchresult))}
+                      >Description</button
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-block bg-emerald-600" on:click={()=>checktodo(todoitem._id,todoitem.completed)}>Fait</button>
+                  </div>
+                  <div class="col-auto">
+                    <button
+                      class="btn btn-block bg-red-800"
+                      on:click={() => deletetodo(todoitem._id)}>Supp</button
+                    >
+                  </div>
+                </div>
+              </li>
+            </div>
+          {/each}
+        {:else}
           <div class="bg-zinc-400">
-            <input bind:checked={item.status} type="checkbox" />
-            <span class:checked={item.status}>{item.title}</span>
-            <span on:click={() => deletetodo(index)}>❌</span>
-            <span on:click={() => switchaff(index)}></span>
+            <p>rien</p>
           </div>
-          <br />
-        {/each}
+        {/if}
       </div>
     </div>
 
@@ -209,8 +262,8 @@
       <div class="col-span-2 container mx-auto py-10" />
       <!-- message de réussite ou non du delete d'une todo -->
       <div class="flex space-x-2 mb-4">
-        {#if verificationaddtodo != null}
-          {#if verificationaddtodo === true}
+        {#if verificationdelete != null}
+          {#if verificationdelete === true}
             <p>La todo a été supprimé avec succès</p>
           {:else}
             <p>Une erreur a été rencontré lors de la suppression</p>
