@@ -1,5 +1,5 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import calendarize from "calendarize";
   import { Todofaite } from "./checktodo";
@@ -72,7 +72,28 @@
   /**
    * @type {JSON |null}
    */
-  let searchresult = null;
+  let searchresult = [
+    {
+      _id: "645e70de40ee0701f3805ee2",
+      title: "tesvqhtret1",
+      description: "gfzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      start_date: "2023-05-12T17:01:13.860Z",
+      end_date: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+    {
+      _id: "645e7gsgs0de40ee0701f3805ee2",
+      title: "oui",
+      description: "fzghfgrfeafezrgezg",
+      completed: false,
+      createdAt: "2023-05-12T17:01:13.860Z",
+      start_date: "2023-05-12T17:01:13.860Z",
+      end_date: "2023-05-12T17:01:13.860Z",
+      __v: 0,
+    },
+  ];
 
   /**
    * @param {Date} day
@@ -150,21 +171,21 @@
     }
   }
 
- //aff description
- let aff = false;
+  //aff description
+  let aff = false;
   let affdescription = "";
   let affdebut = "";
   let afffin = "";
   let affcomplete = "";
 
-    /**
+  /**
    * @param {any} todo
    */
-   function switchaff(todo) {
-    verificationaddtodo = null;
+  function switchaff(todo) {
     verificationcheck = null;
     verificationdelete = null;
     aff = true;
+    console.log(aff);
     if (todo != null) {
       affdescription = " Description : " + todo[0].description;
       affdebut = " Début : " + todo[0].start_date;
@@ -179,7 +200,9 @@
 <div class=" bg-zinc-800 h-screen">
   <div class="navbar bg-zinc-800">
     <div class="navbar-start">
-      <a href="/createtodo" class="btn btn-ghost normal-case text-xl">To do list</a>
+      <a href="/createtodo" class="btn btn-ghost normal-case text-xl"
+        >To do list</a
+      >
     </div>
     <div class="navbar-center secondary lg:flex">
       <strong>Calendar</strong>
