@@ -223,35 +223,37 @@
         <!-- todo trouvé-->
         {#if searchresult != null}
           {#each searchresult as todoitem}
-            <div class="bg-zinc-400">
-              <li>
-                <div class="p-4">{todoitem.title}</div>
-                <div class="grid grid-cols-3 gap-4 p-2">
-                  <div class="col-auto">
-                    <button
-                      class="btn btn-block bg-blue-800"
-                      on:click={() =>
-                        switchaff(gettodobyid(todoitem._id, searchresult))}
-                      >Description</button
-                    >
+            {#if todoitem != ""}
+              <div class="bg-zinc-400">
+                <li>
+                  <div class="p-4">{todoitem.title}</div>
+                  <div class="grid grid-cols-3 gap-4 p-2">
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-blue-800"
+                        on:click={() =>
+                          switchaff(gettodobyid(todoitem._id, searchresult))}
+                        >Description</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-emerald-600"
+                        on:click={() =>
+                          checktodo(todoitem._id, todoitem.completed)}
+                        >Fait</button
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-block bg-red-800"
+                        on:click={() => deletetodo(todoitem._id)}>Supp</button
+                      >
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <button
-                      class="btn btn-block bg-emerald-600"
-                      on:click={() =>
-                        checktodo(todoitem._id, todoitem.completed)}
-                      >Fait</button
-                    >
-                  </div>
-                  <div class="col-auto">
-                    <button
-                      class="btn btn-block bg-red-800"
-                      on:click={() => deletetodo(todoitem._id)}>Supp</button
-                    >
-                  </div>
-                </div>
-              </li>
-            </div>
+                </li>
+              </div>
+            {/if}
           {/each}
         {:else}
           <div class="bg-zinc-400">
