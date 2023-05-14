@@ -315,13 +315,7 @@
               {affdescription} <br />
               {affdebut} <br />
               {afffin} <br />
-              {#if affcomplete === "false"}
-                la todo n'est pas complété
-              {:else}
-                {#if affcomplete==="true"}
-                la todo est complété
-                {/if}
-              {/if}
+              todo complété {affcomplete}
             </p>
           {:else}
             <p />
