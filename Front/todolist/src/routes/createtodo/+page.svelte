@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import { DateInput } from "date-picker-svelte";
   import { Addtodo } from "./add";
   import { Todofaite } from "./checktodo";
